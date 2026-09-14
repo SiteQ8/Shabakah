@@ -17,7 +17,7 @@ import ssl
 import subprocess
 import textwrap
 
-VERSION = "1.0.0"
+VERSION = "1.1.0"
 
 # --- Paths -------------------------------------------------------------------
 
@@ -32,6 +32,8 @@ TARGET_HTTP = 8080
 TARGET_HTTPS = 8443
 TARGET_ENUM = 9000
 TARGET_DNS = 5353
+TARGET_UDP = 9001
+TARGET_CONSOLE = 2323
 
 # --- Colours -----------------------------------------------------------------
 
@@ -99,6 +101,24 @@ STR = {
         "lang_set": "Language set to English.",
         "unknown_cmd": "Unknown command.",
         "help_title": "USAGE",
+        "m_ctf": "Capture the flag",
+        "m_achievements": "Achievements",
+        "ctf_title": "CAPTURE THE FLAG",
+        "ctf_intro": "Five flags are hidden in the lab, each reachable with the tools in the box. Find one, then submit it.",
+        "ctf_score": "Score: %d of %d points, %d of %d flags.",
+        "ctf_found": "found",
+        "ctf_hidden": "not found yet",
+        "ctf_submit_usage": "usage: netsec submit flag{...}",
+        "ctf_new": "Flag captured!",
+        "ctf_already": "You already captured that one.",
+        "ctf_unknown": "That is not a valid flag. Keep hunting.",
+        "ctf_points_each": "points",
+        "ctf_hint_usage": "usage: netsec ctf hint <flag-id>",
+        "ach_title": "ACHIEVEMENTS",
+        "ach_unlocked": "unlocked",
+        "ach_locked": "locked",
+        "ach_new": "Achievement unlocked:",
+        "welcome_back": "Welcome back.",
     },
     "ar": {
         "tagline": "مختبر تفاعلي لأمن الشبكات تتعلمه بالممارسة",
@@ -137,6 +157,24 @@ STR = {
         "lang_set": "تم ضبط اللغة على العربية.",
         "unknown_cmd": "أمر غير معروف.",
         "help_title": "الصيغة",
+        "m_ctf": "التقاط الأعلام",
+        "m_achievements": "الإنجازات",
+        "ctf_title": "التقاط الأعلام",
+        "ctf_intro": "خمسة أعلام مخبأة في المختبر ويمكن الوصول إلى كل واحد بأدوات الحاوية، فاعثر على علم ثم أرسله.",
+        "ctf_score": "النتيجة: %d من %d نقطة، و%d من %d أعلام.",
+        "ctf_found": "ملتقط",
+        "ctf_hidden": "لم يُلتقط بعد",
+        "ctf_submit_usage": "الصيغة: netsec submit flag{...}",
+        "ctf_new": "التقطت العلم",
+        "ctf_already": "لقد التقطت هذا العلم من قبل.",
+        "ctf_unknown": "هذا ليس علما صحيحا فواصل البحث.",
+        "ctf_points_each": "نقاط",
+        "ctf_hint_usage": "الصيغة: netsec ctf hint <معرّف العلم>",
+        "ach_title": "الإنجازات",
+        "ach_unlocked": "مفتوح",
+        "ach_locked": "مقفل",
+        "ach_new": "إنجاز جديد:",
+        "welcome_back": "أهلا بعودتك.",
     },
 }
 
@@ -191,6 +229,101 @@ def mark_complete(lesson_id):
 
 def is_complete(lesson_id):
     return str(lesson_id) in set(get_progress().get("completed", []))
+
+# --- Capture the flag --------------------------------------------------------
+# Each flag is a string hidden somewhere a learner can reach with the tools in
+# the box. We store the plain flag so the guide can verify a submission and so a
+# learner can confirm they read it correctly. The "where" text is a hint shown
+# on the board only after a flag is found, or with `netsec ctf hint <id>`.
+
+FLAGS = [
+    {"id": "recon",   "flag": "flag{shabakah_http_recon_ok}",
+     "points": 10, "title_en": "Recon rookie", "title_ar": "مستكشف مبتدئ",
+     "where_en": "The web service has a /flag page. curl it.",
+     "where_ar": "لخدمة الويب صفحة اسمها flag فاطلبها بأداة curl."},
+    {"id": "html",    "flag": "flag{shabakah_hidden_in_html}",
+     "points": 10, "title_en": "Source reader", "title_ar": "قارئ المصدر",
+     "where_en": "Read the HTML source of the web home page, not just the rendered text.",
+     "where_ar": "اقرأ مصدر HTML لصفحة الويب الرئيسة لا النص الظاهر فقط."},
+    {"id": "backup",  "flag": "flag{shabakah_forgotten_backup}",
+     "points": 20, "title_en": "Left the door open", "title_ar": "باب مفتوح",
+     "where_en": "robots.txt points at paths that should not be public. One of them holds a config backup.",
+     "where_ar": "يشير ملف robots.txt إلى مسارات لا ينبغي نشرها وأحدها يحوي نسخة احتياطية للإعداد."},
+    {"id": "debug",   "flag": "flag{shabakah_undocumented_debug}",
+     "points": 20, "title_en": "Undocumented", "title_ar": "غير موثّق",
+     "where_en": "The enum service on 9000 answers more commands than HELP lists. Try the obvious one.",
+     "where_ar": "خدمة التعداد على المنفذ 9000 تجيب أوامر أكثر مما تسرده HELP فجرّب الأمر الواضح."},
+    {"id": "reuse",   "flag": "flag{shabakah_reused_password}",
+     "points": 30, "title_en": "One leak, three doors", "title_ar": "تسريب واحد وثلاثة أبواب",
+     "where_en": "A cleartext console listens on 2323. The password is one you already found in the clear.",
+     "where_ar": "توجد وحدة تحكم بنص صريح على المنفذ 2323 وكلمة مرورها وجدتها من قبل بنص صريح."},
+]
+
+def _flag_by_id(fid):
+    for f in FLAGS:
+        if f["id"] == fid:
+            return f
+    return None
+
+def get_found_flags():
+    return set(get_progress().get("flags", []))
+
+def record_flag(fid):
+    prog = get_progress()
+    found = set(prog.get("flags", []))
+    found.add(fid)
+    prog["flags"] = sorted(found)
+    _save_json(PROGRESS_PATH, prog)
+
+def submit_flag(text):
+    """Return (status, flag_dict). status in new, already, unknown."""
+    norm = text.strip()
+    for f in FLAGS:
+        if norm == f["flag"] or norm == f["id"]:
+            if f["id"] in get_found_flags():
+                return "already", f
+            record_flag(f["id"])
+            return "new", f
+    return "unknown", None
+
+def score():
+    found = get_found_flags()
+    got = sum(f["points"] for f in FLAGS if f["id"] in found)
+    total = sum(f["points"] for f in FLAGS)
+    return got, total
+
+# --- Achievements ------------------------------------------------------------
+# Derived from progress, not stored separately. Each has a predicate.
+
+def _ach_defs():
+    lessons = load_lessons()
+    total_l = len(lessons)
+    done_l = sum(1 for m in lessons if is_complete(m.get("id")))
+    found = get_found_flags()
+    got, total_p = score()
+    return [
+        {"id": "first_lesson", "en": "First light", "ar": "أول خطوة",
+         "desc_en": "Complete your first lesson", "desc_ar": "أكمل أول درس",
+         "unlocked": done_l >= 1},
+        {"id": "halfway", "en": "Halfway there", "ar": "منتصف الطريق",
+         "desc_en": "Complete half the lessons", "desc_ar": "أكمل نصف الدروس",
+         "unlocked": total_l and done_l >= (total_l + 1) // 2},
+        {"id": "all_lessons", "en": "Full sweep", "ar": "إتمام كامل",
+         "desc_en": "Complete every lesson", "desc_ar": "أكمل كل الدروس",
+         "unlocked": total_l and done_l == total_l},
+        {"id": "first_flag", "en": "First blood", "ar": "أول صيد",
+         "desc_en": "Capture your first flag", "desc_ar": "التقط أول علم",
+         "unlocked": len(found) >= 1},
+        {"id": "half_flags", "en": "Treasure hunter", "ar": "صائد الكنوز",
+         "desc_en": "Capture half the flags", "desc_ar": "التقط نصف الأعلام",
+         "unlocked": len(found) >= (len(FLAGS) + 1) // 2},
+        {"id": "all_flags", "en": "Clean board", "ar": "لوحة نظيفة",
+         "desc_en": "Capture every flag", "desc_ar": "التقط كل الأعلام",
+         "unlocked": len(found) == len(FLAGS)},
+        {"id": "perfect", "en": "Shabakah master", "ar": "أستاذ شبكة",
+         "desc_en": "All lessons done and all flags found", "desc_ar": "كل الدروس مكتملة وكل الأعلام ملتقطة",
+         "unlocked": bool(total_l) and done_l == total_l and len(found) == len(FLAGS)},
+    ]
 
 # --- Lesson loading ----------------------------------------------------------
 
@@ -510,6 +643,54 @@ def check_dns_web_ip(answer):
         return True, ""
     return False, "Resolve web.shabakah.lab against the lab resolver on port %d." % TARGET_DNS
 
+def check_udp_banner(answer):
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.settimeout(2.0)
+        s.sendto(b"PING", ("127.0.0.1", TARGET_UDP))
+        data, _ = s.recvfrom(512)
+        s.close()
+        reply = data.decode("latin-1", "replace").strip()
+    except Exception:
+        return False, "The UDP service on port %d did not answer. Send PING with nc -u." % TARGET_UDP
+    if reply and reply.lower() in answer.lower():
+        return True, ""
+    return False, "Send PING to udp port %d and read the one word reply." % TARGET_UDP
+
+def check_console_hostname(answer):
+    try:
+        s = socket.create_connection(("127.0.0.1", TARGET_CONSOLE), timeout=2.0)
+        s.settimeout(3.0)
+
+        def until(marker):
+            buf = b""
+            while marker not in buf and len(buf) < 4096:
+                chunk = s.recv(256)
+                if not chunk:
+                    break
+                buf += chunk
+            return buf
+
+        until(b"login:")
+        s.sendall(b"admin\r\n")
+        until(b"Password:")
+        s.sendall(b"lab-P@ss\r\n")
+        until(b"console>")
+        s.sendall(b"HOSTNAME\r\n")
+        out = until(b"console>").decode("latin-1", "replace")
+        s.sendall(b"LOGOUT\r\n")
+        s.close()
+    except Exception:
+        return False, "Could not reach the console on port %d." % TARGET_CONSOLE
+    truth = ""
+    for line in out.splitlines():
+        line = line.strip()
+        if line and "console>" not in line and "welcome" not in line.lower():
+            truth = line
+    if truth and truth.lower() in answer.lower():
+        return True, ""
+    return False, "Log in to the console on port %d and run HOSTNAME." % TARGET_CONSOLE
+
 DYNAMIC_CHECKS = {
     "listening_tcp_count": check_listening_tcp_count,
     "http_server_banner": check_http_server_banner,
@@ -519,6 +700,8 @@ DYNAMIC_CHECKS = {
     "enum_banner": check_enum_banner,
     "open_ports": check_open_ports,
     "dns_web_ip": check_dns_web_ip,
+    "udp_banner": check_udp_banner,
+    "console_hostname": check_console_hostname,
 }
 
 def check_static(answer, expected, mode):
@@ -562,6 +745,13 @@ def banner():
     print("  " + dim("v" + VERSION + "  |  github.com/SiteQ8/Shabakah"))
     print(line)
     print("  " + yellow(t("authorized")))
+    lessons = load_lessons()
+    done = sum(1 for m in lessons if is_complete(m.get("id")))
+    got, ptotal = score()
+    if done or got:
+        print("  " + dim(t("welcome_back") + "  ")
+              + green("%d/%d " % (done, len(lessons))) + dim("lessons  ")
+              + byellow("%d/%d " % (got, ptotal)) + dim("pts"))
     print()
 
 def show_lessons_list():
@@ -647,6 +837,11 @@ def show_progress():
     print("  [" + bar + "]  %d/%d" % (done, total))
     print()
     print("  " + (t("completed_n") % (done, total)))
+    got, ptotal = score()
+    found = len(get_found_flags())
+    print("  " + (t("ctf_score") % (got, ptotal, found, len(FLAGS))))
+    unlocked = sum(1 for a in _ach_defs() if a["unlocked"])
+    print("  " + t("ach_title").title() + ": %d/%d" % (unlocked, len(_ach_defs())))
     print()
 
 def targets_status():
@@ -658,7 +853,9 @@ def targets_status():
         ("HTTP  (cleartext web)", TARGET_HTTP, "banner grab, header and cleartext analysis"),
         ("HTTPS (TLS web)", TARGET_HTTPS, "certificate and TLS inspection"),
         ("ENUM  (raw TCP banner)", TARGET_ENUM, "service enumeration practice"),
+        ("CONSOLE (cleartext)", TARGET_CONSOLE, "reused credential, cleartext login"),
         ("DNS   (lab resolver)", TARGET_DNS, "name resolution practice"),
+        ("UDP   (banner)", TARGET_UDP, "udp scanning practice"),
     ]
     for name, port, note in checks:
         s = _tcp_connect("127.0.0.1", port, timeout=0.8)
@@ -681,6 +878,9 @@ CHEAT = {
         ("Resolve a name at the lab DNS", "dig @127.0.0.1 -p 5353 web.shabakah.lab"),
         ("Capture traffic on loopback", "sudo tcpdump -i lo -n -A port 8080"),
         ("Read a pcap you saved", "tcpdump -nr capture.pcap"),
+        ("Scan a UDP port", "sudo nmap -sU -p 9001 127.0.0.1"),
+        ("Poke the UDP service", "printf 'PING' | nc -u -w1 127.0.0.1 9001"),
+        ("Find hidden web paths", "curl -s http://127.0.0.1:8080/robots.txt"),
         ("List firewall rules", "sudo iptables -L -n -v"),
     ],
     "ar": [
@@ -694,6 +894,9 @@ CHEAT = {
         ("تحليل اسم عبر خادم DNS للمختبر", "dig @127.0.0.1 -p 5353 web.shabakah.lab"),
         ("التقاط الحركة على الاسترجاع", "sudo tcpdump -i lo -n -A port 8080"),
         ("قراءة ملف pcap محفوظ", "tcpdump -nr capture.pcap"),
+        ("فحص منفذ UDP", "sudo nmap -sU -p 9001 127.0.0.1"),
+        ("مخاطبة خدمة UDP", "printf 'PING' | nc -u -w1 127.0.0.1 9001"),
+        ("إيجاد مسارات ويب مخفية", "curl -s http://127.0.0.1:8080/robots.txt"),
         ("عرض قواعد الجدار الناري", "sudo iptables -L -n -v"),
     ],
 }
@@ -706,6 +909,70 @@ def cheat_sheet():
     for label, cmd in rows:
         print("  " + label)
         print("    " + green(cmd))
+    print()
+
+def ctf_board():
+    lang = get_lang()
+    found = get_found_flags()
+    got, total = score()
+    fg, ft = len([f for f in FLAGS if f["id"] in found]), len(FLAGS)
+    print()
+    print(bold(t("ctf_title")))
+    print(dim("-" * 40))
+    print("  " + t("ctf_intro"))
+    print()
+    print("  " + byellow(t("ctf_score") % (got, total, fg, ft)))
+    print()
+    for f in FLAGS:
+        hit = f["id"] in found
+        mark = bgreen("[x]") if hit else dim("[ ]")
+        title = f["title_ar"] if lang == "ar" else f["title_en"]
+        pts = dim("(%d %s)" % (f["points"], t("ctf_points_each")))
+        state = green(t("ctf_found")) if hit else dim(t("ctf_hidden"))
+        print("  %s  %s  %s  %s" % (mark, bold("%-22s" % title), pts, state))
+        if hit:
+            where = f["where_ar"] if lang == "ar" else f["where_en"]
+            print("       " + dim(where))
+    print()
+    print("  " + dim(t("ctf_submit_usage")))
+    print()
+
+def cmd_submit(args):
+    if not args:
+        print(t("ctf_submit_usage"))
+        return 2
+    before = {a["id"] for a in _ach_defs() if a["unlocked"]}
+    status, f = submit_flag(" ".join(args))
+    lang = get_lang()
+    if status == "new":
+        title = f["title_ar"] if lang == "ar" else f["title_en"]
+        print(bgreen("  " + t("ctf_new")) + "  " + bold(title)
+              + "  " + dim("(+%d %s)" % (f["points"], t("ctf_points_each"))))
+        got, total = score()
+        print("  " + byellow(t("ctf_score").split(",")[0] % (got, total)))
+        after = {a["id"] for a in _ach_defs() if a["unlocked"]}
+        for aid in sorted(after - before):
+            a = next(x for x in _ach_defs() if x["id"] == aid)
+            name = a["ar"] if lang == "ar" else a["en"]
+            print("  " + byellow(t("ach_new")) + " " + bold(name))
+        return 0
+    if status == "already":
+        print(dim("  " + t("ctf_already")))
+        return 0
+    print(red("  " + t("ctf_unknown")))
+    return 1
+
+def achievements_view():
+    lang = get_lang()
+    print()
+    print(bold(t("ach_title")))
+    print(dim("-" * 40))
+    for a in _ach_defs():
+        mark = bgreen("[x]") if a["unlocked"] else dim("[ ]")
+        name = a["ar"] if lang == "ar" else a["en"]
+        desc = a["desc_ar"] if lang == "ar" else a["desc_en"]
+        print("  %s  %s" % (mark, bold(name)))
+        print("       " + dim(desc))
     print()
 
 def toggle_lang():
@@ -724,9 +991,11 @@ def main_menu():
             ("2", t("m_progress")),
             ("3", t("m_targets")),
             ("4", t("m_cheat")),
-            ("5", t("m_lang")),
-            ("6", t("m_shell")),
-            ("7", t("m_quit")),
+            ("5", t("m_ctf")),
+            ("6", t("m_achievements")),
+            ("7", t("m_lang")),
+            ("8", t("m_shell")),
+            ("9", t("m_quit")),
         ]
         for k, label in items:
             print("  " + bold(k) + ")  " + label)
@@ -745,13 +1014,17 @@ def main_menu():
             targets_status()
         elif sel in ("4", "c"):
             cheat_sheet()
-        elif sel in ("5",):
+        elif sel in ("5", "f"):
+            ctf_board()
+        elif sel in ("6", "a"):
+            achievements_view()
+        elif sel in ("7",):
             toggle_lang()
             banner()
-        elif sel in ("6", "s"):
+        elif sel in ("8", "s"):
             print("  " + dim(t("shell_note")))
             return
-        elif sel in ("7", "q", "quit", "exit"):
+        elif sel in ("9", "q", "quit", "exit"):
             return
         else:
             print("  " + red(t("unknown_cmd")))
@@ -767,7 +1040,11 @@ def cli_help():
   netsec check <id> <a>   check your challenge answer
   netsec targets          show lab target status
   netsec cheat            command cheat sheet
-  netsec progress         show your progress
+  netsec progress         show your progress and score
+  netsec ctf              show the capture the flag board
+  netsec ctf hint <id>    show where a flag is hidden
+  netsec submit flag{...} submit a flag you found
+  netsec achievements     show unlocked achievements
   netsec lang [en|ar]     get or set the language
   netsec version          print the version
 """)
@@ -820,6 +1097,23 @@ def main(argv):
         cheat_sheet()
     elif cmd == "progress":
         show_progress()
+    elif cmd in ("ctf", "flags"):
+        if rest and rest[0].lower() == "hint":
+            if len(rest) < 2:
+                print(t("ctf_hint_usage"))
+                return 2
+            f = _flag_by_id(rest[1].strip())
+            if not f:
+                print(red(t("ctf_unknown")))
+                return 2
+            where = f["where_ar"] if get_lang() == "ar" else f["where_en"]
+            print("  " + where)
+        else:
+            ctf_board()
+    elif cmd == "submit":
+        return cmd_submit(rest)
+    elif cmd in ("achievements", "ach"):
+        achievements_view()
     elif cmd == "lang":
         if rest:
             set_lang(rest[0])
@@ -840,3 +1134,12 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print()
         sys.exit(130)
+    except BrokenPipeError:
+        # A reader closed early (piping into head, grep -q, and the like).
+        # Redirect stdout to devnull so the interpreter shutdown flush stays quiet.
+        try:
+            devnull = os.open(os.devnull, os.O_WRONLY)
+            os.dup2(devnull, sys.stdout.fileno())
+        except Exception:
+            pass
+        sys.exit(0)
