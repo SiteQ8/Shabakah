@@ -2,6 +2,20 @@
 
 All notable changes to Shabakah are recorded here.
 
+## 1.1.1
+
+Added
+
+- A sixth capture the flag flag, hidden in the TLS certificate metadata on the
+  HTTPS target. The certificate subject carries a field it never should, found
+  with the same openssl skill lesson seven teaches. The board is now six flags
+  worth a hundred and ten points.
+
+Fixed
+
+- The guide no longer prints a traceback when its output is piped into a reader
+  that closes early, such as head or grep.
+
 ## 1.1.0
 
 Added

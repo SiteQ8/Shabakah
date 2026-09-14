@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Shabakah (شبكة): a network security lab you SSH into</title>
-<meta name="description" content="Shabakah is a self contained Docker container you SSH into to learn network security by doing. Twelve hands on lessons, six live targets, a five flag capture the flag hunt, achievements, and a guide that checks your answers. English and Arabic.">
+<meta name="description" content="Shabakah is a self contained Docker container you SSH into to learn network security by doing. Twelve hands on lessons, six live targets, a six flag capture the flag hunt, achievements, and a guide that checks your answers. English and Arabic.">
 <meta name="theme-color" content="#0B141B">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Shabakah (شبكة): a network security lab you SSH into">
@@ -245,7 +245,7 @@ footer{border-top:1px solid var(--rule);padding:40px 0 56px;color:var(--ink-3)}
     <div class="facts">
       <div class="fact"><b>12</b><span>hands on lessons</span></div>
       <div class="fact"><b>6</b><span>live targets</span></div>
-      <div class="fact"><b>5</b><span>flags, 90 points</span></div>
+      <div class="fact"><b>6</b><span>flags, 110 points</span></div>
       <div class="fact"><b>2</b><span>languages</span></div>
     </div>
   </div>
@@ -282,7 +282,7 @@ footer{border-top:1px solid var(--rule);padding:40px 0 56px;color:var(--ink-3)}
     <div class="card k-nar">
       <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 .8-4.5 4.2L18 20l-6-3.4L6 20l1.5-7L3 8.8 9 8z"/></svg></div>
       <h3>Capture the flag</h3>
-      <p>Five flags are hidden across the targets, each reachable with the tools in the box. Hunt them, submit them, watch your score climb to ninety.</p>
+      <p>Six flags are hidden across the targets, each reachable with the tools in the box. Hunt them, submit them, watch your score climb to a hundred and ten.</p>
     </div>
     <div class="card k-third">
       <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M8 14l-2 8 6-3 6 3-2-8"/></svg></div>
@@ -334,7 +334,7 @@ footer{border-top:1px solid var(--rule);padding:40px 0 56px;color:var(--ink-3)}
 <!-- CTF -->
 <section id="ctf"><div class="wrap">
   <p class="eyebrow">Capture the flag</p>
-  <h2>Five flags. Ninety points. One container.</h2>
+  <h2>Six flags. A hundred and ten points. One container.</h2>
   <p class="lead">Each flag sits somewhere a careless operator would leave it, and each is reachable with a tool you already have. Find one, then run <code>netsec submit flag{...}</code>.</p>
   <div class="flaglist">
     <div class="flag"><span class="pts">10 pt</span><div><h3>Recon rookie</h3><p>The web service has a page it should not. A first curl finds it.</p></div></div>
@@ -342,7 +342,8 @@ footer{border-top:1px solid var(--rule);padding:40px 0 56px;color:var(--ink-3)}
     <div class="flag"><span class="pts">20 pt</span><div><h3>Left the door open</h3><p>robots.txt points at paths that were never meant to be public. One holds a config backup.</p></div></div>
     <div class="flag"><span class="pts">20 pt</span><div><h3>Undocumented</h3><p>A service answers more commands than it admits to. Enumeration finds the one it hides.</p></div></div>
     <div class="flag"><span class="pts">30 pt</span><div><h3>One leak, three doors</h3><p>A cleartext console reuses a password you already saw cross the wire. Reuse is the whole lesson.</p></div></div>
-    <div class="flag"><span class="pts">90 pt</span><div><h3>Clean board</h3><p>Capture all five and the master badge is yours. Track it any time with <code>netsec ctf</code>.</p></div></div>
+    <div class="flag"><span class="pts">20 pt</span><div><h3>Hidden in plain sight</h3><p>The TLS certificate carries a field it never should. Read the whole subject, not just the common name.</p></div></div>
+    <div class="flag"><span class="pts">110 pt</span><div><h3>Clean board</h3><p>Capture all five and the master badge is yours. Track it any time with <code>netsec ctf</code>.</p></div></div>
   </div>
   <div class="ctf-note">Lesson twelve walks the full chain, from one small leak to real access, so the hunt doubles as a lesson in how a real assessment actually runs.</div>
 </div></section>
@@ -441,7 +442,7 @@ ssh -p 2222 learner@localhost</pre>
 
 <section><div class="wrap"><div class="closer">
   <h2>Open a terminal and begin.</h2>
-  <p class="lead">Twelve lessons, six live targets, and a hunt for five flags are waiting inside one container.</p>
+  <p class="lead">Twelve lessons, six live targets, and a hunt for six flags are waiting inside one container.</p>
   <div class="cta" style="justify-content:center">
     <a class="btn btn-primary" href="#start">Get started</a>
     <a class="btn btn-ghost" href="https://github.com/SiteQ8/Shabakah">Star it on GitHub</a>
@@ -470,7 +471,7 @@ ssh -p 2222 learner@localhost</pre>
     <div class="facts">
       <div class="fact"><b>12</b><span>درسا عمليا</span></div>
       <div class="fact"><b>6</b><span>أهداف حية</span></div>
-      <div class="fact"><b>5</b><span>أعلام و90 نقطة</span></div>
+      <div class="fact"><b>6</b><span>أعلام و110 نقطة</span></div>
       <div class="fact"><b>2</b><span>لغتان</span></div>
     </div>
   </div>
@@ -507,7 +508,7 @@ ssh -p 2222 learner@localhost</pre>
     <div class="card k-nar">
       <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 .8-4.5 4.2L18 20l-6-3.4L6 20l1.5-7L3 8.8 9 8z"/></svg></div>
       <h3>التقاط الأعلام</h3>
-      <p>خمسة أعلام مخبأة في الأهداف ويمكن الوصول إلى كل واحد بأدوات الحاوية، فاصطدها وأرسلها وشاهد نتيجتك تصعد إلى تسعين.</p>
+      <p>ستة أعلام مخبأة في الأهداف ويمكن الوصول إلى كل واحد بأدوات الحاوية، فاصطدها وأرسلها وشاهد نتيجتك تصعد إلى مئة وعشر.</p>
     </div>
     <div class="card k-third">
       <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M8 14l-2 8 6-3 6 3-2-8"/></svg></div>
@@ -559,7 +560,7 @@ ssh -p 2222 learner@localhost</pre>
 <!-- CTF -->
 <section id="ctf-ar"><div class="wrap">
   <p class="eyebrow">التقاط الأعلام</p>
-  <h2>خمسة أعلام وتسعون نقطة وحاوية واحدة.</h2>
+  <h2>ستة أعلام ومئة وعشر نقاط وحاوية واحدة.</h2>
   <p class="lead">يجلس كل علم حيث يتركه مشغّل مهمل ويمكن الوصول إليه بأداة تملكها أصلا، فاعثر على واحد ثم نفّذ <code>netsec submit flag{...}</code>.</p>
   <div class="flaglist">
     <div class="flag"><span class="pts">10 نقاط</span><div><h3>مستكشف مبتدئ</h3><p>لخدمة الويب صفحة لا ينبغي أن تكون، فأول طلب curl يجدها.</p></div></div>
@@ -567,7 +568,8 @@ ssh -p 2222 learner@localhost</pre>
     <div class="flag"><span class="pts">20 نقطة</span><div><h3>باب مفتوح</h3><p>يشير ملف robots.txt إلى مسارات لم يُقصد نشرها وأحدها يحوي نسخة احتياطية للإعداد.</p></div></div>
     <div class="flag"><span class="pts">20 نقطة</span><div><h3>غير موثّق</h3><p>تجيب خدمة أوامر أكثر مما تعترف به، فالتعداد يجد الأمر الذي تخفيه.</p></div></div>
     <div class="flag"><span class="pts">30 نقطة</span><div><h3>تسريب واحد وثلاثة أبواب</h3><p>تعيد وحدة تحكم بنص صريح استخدام كلمة مرور رأيتها تعبر الشبكة، فإعادة الاستخدام هي الدرس كله.</p></div></div>
-    <div class="flag"><span class="pts">90 نقطة</span><div><h3>لوحة نظيفة</h3><p>التقط الخمسة جميعا فتصير شارة الأستاذ لك، وتابعها متى شئت بالأمر <code>netsec ctf</code>.</p></div></div>
+    <div class="flag"><span class="pts">20 نقطة</span><div><h3>مخبأ على مرأى</h3><p>تحمل شهادة TLS حقلا لا ينبغي أن يكون، فاقرأ الموضوع كاملا لا الاسم الشائع فقط.</p></div></div>
+    <div class="flag"><span class="pts">110 نقطة</span><div><h3>لوحة نظيفة</h3><p>التقط الخمسة جميعا فتصير شارة الأستاذ لك، وتابعها متى شئت بالأمر <code>netsec ctf</code>.</p></div></div>
   </div>
   <div class="ctf-note">يمشي الدرس الثاني عشر السلسلة كاملة من تسريب صغير إلى وصول حقيقي، فيصير الصيد في الوقت نفسه درسا في كيف يجري التقييم الواقعي فعلا.</div>
 </div></section>
@@ -666,7 +668,7 @@ ssh -p 2222 learner@localhost</pre>
 
 <section><div class="wrap"><div class="closer">
   <h2>افتح طرفية وابدأ.</h2>
-  <p class="lead">اثنا عشر درسا وستة أهداف حية وصيد لخمسة أعلام تنتظر داخل حاوية واحدة.</p>
+  <p class="lead">اثنا عشر درسا وستة أهداف حية وصيد لستة أعلام تنتظر داخل حاوية واحدة.</p>
   <div class="cta" style="justify-content:center">
     <a class="btn btn-primary" href="#start-ar">ابدأ الآن</a>
     <a class="btn btn-ghost" href="https://github.com/SiteQ8/Shabakah">ضع نجمة على GitHub</a>
