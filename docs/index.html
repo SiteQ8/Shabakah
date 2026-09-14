@@ -471,7 +471,7 @@ ssh -p 2222 learner@localhost</pre>
   <div>
     <p class="eyebrow">مختبر مفتوح المصدر لأمن الشبكات</p>
     <h1>مختبر لأمن الشبكات في&nbsp;جهازك!</h1>
-    <p class="lead">شبكة هي حاوية Docker واحدة مكتفية بذاتها، تشغّلها ثم تدخل إليها عبر SSH فيرحّب بك مرشد ثنائي اللغة ويقودك عبر خمسة عشر درسا عمليا على خدمات حقيقية تعمل إلى جانبها، ويتحقق من كل تحدٍّ فور إنجازه لتتعلم بالممارسة لا بالقراءة.</p>
+    <p class="lead">شبكة هي بيئة Docker واحدة معزولة ومكتفية بذاتها، تعمل على جهازك دون أن تمس نظامك، فتشغّلها ثم تدخل إليها عبر SSH فيرحّب بك مرشد ثنائي اللغة ويقودك عبر خمسة عشر درسا عمليا على خدمات حقيقية تعمل إلى جانبها، ويتحقق من كل تحدٍّ فور إنجازه لتتعلم بالممارسة لا بالقراءة.</p>
     <div class="cta">
       <a class="btn btn-primary" href="#start-ar">ابدأ الآن</a>
       <a class="btn btn-ghost" href="https://github.com/SiteQ8/Shabakah">شاهده على GitHub</a>
@@ -494,9 +494,9 @@ ssh -p 2222 learner@localhost</pre>
 <section class="band"><div class="wrap">
   <p class="eyebrow">كيف يعمل</p>
   <h2>ثلاثة أوامر وتصبح في الداخل.</h2>
-  <p class="lead">لا مختبر تركّبه ولا سحابة تدفع مقابلها ولا شيء يصل إلى الخارج، فكل شيء يعيش داخل الحاوية.</p>
+  <p class="lead">لا مختبر تركّبه ولا سحابة تدفع مقابلها ولا شيء يصل إلى الخارج، فكل شيء يعمل داخل بيئة واحدة معزولة على جهازك.</p>
   <div class="steps">
-    <div class="step"><div class="n">01</div><h3>شغّل الحاوية</h3><p>اسحب الصورة أو ابنها ثم شغّلها، فهي تعمل حيثما عمل Docker.</p><pre>docker compose up -d --build</pre></div>
+    <div class="step"><div class="n">01</div><h3>شغّل المختبر</h3><p>اسحب الصورة أو ابنها ثم شغّلها، فهي تعمل حيثما عمل Docker.</p><pre>docker compose up -d --build</pre></div>
     <div class="step"><div class="n">02</div><h3>ادخل عبر SSH</h3><p>سجّل الدخول باسم المتعلم فيرحّب بك المرشد ويتذكّر أين توقفت.</p><pre>ssh -p 2222 learner@localhost</pre></div>
     <div class="step"><div class="n">03</div><h3>تعلّم بالممارسة</h3><p>اقرأ درسا ثم شغّل الأدوات على الأهداف الحية ودع المرشد يتحقق من إجابتك.</p><pre>netsec check 03 8080,8443,9000</pre></div>
   </div>
@@ -506,7 +506,7 @@ ssh -p 2222 learner@localhost</pre>
 <section id="features-ar"><div class="wrap">
   <p class="eyebrow">ما في الداخل</p>
   <h2>أكثر من مجرد مجموعة ملاحظات.</h2>
-  <p class="lead">تجمع شبكة مرشدا وأهدافا حية ولعبة في حاوية واحدة، كي لا يعترض شيء طريقك.</p>
+  <p class="lead">تجمع شبكة مرشدا وأهدافا حية ولعبة في بيئة واحدة، كي لا يعترض شيء طريقك.</p>
   <div class="bento">
     <div class="card k-wide feature-lead">
       <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v12H4z"/><path d="M8 20h8"/><path d="M7 8l3 2-3 2"/><path d="M12 12h4"/></svg></div>
@@ -517,7 +517,7 @@ ssh -p 2222 learner@localhost</pre>
     <div class="card k-nar">
       <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 .8-4.5 4.2L18 20l-6-3.4L6 20l1.5-7L3 8.8 9 8z"/></svg></div>
       <h3>التقاط الأعلام</h3>
-      <p>ستة أعلام مخبأة في الأهداف، يمكن الوصول إلى كل واحد منها بأدوات الحاوية، فاقتنصها وأرسلها وشاهد نتيجتك تصعد إلى مئة وعشر.</p>
+      <p>ستة أعلام مخبأة في الأهداف، يمكن الوصول إلى كل واحد منها بأدوات المختبر، فاقتنصها وأرسلها وشاهد نتيجتك تصعد إلى مئة وعشر.</p>
     </div>
     <div class="card k-third">
       <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M8 14l-2 8 6-3 6 3-2-8"/></svg></div>
@@ -537,7 +537,7 @@ ssh -p 2222 learner@localhost</pre>
     <div class="card k-half">
       <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg></div>
       <h3>آمن بحكم التصميم</h3>
-      <p>تبقى كل خدمة داخل الحاوية ولا شيء يصل إلى الخارج، فتتدرب على الأدوات الهجومية دون خطر على أحد، وهي الطريقة الوحيدة الصحيحة لتعلّمها.</p>
+      <p>تبقى كل خدمة داخل البيئة المعزولة ولا شيء يصل إلى الخارج، فتتدرب على الأدوات الهجومية دون خطر على أحد، وهي الطريقة الوحيدة الصحيحة لتعلّمها.</p>
     </div>
     <div class="card k-half">
       <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M8 9l3 3-3 3"/><path d="M13 15h3"/></svg></div>
@@ -569,7 +569,7 @@ ssh -p 2222 learner@localhost</pre>
 <!-- CTF -->
 <section id="ctf-ar"><div class="wrap">
   <p class="eyebrow">التقاط الأعلام</p>
-  <h2>ستة أعلام ومئة وعشر نقاط وحاوية واحدة.</h2>
+  <h2>ستة أعلام ومئة وعشر نقاط ومختبر واحد.</h2>
   <p class="lead">يقبع كل علم حيث يتركه مشغّل مهمل، ويمكن الوصول إليه بأداة تملكها أصلا، فاعثر على واحد ثم نفّذ <code>netsec submit flag{...}</code>.</p>
   <div class="flaglist">
     <div class="flag"><span class="pts">10 نقاط</span><div><h3>مستكشف مبتدئ</h3><p>لخدمة الويب صفحة ما كان ينبغي أن توجد، فأول طلب curl يكشفها.</p></div></div>
@@ -626,9 +626,9 @@ ssh -p 2222 learner@localhost</pre>
 <section class="band" id="tools-ar"><div class="wrap">
   <p class="eyebrow">صندوق الأدوات</p>
   <h2>الأدوات مثبتة سلفا.</h2>
-  <p class="lead">لا شيء تثبّته في منتصف الدرس، فالحاوية تأتي بعُدّة أمن شبكات عاملة وبالمرشد الذي يقودها.</p>
+  <p class="lead">لا شيء تثبّته في منتصف الدرس، فبيئة المختبر تأتي بعُدّة أمن شبكات عاملة وبالمرشد الذي يقودها.</p>
   <div class="toolwrap">
-    <div class="toolcol"><h3>داخل الحاوية</h3><div class="chips"><span class="chip">nmap</span><span class="chip">tcpdump</span><span class="chip">ngrep</span><span class="chip">openssl</span><span class="chip">dig</span><span class="chip">whois</span><span class="chip">netcat</span><span class="chip">socat</span><span class="chip">curl</span><span class="chip">wget</span><span class="chip">hping3</span><span class="chip">nftables</span><span class="chip">iptables</span><span class="chip">mtr</span><span class="chip">traceroute</span></div></div>
+    <div class="toolcol"><h3>داخل المختبر</h3><div class="chips"><span class="chip">nmap</span><span class="chip">tcpdump</span><span class="chip">ngrep</span><span class="chip">openssl</span><span class="chip">dig</span><span class="chip">whois</span><span class="chip">netcat</span><span class="chip">socat</span><span class="chip">curl</span><span class="chip">wget</span><span class="chip">hping3</span><span class="chip">nftables</span><span class="chip">iptables</span><span class="chip">mtr</span><span class="chip">traceroute</span></div></div>
     <div class="toolcol"><h3>قُدها بأمر netsec</h3>
       <div class="cmds" style="margin-top:4px;border-radius:11px">
         <div class="cmd"><code>netsec</code><span>افتح المرشد التفاعلي</span></div>
@@ -657,7 +657,7 @@ docker compose up -d --build
 ssh -p 2222 learner@localhost
 # كلمة المرور مضبوطة في docker-compose.yml والافتراضية shabakah</pre>
   </div>
-  <p class="lead" style="margin-top:20px">تفضّل الصورة الجاهزة؟ اسحبها من سجل حاويات GitHub.</p>
+  <p class="lead" style="margin-top:20px">تفضّل الصورة الجاهزة؟ اسحبها من سجل الصور على GitHub.</p>
   <div class="copywrap">
     <button class="copybtn" data-copy="qs-ar2">نسخ</button>
     <pre id="qs-ar2">docker run -d --name shabakah --cap-add NET_ADMIN -p 2222:22 ghcr.io/siteq8/shabakah:latest
@@ -670,17 +670,17 @@ ssh -p 2222 learner@localhost</pre>
   <p class="eyebrow">أسئلة</p>
   <h2>ما يحسن معرفته.</h2>
   <div class="faq">
-    <details><summary>هل تشغيله خطير؟</summary><p>لا، فكل خدمة تدريب تبقى داخل الحاوية ولا شيء يصل إلى الخارج، فتشغّل nmap وtcpdump وhping3 بطريقتها الهجومية دون خطر على أحد، ولهذا يكون المختبر المعزول هو المكان الصحيح لتعلّمها.</p></details>
+    <details><summary>هل تشغيله خطير؟</summary><p>لا، فكل خدمة تدريب تبقى داخل البيئة المعزولة ولا شيء يصل إلى الخارج، فتشغّل nmap وtcpdump وhping3 بطريقتها الهجومية دون خطر على أحد، ولهذا يكون المختبر المعزول هو المكان الصحيح لتعلّمها.</p></details>
     <details><summary>هل يلزمني إتقان سطر الأوامر مسبقا؟</summary><p>يفيد قليل من الألفة بالطرفية، لكن المرشد يعرض الأوامر الدقيقة لكل درس، وورقة الأوامر السريعة على بعد ضغطة، فيستطيع المبتدئ متابعته، والتكرار يرسّخ التعلّم.</p></details>
-    <details><summary>هل يحتاج اتصالا بالإنترنت؟</summary><p>يحتاجه فقط لسحب الصورة أو بنائها أول مرة، وبعد ذلك يعمل كل شيء دون اتصال داخل الحاوية بما في ذلك خادم DNS للمختبر.</p></details>
-    <details><summary>هل أستطيع تدريس صف أو تشغيل ورشة به؟</summary><p>نعم، فهو مرخّص برخصة MIT وثنائي اللغة ويكفي كل متعلم حاويته الخاصة، والتقدم والأعلام لكل متعلم على حدة، فيتقدم كل متعلم بالإيقاع الذي يناسبه.</p></details>
+    <details><summary>هل يحتاج اتصالا بالإنترنت؟</summary><p>يحتاجه فقط لسحب الصورة أو بنائها أول مرة، وبعد ذلك يعمل كل شيء دون اتصال داخل البيئة، بما في ذلك خادم DNS للمختبر.</p></details>
+    <details><summary>هل أستطيع تدريس صف أو تشغيل ورشة به؟</summary><p>نعم، فهو مرخّص برخصة MIT وثنائي اللغة ويكفي كل متعلم بيئته الخاصة، والتقدم والأعلام لكل متعلم على حدة، فيتقدم كل متعلم بالإيقاع الذي يناسبه.</p></details>
     <details><summary>أين أبلّغ عن مشكلة أو أقترح درسا؟</summary><p>افتح مسألة في مستودع المشروع على GitHub، ومساهماتك بدروس وأهداف جديدة مرحّب بها.</p></details>
   </div>
 </div></section>
 
 <section><div class="wrap"><div class="closer">
   <h2>افتح طرفية وابدأ.</h2>
-  <p class="lead">خمسة عشر درسا وستة أهداف حية وصيدُ ستة أعلام، تنتظرك كلها داخل حاوية واحدة.</p>
+  <p class="lead">خمسة عشر درسا وستة أهداف حية وصيدُ ستة أعلام، تنتظرك كلها داخل مختبر واحد.</p>
   <div class="cta" style="justify-content:center">
     <a class="btn btn-primary" href="#start-ar">ابدأ الآن</a>
     <a class="btn btn-ghost" href="https://github.com/SiteQ8/Shabakah">ضع نجمة على GitHub</a>
