@@ -10,7 +10,7 @@ A network security lab you SSH into to learn by doing.
 Shabakah is a single self contained Docker container. You start it, you SSH in,
 and a bilingual guide walks you through twelve hands on lessons against real
 services running beside it. Every challenge is checked live, so you learn by
-doing, not by reading. There is also a five flag capture the flag hunt and a set
+doing, not by reading. There is also a six flag capture the flag hunt and a set
 of achievements to earn. Nothing here reaches the outside world, so you can
 practise scanning, capture, and enumeration safely.
 
@@ -55,7 +55,7 @@ Your progress is saved between sessions.
 Six live practice targets, each one there so a lesson has something honest to
 find, from a chatty web service to a forgotten cleartext console.
 
-A capture the flag hunt of five flags worth ninety points, plus seven
+A capture the flag hunt of six flags worth a hundred and ten points, plus seven
 achievements that unlock as you clear lessons and capture flags.
 
 ![Capture the flag](docs/screenshots/ctf.png)
@@ -94,7 +94,7 @@ Twelve lessons, each ending in a live challenge the guide checks for you.
 
 ## Capture the flag
 
-Five flags are hidden across the targets, each reachable with the tools in the
+Six flags are hidden across the targets, each reachable with the tools in the
 box. Find one, then submit it.
 
 ```

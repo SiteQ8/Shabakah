@@ -58,7 +58,7 @@ pass "all dynamic checks resolve"
 echo "== certificate =="
 openssl req -x509 -newkey rsa:2048 -nodes \
     -keyout "$SHABAKAH_KEY" -out "$SHABAKAH_CERT" \
-    -days 3650 -subj "/C=KW/O=Shabakah Lab/CN=shabakah.lab" \
+    -days 3650 -subj "/C=KW/O=Shabakah Lab/OU=flag{shabakah_cert_metadata}/CN=shabakah.lab" \
     -addext "subjectAltName=DNS:shabakah.lab" >/dev/null 2>&1 || fail "cert generation failed"
 pass "self signed cert generated"
 
@@ -113,7 +113,8 @@ for f in \
     "flag{shabakah_hidden_in_html}" \
     "flag{shabakah_forgotten_backup}" \
     "flag{shabakah_undocumented_debug}" \
-    "flag{shabakah_reused_password}"; do
+    "flag{shabakah_reused_password}" \
+    "flag{shabakah_cert_metadata}"; do
     flag "$f"
 done
 if python3 "$ROOT/lab/bin/netsec" submit "flag{not_real}" >/dev/null 2>&1; then
@@ -121,8 +122,8 @@ if python3 "$ROOT/lab/bin/netsec" submit "flag{not_real}" >/dev/null 2>&1; then
 else
     pass "fake flag rejected"
 fi
-# after all five, the score line should read 90 of 90
-python3 "$ROOT/lab/bin/netsec" progress | grep -q "90 of 90" && pass "full score reached" || fail "score not 90 of 90"
+# after all six, the score line should read 110 of 110
+python3 "$ROOT/lab/bin/netsec" progress | grep -q "110 of 110" && pass "full score reached" || fail "score not 110 of 110"
 
 echo "== flags are actually reachable on the wire =="
 reachable() {
@@ -131,6 +132,7 @@ reachable() {
 reachable "flag{shabakah_http_recon_ok}"      "$(curl -s http://127.0.0.1:8080/flag)"
 reachable "flag{shabakah_hidden_in_html}"     "$(curl -s http://127.0.0.1:8080/)"
 reachable "flag{shabakah_forgotten_backup}"   "$(curl -s http://127.0.0.1:8080/backup/config.bak)"
+reachable "flag{shabakah_cert_metadata}"      "$(echo | openssl s_client -connect 127.0.0.1:8443 2>/dev/null | openssl x509 -noout -subject 2>/dev/null)"
 
 echo
 echo "ALL SMOKE TESTS PASSED"

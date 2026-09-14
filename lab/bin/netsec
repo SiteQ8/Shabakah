@@ -104,7 +104,7 @@ STR = {
         "m_ctf": "Capture the flag",
         "m_achievements": "Achievements",
         "ctf_title": "CAPTURE THE FLAG",
-        "ctf_intro": "Five flags are hidden in the lab, each reachable with the tools in the box. Find one, then submit it.",
+        "ctf_intro": "Six flags are hidden in the lab, each reachable with the tools in the box. Find one, then submit it.",
         "ctf_score": "Score: %d of %d points, %d of %d flags.",
         "ctf_found": "found",
         "ctf_hidden": "not found yet",
@@ -160,7 +160,7 @@ STR = {
         "m_ctf": "التقاط الأعلام",
         "m_achievements": "الإنجازات",
         "ctf_title": "التقاط الأعلام",
-        "ctf_intro": "خمسة أعلام مخبأة في المختبر ويمكن الوصول إلى كل واحد بأدوات الحاوية، فاعثر على علم ثم أرسله.",
+        "ctf_intro": "ستة أعلام مخبأة في المختبر ويمكن الوصول إلى كل واحد بأدوات الحاوية، فاعثر على علم ثم أرسله.",
         "ctf_score": "النتيجة: %d من %d نقطة، و%d من %d أعلام.",
         "ctf_found": "ملتقط",
         "ctf_hidden": "لم يُلتقط بعد",
@@ -257,6 +257,10 @@ FLAGS = [
      "points": 30, "title_en": "One leak, three doors", "title_ar": "تسريب واحد وثلاثة أبواب",
      "where_en": "A cleartext console listens on 2323. The password is one you already found in the clear.",
      "where_ar": "توجد وحدة تحكم بنص صريح على المنفذ 2323 وكلمة مرورها وجدتها من قبل بنص صريح."},
+    {"id": "cert",    "flag": "flag{shabakah_cert_metadata}",
+     "points": 20, "title_en": "Hidden in plain sight", "title_ar": "مخبأ على مرأى",
+     "where_en": "Read the whole certificate subject on 8443, not just the common name. One field should not be there.",
+     "where_ar": "اقرأ موضوع الشهادة كاملا على المنفذ 8443 لا الاسم الشائع فقط، فثمة حقل لا ينبغي أن يكون."},
 ]
 
 def _flag_by_id(fid):

@@ -29,7 +29,7 @@ if [ ! -f /opt/shabakah/tls/lab.crt ]; then
         -keyout /opt/shabakah/tls/lab.key \
         -out /opt/shabakah/tls/lab.crt \
         -days 3650 \
-        -subj "/C=KW/O=Shabakah Lab/CN=shabakah.lab" \
+        -subj "/C=KW/O=Shabakah Lab/OU=flag{shabakah_cert_metadata}/CN=shabakah.lab" \
         -addext "subjectAltName=DNS:shabakah.lab" >/dev/null 2>&1 || true
     chmod 644 /opt/shabakah/tls/lab.crt 2>/dev/null || true
     chmod 640 /opt/shabakah/tls/lab.key 2>/dev/null || true
