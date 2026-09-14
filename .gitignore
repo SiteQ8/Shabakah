@@ -1,5 +1,7 @@
 __pycache__/
 *.pyc
 *.pcap
+# but do ship the sample lab data used by the lessons
+!lab/data/pcaps/*.pcap
 .DS_Store
 /tls/
