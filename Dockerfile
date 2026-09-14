@@ -6,7 +6,8 @@ LABEL org.opencontainers.image.title="Shabakah" \
       org.opencontainers.image.description="Interactive network security lab you SSH into to learn by doing" \
       org.opencontainers.image.authors="Ali AlEnezi (SiteQ8)" \
       org.opencontainers.image.source="https://github.com/SiteQ8/Shabakah" \
-      org.opencontainers.image.licenses="MIT"
+      org.opencontainers.image.licenses="MIT" \
+      org.opencontainers.image.version="1.1.0"
 
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8 \
@@ -67,6 +68,6 @@ RUN chmod +x /usr/local/bin/netsec /usr/local/bin/entrypoint.sh \
 
 ENV SHABAKAH_LESSONS=/opt/shabakah/lessons
 
-EXPOSE 22
+EXPOSE 22 8080 8443 9000 9001 2323 5353
 
 ENTRYPOINT ["/usr/bin/tini", "--", "/usr/local/bin/entrypoint.sh"]

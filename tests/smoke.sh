@@ -32,8 +32,28 @@ echo "== lesson parity =="
 EN=$(ls "$ROOT"/lab/lessons/en/*.md | wc -l | tr -d ' ')
 AR=$(ls "$ROOT"/lab/lessons/ar/*.md | wc -l | tr -d ' ')
 [ "$EN" = "$AR" ] || fail "lesson count mismatch en=$EN ar=$AR"
-[ "$EN" -ge 10 ] || fail "expected at least 10 lessons, found $EN"
+[ "$EN" -ge 12 ] || fail "expected at least 12 lessons, found $EN"
 pass "en and ar both have $EN lessons"
+
+echo "== every dynamic check referenced by a lesson exists in the guide =="
+MISSING=$(python3 - "$ROOT" <<'PYEOF'
+import os, re, sys
+root = sys.argv[1]
+src = open(os.path.join(root, "lab/bin/netsec"), encoding="utf-8").read()
+known = set(re.findall(r'"([a-z_]+)":\s*check_', src))
+missing = []
+for d in ("en", "ar"):
+    for fn in os.listdir(os.path.join(root, "lab/lessons", d)):
+        text = open(os.path.join(root, "lab/lessons", d, fn), encoding="utf-8").read()
+        m = re.search(r"challenge_type:\s*dynamic", text)
+        c = re.search(r"challenge_check:\s*(\S+)", text)
+        if m and c and c.group(1) not in known:
+            missing.append(d + "/" + fn + " -> " + c.group(1))
+print("\n".join(missing))
+PYEOF
+)
+[ -z "$MISSING" ] || fail "dynamic checks missing from guide: $MISSING"
+pass "all dynamic checks resolve"
 
 echo "== certificate =="
 openssl req -x509 -newkey rsa:2048 -nodes \
@@ -73,8 +93,44 @@ check 07 shabakah.lab
 check 08 DROP
 check 09 "port scan"
 check 10 "least privilege"
+check 11 PONG
+check 12 netadmin-console-01
 reject 02 WRONG
 reject 07 example.com
+reject 11 NOPE
+
+echo "== capture the flag flow =="
+flag() {
+    if python3 "$ROOT/lab/bin/netsec" submit "$1" >/dev/null 2>&1; then
+        pass "flag accepted: $1"
+    else
+        fail "flag rejected: $1"
+    fi
+}
+# every flag must be reachable from the running targets and accepted on submit
+for f in \
+    "flag{shabakah_http_recon_ok}" \
+    "flag{shabakah_hidden_in_html}" \
+    "flag{shabakah_forgotten_backup}" \
+    "flag{shabakah_undocumented_debug}" \
+    "flag{shabakah_reused_password}"; do
+    flag "$f"
+done
+if python3 "$ROOT/lab/bin/netsec" submit "flag{not_real}" >/dev/null 2>&1; then
+    fail "a fake flag was accepted"
+else
+    pass "fake flag rejected"
+fi
+# after all five, the score line should read 90 of 90
+python3 "$ROOT/lab/bin/netsec" progress | grep -q "90 of 90" && pass "full score reached" || fail "score not 90 of 90"
+
+echo "== flags are actually reachable on the wire =="
+reachable() {
+    echo "$2" | grep -q "$1" && pass "reachable: $1" || fail "not reachable: $1"
+}
+reachable "flag{shabakah_http_recon_ok}"      "$(curl -s http://127.0.0.1:8080/flag)"
+reachable "flag{shabakah_hidden_in_html}"     "$(curl -s http://127.0.0.1:8080/)"
+reachable "flag{shabakah_forgotten_backup}"   "$(curl -s http://127.0.0.1:8080/backup/config.bak)"
 
 echo
 echo "ALL SMOKE TESTS PASSED"
