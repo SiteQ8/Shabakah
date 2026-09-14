@@ -58,6 +58,7 @@ COPY lab/bin/netsec /usr/local/bin/netsec
 COPY lab/targets/targets.py /opt/shabakah/targets/targets.py
 COPY lab/targets/dnsmasq.conf /etc/shabakah/dnsmasq.conf
 COPY lab/lessons /opt/shabakah/lessons
+COPY lab/data /opt/shabakah/data
 COPY lab/sshd_shabakah.conf /etc/ssh/sshd_config.d/shabakah.conf
 COPY lab/profile-shabakah.sh /etc/profile.d/shabakah.sh
 COPY lab/motd /etc/motd
@@ -66,7 +67,8 @@ COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/netsec /usr/local/bin/entrypoint.sh \
     && chmod 644 /etc/profile.d/shabakah.sh
 
-ENV SHABAKAH_LESSONS=/opt/shabakah/lessons
+ENV SHABAKAH_LESSONS=/opt/shabakah/lessons \
+    SHABAKAH_DATA=/opt/shabakah/data
 
 EXPOSE 22 8080 8443 9000 9001 2323 5353
 

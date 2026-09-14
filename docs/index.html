@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Shabakah (شبكة): a network security lab you SSH into</title>
-<meta name="description" content="Shabakah is a self contained Docker container you SSH into to learn network security by doing. Twelve hands on lessons, six live targets, a six flag capture the flag hunt, achievements, and a guide that checks your answers. English and Arabic.">
+<meta name="description" content="Shabakah is a self contained Docker container you SSH into to learn network security by doing. Fifteen hands on lessons, six live targets, a six flag capture the flag hunt, achievements, and a guide that checks your answers. English and Arabic.">
 <meta name="theme-color" content="#0B141B">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Shabakah (شبكة): a network security lab you SSH into">
-<meta property="og:description" content="Twelve lessons, six live targets, a capture the flag hunt, and a guide that checks your work. English and Arabic.">
+<meta property="og:description" content="Fifteen lessons, six live targets, a capture the flag hunt, and a guide that checks your work. English and Arabic.">
 <meta property="og:url" content="https://shabakah.3li.info/">
 <link rel="canonical" href="https://shabakah.3li.info/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230B141B'/%3E%3Cpath d='M16 44 L32 20 L48 44 M16 44 L48 44' stroke='%235FD3C6' stroke-width='3' fill='none' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='44' r='5' fill='%23F2C14E'/%3E%3Ccircle cx='32' cy='20' r='5' fill='%23F2C14E'/%3E%3Ccircle cx='48' cy='44' r='5' fill='%23F2C14E'/%3E%3C/svg%3E">
@@ -234,7 +234,7 @@ footer{border-top:1px solid var(--rule);padding:40px 0 56px;color:var(--ink-3)}
   <div>
     <p class="eyebrow">Open source network security lab</p>
     <h1>A network security lab you SSH into.</h1>
-    <p class="lead">Shabakah is one self contained Docker container. You start it, you SSH in, and a bilingual guide walks you through twelve hands on lessons against real services running beside it. Every challenge is checked live, so you learn by doing, not by reading.</p>
+    <p class="lead">Shabakah is one self contained Docker container. You start it, you SSH in, and a bilingual guide walks you through fifteen hands on lessons against real services running beside it. Every challenge is checked live, so you learn by doing, not by reading.</p>
     <div class="cta">
       <a class="btn btn-primary" href="#start">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 17l6-6-6-6"/><path d="M12 19h8"/></svg>
@@ -243,7 +243,7 @@ footer{border-top:1px solid var(--rule);padding:40px 0 56px;color:var(--ink-3)}
       <a class="btn btn-ghost" href="https://github.com/SiteQ8/Shabakah">View on GitHub</a>
     </div>
     <div class="facts">
-      <div class="fact"><b>12</b><span>hands on lessons</span></div>
+      <div class="fact"><b>15</b><span>hands on lessons</span></div>
       <div class="fact"><b>6</b><span>live targets</span></div>
       <div class="fact"><b>6</b><span>flags, 110 points</span></div>
       <div class="fact"><b>2</b><span>languages</span></div>
@@ -351,7 +351,7 @@ footer{border-top:1px solid var(--rule);padding:40px 0 56px;color:var(--ink-3)}
 <!-- LESSONS -->
 <section class="band" id="lessons"><div class="wrap">
   <p class="eyebrow">The curriculum</p>
-  <h2>Twelve lessons, each with a live challenge.</h2>
+  <h2>Fifteen lessons, each with a live challenge.</h2>
   <p class="lead">Every lesson ends with something to prove on the running targets, checked by the guide.</p>
   <div class="lessons">
     <div class="lrow"><span class="lid">01</span><span class="lt">The lay of the land<span class="ld">See what is listening and read the shape of the host</span></span><span class="lmeta">recon</span></div>
@@ -366,6 +366,9 @@ footer{border-top:1px solid var(--rule);padding:40px 0 56px;color:var(--ink-3)}
     <div class="lrow"><span class="lid">10</span><span class="lt">Think like a defender<span class="ld">Turn findings into least privilege and safer defaults</span></span><span class="lmeta">defense</span></div>
     <div class="lrow"><span class="lid">11</span><span class="lt">UDP services and why they hide<span class="ld">Scan and speak to a UDP service that answers only when asked</span></span><span class="lmeta">udp</span></div>
     <div class="lrow"><span class="lid">12</span><span class="lt">Chaining findings into access<span class="ld">Follow a trail from a small leak all the way to a login</span></span><span class="lmeta">chain</span></div>
+    <div class="lrow"><span class="lid">13</span><span class="lt">Read a capture like an investigator<span class="ld">Reconstruct an incident from a saved packet capture</span></span><span class="lmeta">forensics</span></div>
+    <div class="lrow"><span class="lid">14</span><span class="lt">Find the attack in the logs<span class="ld">Pick a brute force and its source out of an auth log</span></span><span class="lmeta">logs</span></div>
+    <div class="lrow"><span class="lid">15</span><span class="lt">Harden the door you came in through<span class="ld">The settings that make an SSH server hard to attack</span></span><span class="lmeta">hardening</span></div>
   </div>
 </div></section>
 
@@ -442,7 +445,7 @@ ssh -p 2222 learner@localhost</pre>
 
 <section><div class="wrap"><div class="closer">
   <h2>Open a terminal and begin.</h2>
-  <p class="lead">Twelve lessons, six live targets, and a hunt for six flags are waiting inside one container.</p>
+  <p class="lead">Fifteen lessons, six live targets, and a hunt for six flags are waiting inside one container.</p>
   <div class="cta" style="justify-content:center">
     <a class="btn btn-primary" href="#start">Get started</a>
     <a class="btn btn-ghost" href="https://github.com/SiteQ8/Shabakah">Star it on GitHub</a>
@@ -463,13 +466,13 @@ ssh -p 2222 learner@localhost</pre>
   <div>
     <p class="eyebrow">مختبر مفتوح المصدر لأمن الشبكات</p>
     <h1>مختبر لأمن الشبكات في&nbsp;جهازك!</h1>
-    <p class="lead">شبكة حاوية Docker واحدة ومكتفية بذاتها، فتشغّلها ثم تدخل إليها عبر SSH فيرحّب بك مرشد ويأخذك عبر اثني عشر درسا عمليا على خدمات حقيقية تعمل بجانبها، ويُتحقق من كل تحدٍّ حيا لتتعلم بالممارسة لا بالقراءة.</p>
+    <p class="lead">شبكة حاوية Docker واحدة ومكتفية بذاتها، فتشغّلها ثم تدخل إليها عبر SSH فيرحّب بك مرشد ويأخذك عبر خمسة عشر درسا عمليا على خدمات حقيقية تعمل بجانبها، ويُتحقق من كل تحدٍّ حيا لتتعلم بالممارسة لا بالقراءة.</p>
     <div class="cta">
       <a class="btn btn-primary" href="#start-ar">ابدأ الآن</a>
       <a class="btn btn-ghost" href="https://github.com/SiteQ8/Shabakah">شاهده على GitHub</a>
     </div>
     <div class="facts">
-      <div class="fact"><b>12</b><span>درسا عمليا</span></div>
+      <div class="fact"><b>15</b><span>درسا عمليا</span></div>
       <div class="fact"><b>6</b><span>أهداف حية</span></div>
       <div class="fact"><b>6</b><span>أعلام و110 نقطة</span></div>
       <div class="fact"><b>2</b><span>لغتان</span></div>
@@ -577,7 +580,7 @@ ssh -p 2222 learner@localhost</pre>
 <!-- LESSONS -->
 <section class="band" id="lessons-ar"><div class="wrap">
   <p class="eyebrow">المنهج</p>
-  <h2>اثنا عشر درسا ولكل واحد تحدٍّ حي.</h2>
+  <h2>خمسة عشر درسا ولكل واحد تحدٍّ حي.</h2>
   <p class="lead">ينتهي كل درس بشيء تثبته على الأهداف العاملة ويتحقق منه المرشد.</p>
   <div class="lessons">
     <div class="lrow"><span class="lid">01</span><span class="lt">معرفة الأرض<span class="ld">اعرف ما يستمع واقرأ شكل المضيف</span></span><span class="lmeta">استطلاع</span></div>
@@ -592,6 +595,9 @@ ssh -p 2222 learner@localhost</pre>
     <div class="lrow"><span class="lid">10</span><span class="lt">فكّر كمدافع<span class="ld">حوّل النتائج إلى أقل امتياز وإعدادات أأمن</span></span><span class="lmeta">دفاع</span></div>
     <div class="lrow"><span class="lid">11</span><span class="lt">خدمات UDP ولماذا تختبئ<span class="ld">افحص خدمة UDP لا ترد إلا حين تُسأل وخاطبها</span></span><span class="lmeta">udp</span></div>
     <div class="lrow"><span class="lid">12</span><span class="lt">ربط النتائج للوصول<span class="ld">اتبع أثرا من تسريب صغير حتى تسجيل دخول</span></span><span class="lmeta">سلسلة</span></div>
+    <div class="lrow"><span class="lid">13</span><span class="lt">اقرأ الالتقاط كمحقق<span class="ld">أعد بناء حادثة من ملف التقاط محفوظ</span></span><span class="lmeta">تحقيق</span></div>
+    <div class="lrow"><span class="lid">14</span><span class="lt">اعثر على الهجوم في السجلات<span class="ld">التقط تخمينا شاملا ومصدره من سجل المصادقة</span></span><span class="lmeta">سجلات</span></div>
+    <div class="lrow"><span class="lid">15</span><span class="lt">حصّن الباب الذي دخلت منه<span class="ld">الإعدادات التي تجعل خادم SSH صعب المهاجمة</span></span><span class="lmeta">تحصين</span></div>
   </div>
 </div></section>
 
@@ -668,7 +674,7 @@ ssh -p 2222 learner@localhost</pre>
 
 <section><div class="wrap"><div class="closer">
   <h2>افتح طرفية وابدأ.</h2>
-  <p class="lead">اثنا عشر درسا وستة أهداف حية وصيد لستة أعلام تنتظر داخل حاوية واحدة.</p>
+  <p class="lead">خمسة عشر درسا وستة أهداف حية وصيد لستة أعلام تنتظر داخل حاوية واحدة.</p>
   <div class="cta" style="justify-content:center">
     <a class="btn btn-primary" href="#start-ar">ابدأ الآن</a>
     <a class="btn btn-ghost" href="https://github.com/SiteQ8/Shabakah">ضع نجمة على GitHub</a>

@@ -2,6 +2,24 @@
 
 All notable changes to Shabakah are recorded here.
 
+## 1.2.0
+
+Added
+
+- Three new lessons, bringing the total to fifteen: read a capture like an
+  investigator (13), find the attack in the logs (14), and harden the door you
+  came in through (15).
+- A sample packet capture and a sample authentication log shipped in the image
+  under /opt/shabakah/data, so the forensics and log lessons have real material
+  to work on. The capture is generated deterministically with correct checksums.
+- A SHABAKAH_DATA path and a Dockerfile copy for the sample data.
+
+Changed
+
+- The website and README now list fifteen lessons, in English and Arabic.
+- The smoke test checks lesson parity at fifteen, runs the three new lesson
+  checks, and confirms the sample data files are present and well formed.
+
 ## 1.1.1
 
 Added
