@@ -14,7 +14,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A0E1A'/%3E%3Cpath d='M16 44 L32 20 L48 44 M16 44 L48 44' stroke='%234F8BFF' stroke-width='3' fill='none' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='44' r='5' fill='%23F2C14E'/%3E%3Ccircle cx='32' cy='20' r='5' fill='%23F2C14E'/%3E%3Ccircle cx='48' cy='44' r='5' fill='%23F2C14E'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#0A0E1A; --bg-2:#0E1428; --panel:#121A2E; --panel-2:#182238;
@@ -22,8 +22,8 @@
   --rule:#233149; --rule-2:#2E3E5C;
   --brand:#0033a0; --wire:#4F8BFF; --wire-2:#0033a0; --signal:#F2C14E; --coral:#FF8A6B; --violet:#B79CEB;
   --term-bg:#080C18; --term-fg:#D9E6E0; --term-dim:#6E8791;
-  --sans:'Sora',system-ui,'Segoe UI',Roboto,sans-serif;
-  --sans-ar:'IBM Plex Sans Arabic','Sora',system-ui,Tahoma,sans-serif;
+  --sans:'IBM Plex Sans Arabic',system-ui,'Segoe UI',Roboto,sans-serif;
+  --sans-ar:'IBM Plex Sans Arabic',system-ui,Tahoma,sans-serif;
   --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
   --maxw:1180px;
 }
@@ -33,7 +33,7 @@ html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;
   background-image:radial-gradient(1100px 560px at 80% -10%,rgba(0,51,160,.30),transparent 60%),radial-gradient(820px 480px at 6% 2%,rgba(242,193,78,.05),transparent 55%);background-attachment:fixed}
 main[lang="ar"]{font-family:var(--sans-ar);line-height:2;letter-spacing:0}
-main[lang="ar"] h1,main[lang="ar"] h2,main[lang="ar"] h3{font-family:"Cairo","IBM Plex Sans Arabic",sans-serif;letter-spacing:0;line-height:1.35;font-weight:700}
+main[lang="ar"] h1,main[lang="ar"] h2,main[lang="ar"] h3{letter-spacing:0;line-height:1.35;font-weight:700}
 main[lang="ar"] h1{font-weight:800}
 main[lang="ar"] .eyebrow{letter-spacing:0;font-weight:600}
 main[lang="ar"] .lead{line-height:2.05}
@@ -86,7 +86,7 @@ h1{font-size:clamp(2.1rem,5.2vw,3.5rem);font-weight:700;margin:.1em 0 .35em}
 .fact b{display:block;font-size:1.6rem;font-weight:700;color:var(--wire);line-height:1.05;font-variant-numeric:tabular-nums}
 .fact span{display:block;margin-top:5px;color:var(--ink-2);font-size:.82rem}
 
-.term{background:var(--term-bg);border:1px solid var(--rule-2);border-radius:14px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.45);font-family:var(--mono)}
+.term{background:var(--term-bg);border:1px solid var(--rule-2);border-radius:14px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.45);font-family:var(--mono);animation:termglow 4.5s ease-in-out infinite}
 .term .tbar{display:flex;align-items:center;gap:8px;padding:11px 14px;background:rgba(255,255,255,.03);border-bottom:1px solid var(--rule)}
 .term .dots{display:flex;gap:6px}
 .term .dots i{width:11px;height:11px;border-radius:50%;display:block}
@@ -96,7 +96,11 @@ h1{font-size:clamp(2.1rem,5.2vw,3.5rem);font-weight:700;margin:.1em 0 .35em}
 .term .body .p{color:#5FD3C6}.term .body .u{color:var(--signal)}.term .body .g{color:#7ce0b3}.term .body .d{color:var(--term-dim)}.term .body .c{color:#5FD3C6}
 .cursor{display:inline-block;width:9px;height:1.05em;background:#5FD3C6;vertical-align:-2px;animation:blink 1.1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
-@media (prefers-reduced-motion:reduce){.cursor{animation:none}}
+@keyframes termglow{0%,100%{box-shadow:0 30px 60px rgba(0,0,0,.45)}50%{box-shadow:0 30px 60px rgba(0,0,0,.45),0 0 34px rgba(79,139,255,.20)}}
+.replay{margin-inline-start:auto;background:transparent;border:0;color:var(--term-dim);cursor:pointer;padding:3px;display:inline-flex;border-radius:6px;transition:color .15s,background .15s}
+.replay:hover{color:#4F8BFF;background:rgba(79,139,255,.12)}
+.replay svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2}
+@media (prefers-reduced-motion:reduce){.cursor{animation:none}.term{animation:none}}
 
 .band{background:var(--bg-2);border-block:1px solid var(--rule)}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:34px}
@@ -224,7 +228,7 @@ footer{border-top:1px solid var(--rule);padding:40px 0 56px;color:var(--ink-3)}
     </a>
     <nav>
       <a class="navlink" href="#features" data-nav="features" data-en="Features" data-ar="المزايا">Features</a>
-      <a class="navlink" href="#screens" data-nav="screens" data-en="Screenshots" data-ar="من الداخل">Screenshots</a>
+      <a class="navlink" href="#screens" data-nav="screens" data-en="Screenshots" data-ar="معاينة">Screenshots</a>
       <a class="navlink" href="#lessons" data-nav="lessons" data-en="Lessons" data-ar="الدروس">Lessons</a>
       <a class="navlink" href="#ctf" data-nav="ctf" data-en="Flags" data-ar="التحديات">Flags</a>
       <a class="ghlink" href="https://github.com/SiteQ8/Shabakah"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
@@ -324,8 +328,8 @@ footer{border-top:1px solid var(--rule);padding:40px 0 56px;color:var(--ink-3)}
 
 <!-- SCREENSHOTS -->
 <section class="band" id="screens"><div class="wrap">
-  <p class="eyebrow">A look inside</p>
-  <h2>This is what you see.</h2>
+  <p class="eyebrow">A quick look</p>
+  <h2>See the guide before you start.</h2>
   <p class="lead">Real screens from the guide, straight out of the terminal.</p>
   <div class="shots">
     <div class="shot-tabs" role="tablist">
@@ -554,8 +558,8 @@ ssh -p 2222 learner@localhost</pre>
 
 <!-- SCREENSHOTS -->
 <section class="band" id="screens-ar"><div class="wrap">
-  <p class="eyebrow">نظرة من الداخل</p>
-  <h2>هكذا يبدو من الداخل.</h2>
+  <p class="eyebrow">معاينة سريعة</p>
+  <h2>شاهد المرشد قبل أن تبدأ.</h2>
   <p class="lead">قبل أن تبدأ، شاهد لقطات حقيقية من المرشد كما ستظهر في طرفيتك تماما.</p>
   <div class="shots">
     <div class="shot-tabs" role="tablist">
@@ -787,7 +791,8 @@ ssh -p 2222 learner@localhost</pre>
   var SCRIPTS = {
     en:[
       {t:"$ ",cls:""},{t:"ssh -p 2222 learner@localhost\n",cls:"typed"},
-      {t:"learner@localhost's password: \n",cls:"d"},
+      {cls:"spin",text:"Connecting to shabakah.lab ",ms:950},
+      {cls:"spin",text:"Authenticating ",ms:650},
       {t:"================================================================\n",cls:"c"},
       {t:"  SHABAKAH ",cls:"p"},{t:"|  ",cls:"d"},{t:"شبكة\n",cls:""},
       {t:"  a network security lab you SSH into\n",cls:"d"},
@@ -802,7 +807,8 @@ ssh -p 2222 learner@localhost</pre>
     ],
     ar:[
       {t:"$ ",cls:""},{t:"ssh -p 2222 learner@localhost\n",cls:"typed"},
-      {t:"learner@localhost's password: \n",cls:"d"},
+      {cls:"spin",text:"جارٍ الاتصال بـ shabakah.lab ",ms:950},
+      {cls:"spin",text:"جارٍ تسجيل الدخول ",ms:650},
       {t:"================================================================\n",cls:"c"},
       {t:"  SHABAKAH ",cls:"p"},{t:"|  ",cls:"d"},{t:"شبكة\n",cls:""},
       {t:"  مختبر لأمن الشبكات في جهازك\n",cls:"d"},
@@ -824,6 +830,11 @@ ssh -p 2222 learner@localhost</pre>
     var el = elFor(lang); if(!el) return;
     el.innerHTML='';
     SCRIPTS[lang].forEach(function(seg){
+      if(seg.cls==='spin'){
+        var l=document.createElement('span'); l.className='d'; l.textContent=seg.text; el.appendChild(l);
+        var ok=document.createElement('span'); ok.className='g'; ok.textContent='[ok]\n'; el.appendChild(ok);
+        return;
+      }
       var s=document.createElement('span'); if(seg.cls && seg.cls!=='typed') s.className=seg.cls; s.textContent=seg.t; el.appendChild(s);
     });
     var cur=document.createElement('span'); cur.className='cursor'; el.appendChild(cur);
@@ -840,7 +851,19 @@ ssh -p 2222 learner@localhost</pre>
     var cur=document.createElement('span'); cur.className='cursor'; el.appendChild(cur);
     function nextSeg(){
       if(i>=segs.length){ return; }
-      var seg=segs[i++], span=document.createElement('span');
+      var seg=segs[i++];
+      if(seg.cls==='spin'){
+        var label=document.createElement('span'); label.className='d'; label.textContent=seg.text; el.insertBefore(label,cur);
+        var sp=document.createElement('span'); sp.className='c'; el.insertBefore(sp,cur);
+        var frames=['|','/','-','\\'], fi=0, start=Date.now();
+        (function doSpin(){
+          sp.textContent=frames[fi++%frames.length];
+          if(Date.now()-start < seg.ms){ timers.push(setTimeout(doSpin,90)); }
+          else { sp.textContent=''; var ok=document.createElement('span'); ok.className='g'; ok.textContent='[ok]\n'; el.insertBefore(ok,cur); timers.push(setTimeout(nextSeg,200)); }
+        })();
+        return;
+      }
+      var span=document.createElement('span');
       if(seg.cls && seg.cls!=='typed') span.className=seg.cls;
       el.insertBefore(span, cur);
       if(seg.cls==='typed'){
@@ -857,6 +880,24 @@ ssh -p 2222 learner@localhost</pre>
     }
     timers.push(setTimeout(nextSeg, delay));
   }
+
+  function replay(lang){ clearTimers(); typed[lang]=false; runTerminal(lang); }
+  [['en','hero-term'],['ar','hero-term-ar']].forEach(function(pair){
+    var body=document.getElementById(pair[1]); if(!body) return;
+    var term=body.parentNode; if(!term) return;
+    term.style.cursor='pointer';
+    term.setAttribute('title', pair[0]==='ar'?'انقر للإعادة':'click to replay');
+    term.addEventListener('click', function(){ replay(pair[0]); });
+    var bar=term.querySelector('.tbar');
+    if(bar && !bar.querySelector('.replay')){
+      var btn=document.createElement('button');
+      btn.className='replay'; btn.type='button';
+      btn.setAttribute('aria-label', pair[0]==='ar'?'إعادة التشغيل':'replay');
+      btn.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>';
+      btn.addEventListener('click', function(e){ e.stopPropagation(); replay(pair[0]); });
+      bar.appendChild(btn);
+    }
+  });
 
   setLang(pickInitial(), false);
 })();
