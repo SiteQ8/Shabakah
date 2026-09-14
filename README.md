@@ -8,7 +8,7 @@ A network security lab you SSH into to learn by doing.
 [![image](https://img.shields.io/badge/ghcr.io-siteq8%2Fshabakah-2AA79B)](https://github.com/SiteQ8/Shabakah/pkgs/container/shabakah)
 
 Shabakah is a single self contained Docker container. You start it, you SSH in,
-and a bilingual guide walks you through twelve hands on lessons against real
+and a bilingual guide walks you through fifteen hands on lessons against real
 services running beside it. Every challenge is checked live, so you learn by
 doing, not by reading. There is also a six flag capture the flag hunt and a set
 of achievements to earn. Nothing here reaches the outside world, so you can
@@ -62,7 +62,7 @@ achievements that unlock as you clear lessons and capture flags.
 
 ## The lessons
 
-Twelve lessons, each ending in a live challenge the guide checks for you.
+Fifteen lessons, each ending in a live challenge the guide checks for you.
 
 | # | Lesson | Focus |
 |---|--------|-------|
@@ -78,6 +78,9 @@ Twelve lessons, each ending in a live challenge the guide checks for you.
 | 10 | Think like a defender | Turn findings into least privilege and safer defaults |
 | 11 | UDP services and why they hide | Scan and speak to a UDP service that answers only when asked |
 | 12 | Chaining findings into access | Follow a trail from a small leak all the way to a login |
+| 13 | Read a capture like an investigator | Reconstruct an incident from a saved packet capture |
+| 14 | Find the attack in the logs | Pick a brute force and its source out of an auth log |
+| 15 | Harden the door you came in through | The settings that make an SSH server hard to attack |
 
 ![A lesson in the terminal](docs/screenshots/lesson.png)
 
@@ -170,9 +173,9 @@ MIT. See LICENSE. Built by Ali AlEnezi (SiteQ8).
 ## عن شبكة
 
 شبكة مختبر لأمن الشبكات تدخل إليه عبر SSH فتتعلم بالممارسة، وهو حاوية Docker
-واحدة ومكتفية بذاتها تشغّلها ثم تدخل إليها فيرحّب بك مرشد ويأخذك عبر اثني عشر
+واحدة ومكتفية بذاتها تشغّلها ثم تدخل إليها فيرحّب بك مرشد ويأخذك عبر خمسة عشر
 درسا عمليا على خدمات حقيقية تعمل بجانبها، ويُتحقق من كل تحدٍّ حيا. يوجد أيضا صيد
-لخمسة أعلام وسبع شارات إنجاز تكسبها، ولا شيء هنا يصل إلى الخارج فتتدرب على الفحص
+لستة أعلام وسبع شارات إنجاز تكسبها، ولا شيء هنا يصل إلى الخارج فتتدرب على الفحص
 والالتقاط والتعداد بأمان.
 
 للبدء اسحب الصورة أو ابنها ثم شغّلها بأمر `docker compose up -d --build` ثم ادخل

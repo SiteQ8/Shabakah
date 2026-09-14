@@ -32,7 +32,7 @@ echo "== lesson parity =="
 EN=$(ls "$ROOT"/lab/lessons/en/*.md | wc -l | tr -d ' ')
 AR=$(ls "$ROOT"/lab/lessons/ar/*.md | wc -l | tr -d ' ')
 [ "$EN" = "$AR" ] || fail "lesson count mismatch en=$EN ar=$AR"
-[ "$EN" -ge 12 ] || fail "expected at least 12 lessons, found $EN"
+[ "$EN" -ge 15 ] || fail "expected at least 15 lessons, found $EN"
 pass "en and ar both have $EN lessons"
 
 echo "== every dynamic check referenced by a lesson exists in the guide =="
@@ -95,9 +95,23 @@ check 09 "port scan"
 check 10 "least privilege"
 check 11 PONG
 check 12 netadmin-console-01
+check 13 10.13.37.66
+check 14 203.0.113.77
+check 15 PermitRootLogin
 reject 02 WRONG
 reject 07 example.com
 reject 11 NOPE
+
+echo "== sample data files present and readable =="
+[ -s "$ROOT/lab/data/pcaps/incident.pcap" ] && pass "incident.pcap present" || fail "incident.pcap missing"
+[ -s "$ROOT/lab/data/logs/auth.log" ] && pass "auth.log present" || fail "auth.log missing"
+python3 -c "
+import struct,sys
+d=open('$ROOT/lab/data/pcaps/incident.pcap','rb').read()
+magic=struct.unpack('<I', d[:4])[0]
+sys.exit(0 if magic==0xA1B2C3D4 else 1)
+" && pass "incident.pcap has a valid pcap header" || fail "incident.pcap header invalid"
+grep -q "203.0.113.77" "$ROOT/lab/data/logs/auth.log" && pass "auth.log contains the attacker address" || fail "auth.log missing attacker"
 
 echo "== capture the flag flow =="
 flag() {
