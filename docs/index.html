@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shabakah (شبكة): a network security lab you SSH into</title>
+<meta name="description" content="Shabakah is a self contained Docker container you SSH into to learn network security by doing. Ten hands on lessons, live practice targets, and a bilingual guide in English and Arabic.">
+<meta name="theme-color" content="#0F1A22">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Shabakah (شبكة): a network security lab you SSH into">
+<meta property="og:description" content="Ten hands on lessons, live practice targets inside the box, and a guide that checks your answers. English and Arabic.">
+<meta property="og:url" content="https://siteq8.github.io/Shabakah/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230F1A22'/%3E%3Cpath d='M16 44 L32 20 L48 44 M16 44 L48 44' stroke='%235FD3C6' stroke-width='3' fill='none' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='44' r='5' fill='%23F2C14E'/%3E%3Ccircle cx='32' cy='20' r='5' fill='%23F2C14E'/%3E%3Ccircle cx='48' cy='44' r='5' fill='%23F2C14E'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E8EDF2;
+  --paper-2:#F5F7FA;
+  --ink:#14202B;
+  --ink-2:#4B5B6B;
+  --rule:#C7D1DB;
+  --wire:#0E7C7B;
+  --wire-deep:#0A5F5E;
+  --signal:#F2C14E;
+  --term-bg:#0F1A22;
+  --term-fg:#D9E6E0;
+  --term-dim:#7E9AA6;
+  --term-prompt:#5FD3C6;
+  --sans:'IBM Plex Sans',system-ui,'Segoe UI',Roboto,sans-serif;
+  --sans-ar:'IBM Plex Sans Arabic','IBM Plex Sans',system-ui,'Segoe UI',Tahoma,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --measure:66ch;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:17px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+main[lang="ar"]{font-family:var(--sans-ar);line-height:1.9}
+main[lang="ar"] h1,main[lang="ar"] h2,main[lang="ar"] h3{letter-spacing:0}
+a{color:var(--wire-deep);text-underline-offset:3px}
+a:hover{color:var(--ink)}
+:focus-visible{outline:3px solid var(--signal);outline-offset:3px;border-radius:3px}
+code,pre,kbd{font-family:var(--mono);direction:ltr;unicode-bidi:isolate}
+code{font-size:.92em;background:var(--paper-2);padding:.12em .4em;border-radius:4px;border:1px solid var(--rule)}
+pre code{background:none;border:0;padding:0;font-size:1em}
+.wrap{max-width:1120px;margin:0 auto;padding:0 clamp(18px,4vw,40px)}
+.hero>*,.two>*{min-width:0}
+
+/* header */
+header{padding:22px 0 8px}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:baseline;gap:12px;text-decoration:none;color:var(--ink)}
+.brand .latin{font-weight:600;font-size:1.25rem;letter-spacing:-.01em}
+.brand .arabic{font-family:var(--sans-ar);font-size:1.25rem;color:var(--ink-2)}
+nav{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+nav a{text-decoration:none;color:var(--ink-2);font-size:.95rem}
+nav a:hover{color:var(--ink);text-decoration:underline}
+.lang{display:inline-flex;border:1px solid var(--rule);border-radius:999px;padding:3px;background:var(--paper-2)}
+.lang button{
+  appearance:none;border:0;background:transparent;color:var(--ink-2);
+  font:inherit;font-size:.9rem;padding:5px 12px;border-radius:999px;cursor:pointer
+}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper-2)}
+.lang button:hover{color:var(--ink)}
+.lang button[aria-pressed="true"]:hover{color:var(--paper-2)}
+.lang .ar{font-family:var(--sans-ar)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);align-items:start;padding:clamp(28px,6vw,72px) 0 clamp(36px,6vw,64px)}
+.hero h1{
+  font-size:clamp(2.6rem,6.2vw,4.6rem);line-height:1.02;letter-spacing:-.025em;
+  font-weight:600;margin:0 0 .35em
+}
+main[lang="ar"] .hero h1{line-height:1.25;font-size:clamp(2.4rem,5.8vw,4.2rem)}
+.lede{font-size:1.15rem;max-width:var(--measure);margin:0 0 1.4em;color:var(--ink)}
+.hero p.note{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.6em}
+.actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:1.2em}
+.btn{
+  display:inline-block;padding:11px 18px;border-radius:8px;text-decoration:none;
+  font-weight:500;font-size:.98rem;border:1px solid var(--ink);color:var(--ink);background:transparent
+}
+.btn.primary{background:var(--ink);color:var(--paper-2)}
+.btn:hover{background:var(--wire-deep);border-color:var(--wire-deep);color:#fff}
+
+/* code blocks */
+.codeblock{position:relative;background:var(--paper-2);border:1px solid var(--rule);border-radius:10px;margin:0 0 14px}
+.codeblock pre{margin:0;padding:16px 66px 16px 18px;overflow:auto;font-size:.88rem;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}
+main[lang="ar"] .codeblock pre{padding:16px 18px 16px 66px}
+.codeblock .copy{
+  position:absolute;top:8px;right:8px;appearance:none;border:1px solid var(--rule);
+  background:var(--paper);color:var(--ink-2);font:inherit;font-size:.8rem;
+  padding:4px 10px;border-radius:6px;cursor:pointer
+}
+main[lang="ar"] .codeblock .copy{right:auto;left:8px}
+.codeblock .copy:hover{color:var(--ink);border-color:var(--ink)}
+.codeblock .copy[data-done="1"]{background:var(--signal);border-color:var(--signal);color:var(--ink)}
+.caption{font-size:.9rem;color:var(--ink-2);margin:0 0 20px}
+
+/* the terminal: the one memorable element */
+.term{
+  min-width:0;background:var(--term-bg);color:var(--term-fg);border-radius:12px;
+  box-shadow:0 30px 60px rgba(15,26,34,.28),0 2px 0 rgba(255,255,255,.35) inset;
+  overflow:hidden;font-family:var(--mono);font-size:.78rem;line-height:1.5
+}
+.term-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:9px 14px;background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.08);
+  color:var(--term-dim);font-size:.78rem
+}
+.term pre{margin:0;padding:14px 14px 16px;white-space:pre;overflow:auto;direction:ltr}
+.term .ln{display:block;min-height:1.5em}
+.term .ln.hid{visibility:hidden}
+.term .p{color:var(--term-prompt)}
+.term .d{color:var(--term-dim)}
+.term .y{color:var(--signal)}
+.term .cur::after{content:"";display:inline-block;width:.6em;height:1.05em;background:var(--term-fg);vertical-align:-.18em;margin-left:2px;animation:blink 1s steps(1) infinite}
+@media (prefers-reduced-motion:reduce){.term .cur::after{animation:none}}
+@keyframes blink{50%{opacity:0}}
+.term .ar-run{font-family:var(--sans-ar);font-size:.95em}
+
+/* sections */
+section{padding:clamp(34px,5vw,60px) 0;border-top:1px solid var(--rule)}
+h2{font-size:clamp(1.5rem,2.6vw,1.95rem);line-height:1.2;letter-spacing:-.015em;font-weight:600;margin:0 0 .7em}
+h3{font-size:1.1rem;font-weight:600;margin:0 0 .35em}
+section p{max-width:var(--measure)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,36px);counter-reset:step;list-style:none;margin:0;padding:0}
+.steps li{counter-increment:step}
+.steps li::before{
+  content:counter(step);display:inline-flex;width:34px;height:34px;align-items:center;justify-content:center;
+  border-radius:50%;background:var(--ink);color:var(--paper-2);font-family:var(--mono);font-size:.95rem;margin-bottom:10px
+}
+.steps p{margin:0;color:var(--ink-2)}
+.lessons{columns:2;column-gap:clamp(24px,4vw,56px);margin:0;padding:0 0 0 1.6em;max-width:60ch}
+main[lang="ar"] .lessons{padding:0 1.6em 0 0}
+.lessons li{break-inside:avoid;padding:6px 0 6px 6px;border-bottom:1px solid var(--rule)}
+main[lang="ar"] .lessons li{padding:6px 6px 6px 0}
+.lessons li::marker{font-family:var(--mono);color:var(--wire-deep)}
+.targets{margin:0;padding:0;list-style:none;display:grid;gap:0;max-width:78ch}
+.targets li{display:grid;grid-template-columns:86px 150px 1fr;gap:16px;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--rule)}
+.targets .port{font-family:var(--mono);color:var(--wire-deep);font-size:1.05rem;font-weight:500}
+.targets .name{font-weight:600}
+.targets .what{color:var(--ink-2)}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none;max-width:70ch}
+.tools li{font-family:var(--mono);font-size:.9rem;background:var(--paper-2);border:1px solid var(--rule);border-radius:6px;padding:4px 10px}
+.cmds{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 20px;align-items:baseline;max-width:78ch}
+.cmds dt{font-family:var(--mono);font-size:.9rem;color:var(--wire-deep);white-space:nowrap}
+.cmds dd{margin:0;color:var(--ink-2)}
+.safety{border:1px solid var(--rule);border-left:5px solid var(--signal);background:var(--paper-2);border-radius:8px;padding:16px 20px;max-width:78ch}
+main[lang="ar"] .safety{border-left:1px solid var(--rule);border-right:5px solid var(--signal)}
+.safety p{margin:0}
+footer{border-top:1px solid var(--rule);padding:28px 0 40px;color:var(--ink-2);font-size:.95rem}
+footer .row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+[hidden]{display:none !important}
+
+@media (max-width:920px){
+  .hero{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .two{grid-template-columns:1fr}
+  .lessons{columns:1}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .term{font-size:.7rem}
+  .targets li{grid-template-columns:70px 1fr}
+  .targets .what{grid-column:1 / -1}
+  .cmds{grid-template-columns:1fr;gap:2px 0}
+  .cmds dd{margin-bottom:10px}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="bar">
+    <a class="brand" href="#top" aria-label="Shabakah">
+      <span class="latin">Shabakah</span><span class="arabic">شبكة</span>
+    </a>
+    <nav aria-label="Page">
+      <a href="#lessons" data-en="Lessons" data-ar="الدروس">Lessons</a>
+      <a href="#targets" data-en="Targets" data-ar="الأهداف">Targets</a>
+      <a href="#guide" data-en="The guide" data-ar="المرشد">The guide</a>
+      <a href="https://github.com/SiteQ8/Shabakah">GitHub</a>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-set="en" aria-pressed="true">English</button>
+        <button type="button" data-set="ar" aria-pressed="false" class="ar">العربية</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- ======================= ENGLISH ======================= -->
+<main lang="en" dir="ltr" id="top" class="wrap" data-lang="en">
+  <div class="hero">
+    <div>
+      <h1>A network security lab you SSH into.</h1>
+      <p class="lede">Shabakah is one self contained Docker container. You start it, SSH in, and a guide greets you and takes you through ten hands on lessons in network security.</p>
+      <p class="note">Every lesson has a real practice target running inside the box, a challenge, and a checker that verifies your answer live. Nothing reaches the outside world, so you can practise scanning, capture and enumeration safely, in English or Arabic.</p>
+
+      <div class="codeblock">
+        <button type="button" class="copy" data-copy="qs-en">Copy</button>
+<pre id="qs-en"><code>git clone https://github.com/SiteQ8/Shabakah.git
+cd Shabakah
+docker compose up -d --build
+ssh -p 2222 learner@localhost</code></pre>
+      </div>
+      <p class="caption">The default password is <code>shabakah</code>. Set <code>LEARNER_PASSWORD</code> to change it.</p>
+
+      <div class="codeblock">
+        <button type="button" class="copy" data-copy="pull-en">Copy</button>
+<pre id="pull-en"><code>docker run -d --cap-add NET_ADMIN -p 2222:22 ghcr.io/siteq8/shabakah:latest</code></pre>
+      </div>
+      <p class="caption">Or pull the prebuilt image. <code>NET_ADMIN</code> is only needed for the firewall lesson.</p>
+
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/SiteQ8/Shabakah">View the source on GitHub</a>
+        <a class="btn" href="https://github.com/SiteQ8/Shabakah/releases/latest">Latest release</a>
+      </div>
+    </div>
+
+    <div class="term" data-term aria-label="What you see when you log in">
+      <div class="term-bar"><span>learner@shabakah: ~</span></div>
+<pre><span class="ln"><span class="p">$ </span><span class="cmd" data-text="ssh -p 2222 learner@localhost"></span></span><span class="ln hid d">learner@localhost's password:</span><span class="ln hid d">========================================================</span><span class="ln hid">  <span class="y">SHABAKAH</span>  |  <span class="ar-run">شبكة</span></span><span class="ln hid">  Interactive network security lab you learn by doing</span><span class="ln hid d">  v1.0.0  |  github.com/SiteQ8/Shabakah</span><span class="ln hid d">========================================================</span><span class="ln hid d">  Only scan the local lab targets or systems you own.</span><span class="ln hid"> </span><span class="ln hid">MAIN MENU</span><span class="ln hid d">----------------------------------------</span><span class="ln hid">  <span class="p">1)</span>  Browse lessons</span><span class="ln hid">  <span class="p">2)</span>  My progress</span><span class="ln hid">  <span class="p">3)</span>  Lab targets status</span><span class="ln hid">  <span class="p">4)</span>  Command cheat sheet</span><span class="ln hid">  <span class="p">5)</span>  Language: English</span><span class="ln hid">  <span class="p">6)</span>  Drop to a shell</span><span class="ln hid">  <span class="p">7)</span>  Quit</span><span class="ln hid"> </span><span class="ln hid"><span class="cur">Choose a number: </span></span></pre>
+    </div>
+  </div>
+
+  <section id="how-en">
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li><h3>Start the container</h3><p>One image on Debian with the tools already installed. The practice targets start with it, all bound to loopback inside the box.</p></li>
+      <li><h3>Connect over SSH</h3><p>Log in as <code>learner</code> on port 2222. The guide opens on its own, and you can leave it for a normal shell at any time.</p></li>
+      <li><h3>Learn by doing</h3><p>Read a lesson, run the commands against the targets, then check your answer. The guide records what you have completed.</p></li>
+    </ol>
+  </section>
+
+  <section id="lessons">
+    <h2>The ten lessons</h2>
+    <p>Each lesson explains one idea, shows the commands, says why a defender cares, and ends with a challenge the guide can verify against the live targets.</p>
+    <ol class="lessons">
+      <li>The network stack and sockets</li>
+      <li>Reading the wire with tcpdump</li>
+      <li>Port scanning with nmap</li>
+      <li>Service enumeration and banners</li>
+      <li>HTTP recon and cleartext exposure</li>
+      <li>DNS reconnaissance</li>
+      <li>TLS and certificates</li>
+      <li>Host firewalling</li>
+      <li>Traffic analysis and spotting attacks</li>
+      <li>Detection and hardening</li>
+    </ol>
+  </section>
+
+  <section id="targets">
+    <h2>The practice targets</h2>
+    <p>Four small services run inside the container so there is always something real to scan, capture and inspect.</p>
+    <ul class="targets">
+      <li><span class="port">8080</span><span class="name">HTTP</span><span class="what">A deliberately careless web service for header, banner and cleartext analysis. It leaks a credential on purpose.</span></li>
+      <li><span class="port">8443</span><span class="name">HTTPS</span><span class="what">A TLS service with a self signed certificate to inspect with openssl.</span></li>
+      <li><span class="port">9000</span><span class="name">Raw TCP</span><span class="what">A banner service that answers a few commands, for enumeration practice with netcat.</span></li>
+      <li><span class="port">5353</span><span class="name">DNS</span><span class="what">A small resolver serving a practice zone with A, MX and TXT records.</span></li>
+    </ul>
+  </section>
+
+  <section id="tools-en">
+    <div class="two">
+      <div>
+        <h2>Tools inside</h2>
+        <p>Everything is installed and ready, with the manual pages.</p>
+        <ul class="tools">
+          <li>nmap</li><li>tcpdump</li><li>ngrep</li><li>netcat</li><li>socat</li><li>curl</li><li>dig</li><li>whois</li><li>ss</li><li>netstat</li><li>ping</li><li>traceroute</li><li>mtr</li><li>openssl</li><li>nftables</li><li>iptables</li><li>hping3</li><li>jq</li>
+        </ul>
+      </div>
+      <div id="guide">
+        <h2>The guide</h2>
+        <p>It opens when you log in. Type <code>netsec</code> to reopen it from a shell, or use it directly:</p>
+        <dl class="cmds">
+          <dt>netsec lessons</dt><dd>list all lessons</dd>
+          <dt>netsec lesson 03</dt><dd>read one lesson</dd>
+          <dt>netsec check 03 8080,8443,9000</dt><dd>check a challenge answer</dd>
+          <dt>netsec targets</dt><dd>show lab target status</dd>
+          <dt>netsec cheat</dt><dd>command cheat sheet</dd>
+          <dt>netsec progress</dt><dd>show your progress</dd>
+          <dt>netsec lang ar</dt><dd>switch the guide to Arabic</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="safety-en">
+    <h2>Safety and scope</h2>
+    <div class="safety">
+      <p>This lab exists for learning on systems you own or are authorised to test. Only scan the local practice targets. The container attacks nothing outside itself, and its tools should not be pointed at hosts you do not have permission to test.</p>
+    </div>
+  </section>
+</main>
+
+<!-- ======================= ARABIC ======================= -->
+<main lang="ar" dir="rtl" class="wrap" data-lang="ar" hidden>
+  <div class="hero">
+    <div>
+      <h1>مختبر لأمن الشبكات تدخل إليه عبر SSH.</h1>
+      <p class="lede">شبكة حاوية Docker واحدة ومكتفية بذاتها، فأنت تشغّلها ثم تدخل عبر SSH فيرحّب بك مرشد ويأخذك عبر عشرة دروس عملية في أمن الشبكات.</p>
+      <p class="note">يأتي كل درس بهدف تدريب حقيقي يعمل داخل الحاوية وتحدٍّ ومدقّق يتحقق من إجابتك حيّا، ولا شيء يصل إلى الخارج لذا تتدرب على الفحص والالتقاط والتعداد بأمان وبالعربية أو الإنجليزية.</p>
+
+      <div class="codeblock">
+        <button type="button" class="copy" data-copy="qs-ar">نسخ</button>
+<pre id="qs-ar"><code>git clone https://github.com/SiteQ8/Shabakah.git
+cd Shabakah
+docker compose up -d --build
+ssh -p 2222 learner@localhost</code></pre>
+      </div>
+      <p class="caption">كلمة المرور الافتراضية هي <code>shabakah</code> وتغيّرها عبر <code>LEARNER_PASSWORD</code>.</p>
+
+      <div class="codeblock">
+        <button type="button" class="copy" data-copy="pull-ar">نسخ</button>
+<pre id="pull-ar"><code>docker run -d --cap-add NET_ADMIN -p 2222:22 ghcr.io/siteq8/shabakah:latest</code></pre>
+      </div>
+      <p class="caption">أو اسحب الصورة الجاهزة، فالصلاحية <code>NET_ADMIN</code> مطلوبة لدرس الجدار الناري فقط.</p>
+
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/SiteQ8/Shabakah">اطّلع على المصدر في GitHub</a>
+        <a class="btn" href="https://github.com/SiteQ8/Shabakah/releases/latest">أحدث إصدار</a>
+      </div>
+    </div>
+
+    <div class="term" data-term dir="ltr" aria-label="ما تراه حين تدخل">
+      <div class="term-bar"><span>learner@shabakah: ~</span></div>
+<pre><span class="ln"><span class="p">$ </span><span class="cmd" data-text="ssh -p 2222 learner@localhost"></span></span><span class="ln hid d">learner@localhost's password:</span><span class="ln hid d">========================================================</span><span class="ln hid">  <span class="y">SHABAKAH</span>  |  <span class="ar-run">شبكة</span></span><span class="ln hid">  <span class="ar-run">مختبر تفاعلي لأمن الشبكات تتعلمه بالممارسة</span></span><span class="ln hid d">  v1.0.0  |  github.com/SiteQ8/Shabakah</span><span class="ln hid d">========================================================</span><span class="ln hid"> </span><span class="ln hid"><span class="ar-run">القائمة الرئيسية</span></span><span class="ln hid d">----------------------------------------</span><span class="ln hid">  <span class="p">1)</span>  <span class="ar-run">تصفح الدروس</span></span><span class="ln hid">  <span class="p">2)</span>  <span class="ar-run">تقدمي</span></span><span class="ln hid">  <span class="p">3)</span>  <span class="ar-run">حالة أهداف المختبر</span></span><span class="ln hid">  <span class="p">4)</span>  <span class="ar-run">ورقة الأوامر السريعة</span></span><span class="ln hid">  <span class="p">5)</span>  <span class="ar-run">اللغة: العربية</span></span><span class="ln hid">  <span class="p">6)</span>  <span class="ar-run">الانتقال إلى الطرفية</span></span><span class="ln hid">  <span class="p">7)</span>  <span class="ar-run">خروج</span></span><span class="ln hid"> </span><span class="ln hid"><span class="cur"><span class="ar-run">اختر رقما</span>: </span></span></pre>
+    </div>
+  </div>
+
+  <section id="how-ar">
+    <h2>كيف يعمل</h2>
+    <ol class="steps">
+      <li><h3>شغّل الحاوية</h3><p>صورة واحدة على Debian بالأدوات مثبتة مسبقا، وتنطلق أهداف التدريب معها وكلها مرتبطة بالاسترجاع داخل الحاوية.</p></li>
+      <li><h3>اتصل عبر SSH</h3><p>ادخل بالمستخدم <code>learner</code> على المنفذ 2222 فيفتح المرشد من تلقاء نفسه، وتستطيع مغادرته إلى طرفية عادية في أي وقت.</p></li>
+      <li><h3>تعلّم بالممارسة</h3><p>اقرأ درسا ثم شغّل الأوامر على الأهداف ثم تحقق من إجابتك، ويسجّل المرشد ما أكملته.</p></li>
+    </ol>
+  </section>
+
+  <section id="lessons-ar">
+    <h2>الدروس العشرة</h2>
+    <p>يشرح كل درس فكرة واحدة ويعرض الأوامر ويبيّن لماذا يهتم المدافع، ثم يختم بتحدٍّ يستطيع المرشد التحقق منه على الأهداف الحية.</p>
+    <ol class="lessons">
+      <li>طبقات الشبكة والمقابس</li>
+      <li>قراءة حركة الشبكة باستخدام tcpdump</li>
+      <li>فحص المنافذ باستخدام nmap</li>
+      <li>تعداد الخدمات والترويسات الافتتاحية</li>
+      <li>استطلاع HTTP وخطر النص الصريح</li>
+      <li>استطلاع نظام أسماء النطاقات</li>
+      <li>بروتوكول TLS والشهادات</li>
+      <li>الجدار الناري على المضيف</li>
+      <li>تحليل الحركة واكتشاف الهجمات</li>
+      <li>الكشف والتحصين</li>
+    </ol>
+  </section>
+
+  <section id="targets-ar">
+    <h2>أهداف التدريب</h2>
+    <p>تعمل أربع خدمات صغيرة داخل الحاوية كي يكون هناك دائما شيء حقيقي تفحصه وتلتقطه وتتفحصه.</p>
+    <ul class="targets">
+      <li><span class="port">8080</span><span class="name">HTTP</span><span class="what">خدمة ويب مهمِلة عن قصد لتحليل الترويسات واللافتات والنص الصريح، وهي تسرّب بيانات اعتماد عمدا.</span></li>
+      <li><span class="port">8443</span><span class="name">HTTPS</span><span class="what">خدمة TLS بشهادة موقّعة ذاتيا لفحصها بأداة openssl.</span></li>
+      <li><span class="port">9000</span><span class="name">TCP خام</span><span class="what">خدمة لافتات تجيب عن بضعة أوامر لتدريب التعداد بأداة netcat.</span></li>
+      <li><span class="port">5353</span><span class="name">DNS</span><span class="what">خادم أسماء صغير يخدم نطاقا تدريبيا بسجلات A وMX وTXT.</span></li>
+    </ul>
+  </section>
+
+  <section id="tools-ar">
+    <div class="two">
+      <div>
+        <h2>الأدوات في الداخل</h2>
+        <p>كل شيء مثبّت وجاهز مع صفحات الدليل.</p>
+        <ul class="tools">
+          <li>nmap</li><li>tcpdump</li><li>ngrep</li><li>netcat</li><li>socat</li><li>curl</li><li>dig</li><li>whois</li><li>ss</li><li>netstat</li><li>ping</li><li>traceroute</li><li>mtr</li><li>openssl</li><li>nftables</li><li>iptables</li><li>hping3</li><li>jq</li>
+        </ul>
+      </div>
+      <div id="guide-ar">
+        <h2>المرشد</h2>
+        <p>يفتح حين تدخل، واكتب <code>netsec</code> لإعادة فتحه من الطرفية أو استخدمه مباشرة:</p>
+        <dl class="cmds">
+          <dt>netsec lessons</dt><dd>عرض كل الدروس</dd>
+          <dt>netsec lesson 03</dt><dd>قراءة درس واحد</dd>
+          <dt>netsec check 03 8080,8443,9000</dt><dd>التحقق من إجابة تحدٍّ</dd>
+          <dt>netsec targets</dt><dd>عرض حالة أهداف المختبر</dd>
+          <dt>netsec cheat</dt><dd>ورقة الأوامر السريعة</dd>
+          <dt>netsec progress</dt><dd>عرض تقدمك</dd>
+          <dt>netsec lang en</dt><dd>تبديل المرشد إلى الإنجليزية</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="safety-ar">
+    <h2>الأمان والنطاق</h2>
+    <div class="safety">
+      <p>وُجد هذا المختبر للتعلم على أنظمة تملكها أو مصرّح لك باختبارها، فافحص أهداف التدريب المحلية فقط لأن الحاوية لا تهاجم شيئا خارج نفسها وينبغي ألا توجّه أدواتها إلى مضيفين لا تملك إذنا باختبارهم.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="row">
+    <span data-en="Built by Ali AlEnezi (SiteQ8). MIT licensed." data-ar="بناه علي العنزي (SiteQ8) وهو مرخّص برخصة MIT.">Built by Ali AlEnezi (SiteQ8). MIT licensed.</span>
+    <span><a href="https://github.com/SiteQ8/Shabakah">github.com/SiteQ8/Shabakah</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var mains = document.querySelectorAll('main[data-lang]');
+  var buttons = document.querySelectorAll('.lang button');
+  var titles = {
+    en: 'Shabakah (\u0634\u0628\u0643\u0629): a network security lab you SSH into',
+    ar: '\u0634\u0628\u0643\u0629: \u0645\u062e\u062a\u0628\u0631 \u0644\u0623\u0645\u0646 \u0627\u0644\u0634\u0628\u0643\u0627\u062a \u062a\u062f\u062e\u0644 \u0625\u0644\u064a\u0647 \u0639\u0628\u0631 SSH'
+  };
+  var played = {};
+
+  function showAll(term){
+    term.querySelectorAll('.ln.hid').forEach(function(l){ l.classList.remove('hid'); });
+    var cmd = term.querySelector('.cmd');
+    if (cmd) cmd.textContent = cmd.getAttribute('data-text');
+  }
+
+  function play(term){
+    if (reduced) { showAll(term); return; }
+    var cmd = term.querySelector('.cmd');
+    var text = cmd.getAttribute('data-text');
+    var lines = Array.prototype.slice.call(term.querySelectorAll('.ln.hid'));
+    var i = 0;
+    cmd.textContent = '';
+    function typeNext(){
+      if (i < text.length) { cmd.textContent += text.charAt(i++); setTimeout(typeNext, 38); }
+      else setTimeout(reveal, 420);
+    }
+    function reveal(){
+      var l = lines.shift();
+      if (!l) return;
+      l.classList.remove('hid');
+      setTimeout(reveal, l.textContent.trim() ? 55 : 25);
+    }
+    setTimeout(typeNext, 500);
+  }
+
+  function setLang(code, animate){
+    document.documentElement.lang = code;
+    document.documentElement.dir = code === 'ar' ? 'rtl' : 'ltr';
+    document.title = titles[code] || titles.en;
+    mains.forEach(function(m){
+      var on = m.getAttribute('data-lang') === code;
+      m.hidden = !on;
+      if (on) {
+        var term = m.querySelector('[data-term]');
+        if (term && !played[code]) { played[code] = true; if (animate) play(term); else showAll(term); }
+      }
+    });
+    buttons.forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-set') === code ? 'true' : 'false'); });
+    document.querySelectorAll('[data-en][data-ar]').forEach(function(el){
+      el.textContent = el.getAttribute(code === 'ar' ? 'data-ar' : 'data-en');
+    });
+    try { localStorage.setItem('shabakah-lang', code); } catch (e) {}
+  }
+
+  buttons.forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.getAttribute('data-set'), false); });
+  });
+
+  document.querySelectorAll('.copy').forEach(function(b){
+    b.addEventListener('click', function(){
+      var src = document.getElementById(b.getAttribute('data-copy'));
+      var text = src ? src.textContent : '';
+      var done = function(){
+        var was = b.textContent;
+        b.setAttribute('data-done', '1');
+        b.textContent = b.closest('main[lang="ar"]') ? '\u062a\u0645 \u0627\u0644\u0646\u0633\u062e' : 'Copied';
+        setTimeout(function(){ b.removeAttribute('data-done'); b.textContent = was; }, 1500);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, done);
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(ta); done();
+      }
+    });
+  });
+
+  var initial = 'en';
+  try {
+    var q = new URLSearchParams(location.search).get('lang');
+    var saved = localStorage.getItem('shabakah-lang');
+    var nav = (navigator.language || '').toLowerCase();
+    if (q === 'ar' || q === 'en') initial = q;
+    else if (saved === 'ar' || saved === 'en') initial = saved;
+    else if (nav.indexOf('ar') === 0) initial = 'ar';
+  } catch (e) {}
+  setLang(initial, true);
+})();
+</script>
+</body>
+</html>
