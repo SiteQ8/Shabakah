@@ -1,0 +1,19 @@
+services:
+  shabakah:
+    build: .
+    image: shabakah:latest
+    container_name: shabakah
+    hostname: shabakah
+    ports:
+      # host 2222 -> container 22
+      - "2222:22"
+    environment:
+      # Change this before you use it anywhere shared.
+      LEARNER_PASSWORD: shabakah
+      # Optional: paste a public key to enable key based login.
+      # SSH_PUBKEY: "ssh-ed25519 AAAA... you@host"
+    cap_add:
+      # NET_RAW is already default (tcpdump, nmap SYN via sudo).
+      # NET_ADMIN is needed for the firewall lesson (nftables, iptables).
+      - NET_ADMIN
+    restart: unless-stopped
