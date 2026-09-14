@@ -2,6 +2,14 @@
 
 All notable changes to Shabakah are recorded here.
 
+## 1.2.1
+
+Fixed
+
+- The guide and the container image now report the correct version.
+- The website hero terminal now shows the current lesson count and score, and
+  the guide screenshot was regenerated to match.
+
 ## 1.2.0
 
 Added
