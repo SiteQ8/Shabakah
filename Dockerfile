@@ -7,7 +7,7 @@ LABEL org.opencontainers.image.title="Shabakah" \
       org.opencontainers.image.authors="Ali AlEnezi (SiteQ8)" \
       org.opencontainers.image.source="https://github.com/SiteQ8/Shabakah" \
       org.opencontainers.image.licenses="MIT" \
-      org.opencontainers.image.version="1.1.0"
+      org.opencontainers.image.version="1.2.1"
 
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8 \
