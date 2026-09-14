@@ -10,6 +10,8 @@ outside world, so you can practise scanning, capture, and enumeration safely.
 
 Built and maintained by Ali AlEnezi (SiteQ8). Available in English and Arabic.
 
+Website: https://siteq8.github.io/Shabakah/
+
 ## Quick start
 
 With Docker Compose:
@@ -109,6 +111,8 @@ MIT. See LICENSE.
 شبكة حاوية Docker واحدة ومكتفية بذاتها، فأنت تشغّلها ثم تدخل عبر SSH فيرحّب بك مرشد ويأخذك عبر دروس عملية في أمن الشبكات، ويأتي كل درس بهدف تدريب حقيقي يعمل داخل الحاوية وتحدٍّ ومدقّق يتحقق من إجابتك حيّا، ولا شيء هنا يصل إلى الخارج لذا تستطيع التدرب على الفحص والالتقاط والتعداد بأمان.
 
 بناه ويعتني به علي العنزي أي SiteQ8، وهو متاح بالإنجليزية والعربية.
+
+الموقع: https://siteq8.github.io/Shabakah/
 
 ## البدء السريع
 
