@@ -469,18 +469,18 @@ ssh -p 2222 learner@localhost</pre>
 <!-- HERO -->
 <section class="hero"><div class="wrap"><div class="hero-grid">
   <div>
-    <p class="eyebrow">مختبر مفتوح المصدر لأمن الشبكات</p>
+    <p class="eyebrow">مشروع مفتوح المصدر لأمن الشبكات</p>
     <h1>مختبر لأمن الشبكات في&nbsp;جهازك!</h1>
-    <p class="lead">شبكة هي بيئة Docker واحدة معزولة ومكتفية بذاتها، تعمل على جهازك دون أن تمس نظامك، فتشغّلها ثم تدخل إليها عبر SSH فيرحّب بك مرشد ثنائي اللغة ويقودك عبر خمسة عشر درسا عمليا على خدمات حقيقية تعمل إلى جانبها، ويتحقق من كل تحدٍّ فور إنجازه لتتعلم بالممارسة لا بالقراءة.</p>
+    <p class="lead">شبكة مختبرٌ متكامل لأمن الشبكات يعمل في بيئة Docker معزولة على جهازك وحده، تشغّله وتدخل إليه عبر SSH فيستقبلك مرشد بالعربية والإنجليزية ويسير بك في خمسة عشر درسا تطبيقيا على خدمات حقيقية تعمل داخله، ويصحّح لك كل تمرين لحظة تنفيذه فتتعلّم بيدك لا بعينك.</p>
     <div class="cta">
       <a class="btn btn-primary" href="#start-ar">ابدأ الآن</a>
       <a class="btn btn-ghost" href="https://github.com/SiteQ8/Shabakah">شاهده على GitHub</a>
     </div>
     <div class="facts">
-      <div class="fact"><b>15</b><span>درسا عمليا</span></div>
-      <div class="fact"><b>6</b><span>أهداف حية</span></div>
-      <div class="fact"><b>6</b><span>أعلام تلتقطها</span></div>
-      <div class="fact"><b>110</b><span>نقطة متاحة</span></div>
+      <div class="fact"><b>15</b><span>درسا تطبيقيا</span></div>
+      <div class="fact"><b>6</b><span>أهداف للتدريب</span></div>
+      <div class="fact"><b>6</b><span>أعلام مخفية</span></div>
+      <div class="fact"><b>110</b><span>نقطة</span></div>
       <div class="fact"><b>2</b><span>لغتان</span></div>
     </div>
   </div>
@@ -493,56 +493,56 @@ ssh -p 2222 learner@localhost</pre>
 <!-- HOW -->
 <section class="band"><div class="wrap">
   <p class="eyebrow">كيف يعمل</p>
-  <h2>ثلاثة أوامر وتصبح في الداخل.</h2>
-  <p class="lead">لا مختبر تركّبه ولا سحابة تدفع مقابلها ولا شيء يصل إلى الخارج، فكل شيء يعمل داخل بيئة واحدة معزولة على جهازك.</p>
+  <h2>ثلاثة أوامر وتدخل المختبر.</h2>
+  <p class="lead">لا إعدادات معقّدة ولا خوادم سحابية بمقابل، فكل شيء يعمل داخل بيئة معزولة على جهازك وحده.</p>
   <div class="steps">
-    <div class="step"><div class="n">01</div><h3>شغّل المختبر</h3><p>اسحب الصورة أو ابنها ثم شغّلها، فهي تعمل حيثما عمل Docker.</p><pre>docker compose up -d --build</pre></div>
-    <div class="step"><div class="n">02</div><h3>ادخل عبر SSH</h3><p>سجّل الدخول باسم المتعلم فيرحّب بك المرشد ويتذكّر أين توقفت.</p><pre>ssh -p 2222 learner@localhost</pre></div>
-    <div class="step"><div class="n">03</div><h3>تعلّم بالممارسة</h3><p>اقرأ درسا ثم شغّل الأدوات على الأهداف الحية ودع المرشد يتحقق من إجابتك.</p><pre>netsec check 03 8080,8443,9000</pre></div>
+    <div class="step"><div class="n">01</div><h3>شغّل المختبر</h3><p>نزّل الصورة الجاهزة أو ابنها بنفسك ثم شغّلها، فهي تعمل أينما توفّر Docker.</p><pre>docker compose up -d --build</pre></div>
+    <div class="step"><div class="n">02</div><h3>ادخل عبر SSH</h3><p>ادخل بحساب المتعلّم فيستقبلك المرشد من حيث توقّفت آخر مرة.</p><pre>ssh -p 2222 learner@localhost</pre></div>
+    <div class="step"><div class="n">03</div><h3>تعلّم بالتجربة</h3><p>اقرأ الدرس ثم جرّب الأدوات على أهداف التدريب، ودع المرشد يصحّح إجابتك.</p><pre>netsec check 03 8080,8443,9000</pre></div>
   </div>
 </div></section>
 
 <!-- FEATURES -->
 <section id="features-ar"><div class="wrap">
   <p class="eyebrow">ما في الداخل</p>
-  <h2>أكثر من مجرد مجموعة ملاحظات.</h2>
-  <p class="lead">تجمع شبكة مرشدا وأهدافا حية ولعبة في بيئة واحدة، كي لا يعترض شيء طريقك.</p>
+  <h2>أكثر من مجرد دروس تقرؤها.</h2>
+  <p class="lead">يجمع المختبر بين مرشد يعلّمك، وأهداف حقيقية تتدرّب عليها، وتحديات تتنافس فيها، كلها في مكان واحد.</p>
   <div class="bento">
     <div class="card k-wide feature-lead">
       <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v12H4z"/><path d="M8 20h8"/><path d="M7 8l3 2-3 2"/><path d="M12 12h4"/></svg></div>
-      <h3>مرشد يتحقق من عملك</h3>
-      <p>برنامج netsec هو معلّمك في الطرفية، يضم كل الدروس ويعرض لك الهدف والتحدي ثم يتحقق من إجابتك على الخدمات العاملة مباشرة، فالإجابة الصحيحة تُكمل الدرس ويبقى تقدمك محفوظا بين الجلسات.</p>
-      <div class="tagrow"><span class="tag">تحقق مباشر</span><span class="tag">تقدم محفوظ</span><span class="tag">بلا إنترنت</span></div>
+      <h3>مرشد يصحّح إجابتك</h3>
+      <p>برنامج netsec هو معلّمك داخل الطرفية، يعرض لك هدف كل درس وتمرينه ثم يتأكد من حلّك باختباره مباشرة على الخدمات العاملة، فيُحفظ تقدّمك مع كل إجابة صحيحة ويبقى معك بين الجلسات.</p>
+      <div class="tagrow"><span class="tag">تصحيح فوري</span><span class="tag">تقدّم محفوظ</span><span class="tag">بلا إنترنت</span></div>
     </div>
     <div class="card k-nar">
       <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 .8-4.5 4.2L18 20l-6-3.4L6 20l1.5-7L3 8.8 9 8z"/></svg></div>
       <h3>التقاط الأعلام</h3>
-      <p>ستة أعلام مخبأة في الأهداف، يمكن الوصول إلى كل واحد منها بأدوات المختبر، فاقتنصها وأرسلها وشاهد نتيجتك تصعد إلى مئة وعشر.</p>
+      <p>ستة أعلام مخبّأة بين الخدمات، كل واحد منها في متناولك بالأدوات الموجودة، فابحث عنها وسلّمها لترتفع نتيجتك حتى مئة وعشر نقاط.</p>
     </div>
     <div class="card k-third">
       <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M8 14l-2 8 6-3 6 3-2-8"/></svg></div>
       <h3>الإنجازات</h3>
-      <p>تُفتح لك سبع شارات كلما أتممت دروسا والتقطت أعلاما، حتى تبلغ لقب أستاذ شبكة.</p>
+      <p>سبع شارات تكسبها تباعا مع كل درس تُنهيه وكل علم تجده، وصولا إلى لقب أستاذ شبكة.</p>
     </div>
     <div class="card k-third">
       <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 12h18"/><path d="M12 3a15 15 0 010 18"/><path d="M12 3a15 15 0 000 18"/></svg></div>
       <h3>عربية وإنجليزية</h3>
-      <p>كل درس وتحدٍّ وتلميح مكتوب باللغتين، فبدّل بينهما متى شئت ويبقى تقدمك معك.</p>
+      <p>كل درس وتمرين وتلميح متوفّر بالعربية والإنجليزية، تنتقل بينهما وقتما تشاء دون أن تفقد تقدّمك.</p>
     </div>
     <div class="card k-third">
       <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 10h16"/><circle cx="7" cy="8" r=".6" fill="currentColor"/></svg></div>
       <h3>أدوات حقيقية</h3>
-      <p>أدوات nmap وtcpdump وopenssl وdig وnetcat وhping3 وغيرها مثبتة سلفا، وهي الأدوات نفسها التي تستخدمها في العمل.</p>
+      <p>تجد nmap وtcpdump وopenssl وdig وnetcat وhping3 وغيرها جاهزة للعمل، وهي الأدوات ذاتها التي يعتمدها المحترفون في الميدان.</p>
     </div>
     <div class="card k-half">
       <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg></div>
-      <h3>آمن بحكم التصميم</h3>
-      <p>تبقى كل خدمة داخل البيئة المعزولة ولا شيء يصل إلى الخارج، فتتدرب على الأدوات الهجومية دون خطر على أحد، وهي الطريقة الوحيدة الصحيحة لتعلّمها.</p>
+      <h3>معزول وآمن</h3>
+      <p>كل الخدمات محبوسة داخل البيئة المعزولة ولا شيء يخرج منها إلى شبكتك، فتستخدم الأدوات الهجومية بحرّية ودون أن تؤذي أحدا، وهذه هي الطريقة الصحيحة الوحيدة لإتقانها.</p>
     </div>
     <div class="card k-half">
       <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M8 9l3 3-3 3"/><path d="M13 15h3"/></svg></div>
-      <h3>تعلّم الميدان كله</h3>
-      <p>من الاستطلاع والتقاط اللافتات، إلى فحص HTTP وTLS، وتعداد الخدمات، وDNS وUDP، والتقاط الحزم، والجدار الناري، وربط النتائج للوصول، فهي جولة أولى كاملة في أمن الشبكات.</p>
+      <h3>من الاستطلاع إلى التحصين</h3>
+      <p>تمرّ على الاستطلاع والتقاط اللافتات، وفحص HTTP وTLS، وتعداد الخدمات، وDNS وUDP، والتقاط الحزم، وضبط الجدار الناري، وربط الثغرات للوصول، فتخرج بجولة أولى شاملة في أمن الشبكات.</p>
     </div>
   </div>
 </div></section>
@@ -550,8 +550,8 @@ ssh -p 2222 learner@localhost</pre>
 <!-- SCREENSHOTS -->
 <section class="band" id="screens-ar"><div class="wrap">
   <p class="eyebrow">نظرة من الداخل</p>
-  <h2>هذا ما تراه.</h2>
-  <p class="lead">شاشات حقيقية من المرشد كما تظهر في الطرفية.</p>
+  <h2>هكذا يبدو من الداخل.</h2>
+  <p class="lead">لقطات حقيقية من المرشد كما تظهر في طرفيتك تماما.</p>
   <div class="shots">
     <div class="shot-tabs" role="tablist">
       <button role="tab" aria-selected="true" data-shot="menu">المرشد</button>
@@ -562,82 +562,82 @@ ssh -p 2222 learner@localhost</pre>
       <button role="tab" aria-selected="false" data-shot="cheat">الأوامر السريعة</button>
     </div>
     <div class="shot-stage"><img id="shot-img-ar" src="screenshots/menu.png" alt="مرشد شبكة كما يظهر بعد تسجيل الدخول"></div>
-    <p class="shot-cap" id="shot-cap-ar">يرحّب بك المرشد حين تدخل عبر SSH ويتذكّر تقدمك.</p>
+    <p class="shot-cap" id="shot-cap-ar">يستقبلك المرشد فور دخولك ويتذكّر أين وصلت.</p>
   </div>
 </div></section>
 
 <!-- CTF -->
 <section id="ctf-ar"><div class="wrap">
   <p class="eyebrow">التقاط الأعلام</p>
-  <h2>ستة أعلام ومئة وعشر نقاط ومختبر واحد.</h2>
-  <p class="lead">يقبع كل علم حيث يتركه مشغّل مهمل، ويمكن الوصول إليه بأداة تملكها أصلا، فاعثر على واحد ثم نفّذ <code>netsec submit flag{...}</code>.</p>
+  <h2>ابحث عن ستة أعلام واجمع مئة وعشر نقاط.</h2>
+  <p class="lead">خبّأنا كل علم في موضع يغفل عنه مشرف مهمل، وكلها في متناولك بالأدوات التي بين يديك، فإذا وجدت واحدا فسلّمه بالأمر <code>netsec submit flag{...}</code>.</p>
   <div class="flaglist">
-    <div class="flag"><span class="pts">10 نقاط</span><div><h3>مستكشف مبتدئ</h3><p>لخدمة الويب صفحة ما كان ينبغي أن توجد، فأول طلب curl يكشفها.</p></div></div>
-    <div class="flag"><span class="pts">10 نقاط</span><div><h3>قارئ المصدر</h3><p>تخبئ الصفحة الرئيسة ملاحظة في مصدر HTML لا في النص الظاهر.</p></div></div>
-    <div class="flag"><span class="pts">20 نقطة</span><div><h3>باب مفتوح</h3><p>يشير ملف robots.txt إلى مسارات لم يُقصد نشرها وأحدها يحوي نسخة احتياطية للإعداد.</p></div></div>
-    <div class="flag"><span class="pts">20 نقطة</span><div><h3>غير موثّق</h3><p>تستجيب خدمة لأوامر أكثر مما تُعلن، فالتعداد يكشف الأمر الذي تخفيه.</p></div></div>
-    <div class="flag"><span class="pts">30 نقطة</span><div><h3>تسريب واحد وثلاثة أبواب</h3><p>تعيد وحدة تحكم بنص صريح استخدام كلمة مرور رأيتها تعبر الشبكة، فإعادة الاستخدام هي الدرس كله.</p></div></div>
-    <div class="flag"><span class="pts">20 نقطة</span><div><h3>مخبأ على مرأى</h3><p>تحمل شهادة TLS حقلا زائدا ما كان ينبغي أن يكون، فاقرأ الموضوع كاملا لا الاسم الشائع وحده.</p></div></div>
-    <div class="flag"><span class="pts">110 نقطة</span><div><h3>لوحة نظيفة</h3><p>التقط الستة جميعا فتصبح شارة الأستاذ لك، وتابع تقدمك متى شئت بالأمر <code>netsec ctf</code>.</p></div></div>
+    <div class="flag"><span class="pts">10 نقاط</span><div><h3>مستكشف مبتدئ</h3><p>خدمة الويب تُخفي صفحة ما كان ينبغي أن تظهر، يكشفها أول طلب بـ curl.</p></div></div>
+    <div class="flag"><span class="pts">10 نقاط</span><div><h3>قارئ المصدر</h3><p>الصفحة الرئيسة تُخفي ملاحظة في مصدر HTML لا في النص الذي أمامك.</p></div></div>
+    <div class="flag"><span class="pts">20 نقطة</span><div><h3>باب مفتوح</h3><p>يدلّك ملف robots.txt على مسارات ما كان يُفترض أن تُنشر، وفي أحدها نسخة احتياطية من ملف الإعداد.</p></div></div>
+    <div class="flag"><span class="pts">20 نقطة</span><div><h3>غير موثّق</h3><p>إحدى الخدمات تنفّذ أوامر أكثر مما تُعلن عنه، والتعداد الجيّد يكشف الأمر الخفيّ.</p></div></div>
+    <div class="flag"><span class="pts">30 نقطة</span><div><h3>تسريب واحد وثلاثة أبواب</h3><p>وحدة تحكّم تعمل بنص صريح تستخدم كلمة مرور سبق أن رأيتها تمرّ على الشبكة، وإعادة استخدام كلمة المرور هي الدرس كله.</p></div></div>
+    <div class="flag"><span class="pts">20 نقطة</span><div><h3>مخبأ على مرأى</h3><p>شهادة TLS تحمل حقلا زائدا ما كان ينبغي وجوده، فاقرأ حقل الموضوع كاملا لا الاسم الشائع وحده.</p></div></div>
+    <div class="flag"><span class="pts">110 نقطة</span><div><h3>لوحة نظيفة</h3><p>اجمع الأعلام الستة كلها لتنال شارة الأستاذ، وتابع تقدّمك في أي وقت بالأمر <code>netsec ctf</code>.</p></div></div>
   </div>
-  <div class="ctf-note">يقودك الدرس الثاني عشر عبر السلسلة كاملة، من تسريب صغير إلى وصول حقيقي، فيصير الصيد نفسه درسا في كيفية سير التقييم الأمني الواقعي.</div>
+  <div class="ctf-note">يأخذك الدرس الثاني عشر في هذه السلسلة خطوة بخطوة، من تسريب بسيط إلى اختراق فعلي، فيتحوّل البحث عن الأعلام إلى تدريب حقيقي على أسلوب التقييم الأمني.</div>
 </div></section>
 
 <!-- LESSONS -->
 <section class="band" id="lessons-ar"><div class="wrap">
   <p class="eyebrow">المنهج</p>
-  <h2>خمسة عشر درسا ولكل واحد تحدٍّ حي.</h2>
-  <p class="lead">ينتهي كل درس بشيء تثبته على الأهداف العاملة ويتحقق منه المرشد.</p>
+  <h2>خمسة عشر درسا، ولكل درس تمرين يُختبر مباشرة.</h2>
+  <p class="lead">ينتهي كل درس بتطبيق عملي على الأهداف يتحقق منه المرشد بنفسه.</p>
   <div class="lessons">
-    <div class="lrow"><span class="lid">01</span><span class="lt">معرفة الميدان<span class="ld">اعرف الخدمات المنصتة واقرأ ملامح المضيف</span></span><span class="lmeta">استطلاع</span></div>
-    <div class="lrow"><span class="lid">02</span><span class="lt">التقط اللافتات<span class="ld">اسحب لافتات الخدمات وترويسات HTTP التي تفضح المضيف</span></span><span class="lmeta">http</span></div>
-    <div class="lrow"><span class="lid">03</span><span class="lt">افحص المنافذ<span class="ld">ارسم المنافذ المفتوحة بأداة nmap واقرأ النتائج</span></span><span class="lmeta">nmap</span></div>
-    <div class="lrow"><span class="lid">04</span><span class="lt">عدّد خدمة<span class="ld">خاطب خدمة TCP مباشرة واجعلها تفصح عن إصدارها</span></span><span class="lmeta">تعداد</span></div>
-    <div class="lrow"><span class="lid">05</span><span class="lt">النص الصريح ثغرة<span class="ld">التقط كلمة مرور أُرسلت بنص صريح وافهم لماذا يهم ذلك</span></span><span class="lmeta">التقاط</span></div>
-    <div class="lrow"><span class="lid">06</span><span class="lt">التقط الحركة<span class="ld">استخدم tcpdump على الاسترجاع واقرأ ما يعبره</span></span><span class="lmeta">tcpdump</span></div>
-    <div class="lrow"><span class="lid">07</span><span class="lt">افحص الشهادة<span class="ld">اقرأ شهادة TLS وموضوعها بأداة openssl</span></span><span class="lmeta">tls</span></div>
-    <div class="lrow"><span class="lid">08</span><span class="lt">اضبط الجدار الناري<span class="ld">اكتب قواعد nftables وراقب أثرها</span></span><span class="lmeta">جدار</span></div>
-    <div class="lrow"><span class="lid">09</span><span class="lt">حلّل الأسماء<span class="ld">استعلم خادم DNS في المختبر واقرأ كل أنواع السجلات</span></span><span class="lmeta">dns</span></div>
-    <div class="lrow"><span class="lid">10</span><span class="lt">فكّر كمدافع<span class="ld">حوّل النتائج إلى مبدأ أقل امتياز وإعدادات أكثر أمانا</span></span><span class="lmeta">دفاع</span></div>
-    <div class="lrow"><span class="lid">11</span><span class="lt">خدمات UDP ولماذا تختبئ<span class="ld">افحص خدمة UDP لا ترد إلا حين تُسأل، ثم خاطبها</span></span><span class="lmeta">udp</span></div>
-    <div class="lrow"><span class="lid">12</span><span class="lt">ربط النتائج للوصول<span class="ld">اتبع أثرا من تسريب صغير حتى تسجيل دخول</span></span><span class="lmeta">سلسلة</span></div>
-    <div class="lrow"><span class="lid">13</span><span class="lt">اقرأ الالتقاط كمحقق<span class="ld">أعد بناء حادثة من ملف التقاط محفوظ</span></span><span class="lmeta">تحقيق</span></div>
-    <div class="lrow"><span class="lid">14</span><span class="lt">اعثر على الهجوم في السجلات<span class="ld">التقط هجوم تخمين شاملا ومصدره من سجل المصادقة</span></span><span class="lmeta">سجلات</span></div>
-    <div class="lrow"><span class="lid">15</span><span class="lt">حصّن الباب الذي دخلت منه<span class="ld">إعدادات تجعل خادم SSH أصعب على المهاجم</span></span><span class="lmeta">تحصين</span></div>
+    <div class="lrow"><span class="lid">01</span><span class="lt">تعرّف على المضيف<span class="ld">اكتشف الخدمات التي تستمع، واقرأ ملامح المضيف من بعيد</span></span><span class="lmeta">استطلاع</span></div>
+    <div class="lrow"><span class="lid">02</span><span class="lt">التقط اللافتات<span class="ld">استخرج لافتات الخدمات وترويسات HTTP التي تفضح المضيف</span></span><span class="lmeta">http</span></div>
+    <div class="lrow"><span class="lid">03</span><span class="lt">افحص المنافذ<span class="ld">امسح المنافذ المفتوحة بأداة nmap واقرأ نتائجها</span></span><span class="lmeta">nmap</span></div>
+    <div class="lrow"><span class="lid">04</span><span class="lt">عدّد الخدمة<span class="ld">خاطب خدمة TCP مباشرة واجعلها تفصح عن إصدارها</span></span><span class="lmeta">تعداد</span></div>
+    <div class="lrow"><span class="lid">05</span><span class="lt">النص الصريح ثغرة<span class="ld">التقط كلمة مرور مرسلة بنص صريح، وافهم لماذا يُعدّ ذلك ثغرة</span></span><span class="lmeta">التقاط</span></div>
+    <div class="lrow"><span class="lid">06</span><span class="lt">راقب الحركة<span class="ld">راقب حركة الشبكة بـ tcpdump على واجهة الاسترجاع، واقرأ ما يمرّ عبرها</span></span><span class="lmeta">tcpdump</span></div>
+    <div class="lrow"><span class="lid">07</span><span class="lt">افحص الشهادة<span class="ld">افحص شهادة TLS وحقل الموضوع فيها بأداة openssl</span></span><span class="lmeta">tls</span></div>
+    <div class="lrow"><span class="lid">08</span><span class="lt">اضبط الجدار الناري<span class="ld">اكتب قواعد بـ nftables وراقب أثرها مباشرة</span></span><span class="lmeta">جدار</span></div>
+    <div class="lrow"><span class="lid">09</span><span class="lt">حلّل الأسماء<span class="ld">استعلم خادم DNS في المختبر واقرأ مختلف أنواع سجلاته</span></span><span class="lmeta">dns</span></div>
+    <div class="lrow"><span class="lid">10</span><span class="lt">فكّر كمدافع<span class="ld">وظّف ما اكتشفته لبناء دفاع بمبدأ أقل امتياز وإعدادات أكثر أمانا</span></span><span class="lmeta">دفاع</span></div>
+    <div class="lrow"><span class="lid">11</span><span class="lt">خدمات UDP ولماذا تختبئ<span class="ld">امسح خدمة UDP لا تردّ إلا إذا خاطبتها، وتعلّم كيف تكشفها</span></span><span class="lmeta">udp</span></div>
+    <div class="lrow"><span class="lid">12</span><span class="lt">اربط النتائج للوصول<span class="ld">تتبّع الخيط من تسريب صغير حتى تسجيل دخول كامل</span></span><span class="lmeta">سلسلة</span></div>
+    <div class="lrow"><span class="lid">13</span><span class="lt">حلّل الالتقاط كمحقّق<span class="ld">أعد بناء ما جرى من ملف التقاط محفوظ</span></span><span class="lmeta">تحقيق</span></div>
+    <div class="lrow"><span class="lid">14</span><span class="lt">اعثر على الهجوم في السجلات<span class="ld">اكشف هجوم تخمين كلمات المرور ومصدره من سجل المصادقة</span></span><span class="lmeta">سجلات</span></div>
+    <div class="lrow"><span class="lid">15</span><span class="lt">حصّن الباب الذي دخلت منه<span class="ld">طبّق إعدادات تجعل اختراق خادم SSH أصعب</span></span><span class="lmeta">تحصين</span></div>
   </div>
 </div></section>
 
 <!-- TARGETS -->
 <section id="targets-ar"><div class="wrap">
   <p class="eyebrow">أهداف التدريب</p>
-  <h2>ست خدمات حية تعمل عليها.</h2>
-  <p class="lead">خدمات حقيقية تعمل بجانب المرشد، وُضعت كل واحدة كي يجد الدرس شيئا حقيقيا يكتشفه.</p>
+  <h2>ست خدمات حقيقية تتدرّب عليها.</h2>
+  <p class="lead">خدمات حقيقية تعمل إلى جانب المرشد، وضعنا كل واحدة منها ليجد فيها الدرس شيئا حقيقيا يكتشفه.</p>
   <div class="tgrid">
-    <div class="target"><span class="port">tcp 8080</span><h3>ويب بنص صريح</h3><p>خدمة HTTP بلافتة كاشفة ومسارات مخفية وصفحة ما كان ينبغي أن تُكشف أبدا.</p></div>
-    <div class="target"><span class="port">tcp 8443</span><h3>ويب عبر TLS</h3><p>الخدمة نفسها عبر TLS بشهادة موقّعة ذاتيا تفحصها وتحلّلها.</p></div>
-    <div class="target"><span class="port">tcp 9000</span><h3>خدمة تعداد</h3><p>خدمة TCP خام بلافتة ثرثارة وأمر غير موثّق تكشفه.</p></div>
-    <div class="target"><span class="port">tcp 2323</span><h3>وحدة تحكم بنص صريح</h3><p>وحدة تحكم إدارية منسية تعيد استخدام كلمة مرور، من النوع الذي يحوّل تسريبا واحدا إلى ثلاثة.</p></div>
-    <div class="target"><span class="port">udp 5353</span><h3>خادم DNS للمختبر</h3><p>خادم غير متصل لنطاق shabakah.lab بسجلات A وMX وTXT تستعلمها.</p></div>
-    <div class="target"><span class="port">udp 9001</span><h3>خدمة لافتة UDP</h3><p>خدمة UDP تصمت حتى تخاطبها ببروتوكولها، وهذا هو المقصد.</p></div>
+    <div class="target"><span class="port">tcp 8080</span><h3>ويب بنص صريح</h3><p>خدمة HTTP بلافتة تفضح نفسها، ومسارات مخفية، وصفحة ما كان ينبغي أن تظهر أبدا.</p></div>
+    <div class="target"><span class="port">tcp 8443</span><h3>ويب عبر TLS</h3><p>الخدمة نفسها لكن عبر TLS، بشهادة موقّعة ذاتيا تفحصها وتحلّل محتواها.</p></div>
+    <div class="target"><span class="port">tcp 9000</span><h3>خدمة تعداد</h3><p>خدمة TCP بسيطة بلافتة ثرثارة، وفيها أمر غير موثّق عليك أن تكتشفه.</p></div>
+    <div class="target"><span class="port">tcp 2323</span><h3>وحدة تحكم بنص صريح</h3><p>وحدة تحكّم إدارية منسيّة تُعيد استخدام كلمة مرور، من النوع الذي يحوّل تسريبا واحدا إلى ثلاثة أبواب مفتوحة.</p></div>
+    <div class="target"><span class="port">udp 5353</span><h3>خادم DNS للمختبر</h3><p>خادم أسماء محلّي لنطاق shabakah.lab، فيه سجلات A وMX وTXT تستعلم عنها.</p></div>
+    <div class="target"><span class="port">udp 9001</span><h3>خدمة لافتة UDP</h3><p>خدمة UDP تلزم الصمت حتى تخاطبها باللغة التي تفهمها، وذلك هو التحدي.</p></div>
   </div>
 </div></section>
 
 <!-- TOOLS + COMMANDS -->
 <section class="band" id="tools-ar"><div class="wrap">
   <p class="eyebrow">صندوق الأدوات</p>
-  <h2>الأدوات مثبتة سلفا.</h2>
-  <p class="lead">لا شيء تثبّته في منتصف الدرس، فبيئة المختبر تأتي بعُدّة أمن شبكات عاملة وبالمرشد الذي يقودها.</p>
+  <h2>الأدوات جاهزة من البداية.</h2>
+  <p class="lead">لن تحتاج إلى تثبيت أي شيء أثناء الدرس، فالمختبر يأتي بعُدّة أمن شبكات كاملة ومعها المرشد الذي يوجّهك في استخدامها.</p>
   <div class="toolwrap">
     <div class="toolcol"><h3>داخل المختبر</h3><div class="chips"><span class="chip">nmap</span><span class="chip">tcpdump</span><span class="chip">ngrep</span><span class="chip">openssl</span><span class="chip">dig</span><span class="chip">whois</span><span class="chip">netcat</span><span class="chip">socat</span><span class="chip">curl</span><span class="chip">wget</span><span class="chip">hping3</span><span class="chip">nftables</span><span class="chip">iptables</span><span class="chip">mtr</span><span class="chip">traceroute</span></div></div>
-    <div class="toolcol"><h3>قُدها بأمر netsec</h3>
+    <div class="toolcol"><h3>تحكّم بها عبر netsec</h3>
       <div class="cmds" style="margin-top:4px;border-radius:11px">
         <div class="cmd"><code>netsec</code><span>افتح المرشد التفاعلي</span></div>
-        <div class="cmd"><code>netsec lesson 05</code><span>اقرأ درسا واحدا</span></div>
-        <div class="cmd"><code>netsec check 05 &lt;a&gt;</code><span>تحقق من إجابة تحدٍّ</span></div>
-        <div class="cmd"><code>netsec ctf</code><span>اعرض لوحة التقاط الأعلام</span></div>
-        <div class="cmd"><code>netsec submit flag{...}</code><span>أرسل علما وجدته</span></div>
+        <div class="cmd"><code>netsec lesson 05</code><span>اقرأ درسا محدّدا</span></div>
+        <div class="cmd"><code>netsec check 05 &lt;a&gt;</code><span>تحقّق من حلّ تمرين</span></div>
+        <div class="cmd"><code>netsec ctf</code><span>اعرض لوحة الأعلام</span></div>
+        <div class="cmd"><code>netsec submit flag{...}</code><span>سلّم علما وجدته</span></div>
         <div class="cmd"><code>netsec achievements</code><span>اعرض شاراتك</span></div>
-        <div class="cmd"><code>netsec targets</code><span>اعرف الأهداف العاملة</span></div>
+        <div class="cmd"><code>netsec targets</code><span>اعرض حالة الأهداف</span></div>
         <div class="cmd"><code>netsec lang en</code><span>بدّل إلى الإنجليزية</span></div>
       </div>
     </div>
@@ -647,17 +647,17 @@ ssh -p 2222 learner@localhost</pre>
 <!-- START -->
 <section id="start-ar"><div class="wrap">
   <p class="eyebrow">بداية سريعة</p>
-  <h2>جاهز خلال دقيقة.</h2>
-  <p class="lead">تحتاج Docker، وكل ما عداه في الصورة.</p>
+  <h2>جاهز في دقيقة.</h2>
+  <p class="lead">كل ما تحتاجه هو Docker، والباقي موجود داخل الصورة.</p>
   <div class="copywrap">
     <button class="copybtn" data-copy="qs-ar">نسخ</button>
     <pre id="qs-ar">git clone https://github.com/SiteQ8/Shabakah.git
 cd Shabakah
 docker compose up -d --build
 ssh -p 2222 learner@localhost
-# كلمة المرور مضبوطة في docker-compose.yml والافتراضية shabakah</pre>
+# كلمة المرور محدّدة في docker-compose.yml وقيمتها الافتراضية shabakah</pre>
   </div>
-  <p class="lead" style="margin-top:20px">تفضّل الصورة الجاهزة؟ اسحبها من سجل الصور على GitHub.</p>
+  <p class="lead" style="margin-top:20px">تفضّل صورة جاهزة؟ نزّلها من سجل الصور على GitHub.</p>
   <div class="copywrap">
     <button class="copybtn" data-copy="qs-ar2">نسخ</button>
     <pre id="qs-ar2">docker run -d --name shabakah --cap-add NET_ADMIN -p 2222:22 ghcr.io/siteq8/shabakah:latest
@@ -667,20 +667,20 @@ ssh -p 2222 learner@localhost</pre>
 
 <!-- FAQ -->
 <section class="band" id="faq-ar"><div class="wrap">
-  <p class="eyebrow">أسئلة</p>
-  <h2>ما يحسن معرفته.</h2>
+  <p class="eyebrow">أسئلة شائعة</p>
+  <h2>أمور يحسن أن تعرفها.</h2>
   <div class="faq">
-    <details><summary>هل تشغيله خطير؟</summary><p>لا، فكل خدمة تدريب تبقى داخل البيئة المعزولة ولا شيء يصل إلى الخارج، فتشغّل nmap وtcpdump وhping3 بطريقتها الهجومية دون خطر على أحد، ولهذا يكون المختبر المعزول هو المكان الصحيح لتعلّمها.</p></details>
-    <details><summary>هل يلزمني إتقان سطر الأوامر مسبقا؟</summary><p>يفيد قليل من الألفة بالطرفية، لكن المرشد يعرض الأوامر الدقيقة لكل درس، وورقة الأوامر السريعة على بعد ضغطة، فيستطيع المبتدئ متابعته، والتكرار يرسّخ التعلّم.</p></details>
-    <details><summary>هل يحتاج اتصالا بالإنترنت؟</summary><p>يحتاجه فقط لسحب الصورة أو بنائها أول مرة، وبعد ذلك يعمل كل شيء دون اتصال داخل البيئة، بما في ذلك خادم DNS للمختبر.</p></details>
-    <details><summary>هل أستطيع تدريس صف أو تشغيل ورشة به؟</summary><p>نعم، فهو مرخّص برخصة MIT وثنائي اللغة ويكفي كل متعلم بيئته الخاصة، والتقدم والأعلام لكل متعلم على حدة، فيتقدم كل متعلم بالإيقاع الذي يناسبه.</p></details>
-    <details><summary>أين أبلّغ عن مشكلة أو أقترح درسا؟</summary><p>افتح مسألة في مستودع المشروع على GitHub، ومساهماتك بدروس وأهداف جديدة مرحّب بها.</p></details>
+    <details><summary>هل تشغيله خطر على جهازي؟</summary><p>لا، فكل شيء محبوس داخل البيئة المعزولة ولا شيء يخرج إلى شبكتك، فتشغّل nmap وtcpdump وhping3 بأقوى صورها دون أن تُلحق ضررا بأحد، ولهذا فالمختبر المعزول هو المكان الصحيح لتعلّم هذه الأدوات.</p></details>
+    <details><summary>هل أحتاج إلى خبرة بسطر الأوامر مسبقا؟</summary><p>تكفي معرفة بسيطة بالطرفية، فالمرشد يعرض لك الأوامر الدقيقة في كل درس، وورقة الأوامر السريعة على بُعد ضغطة، حتى يستطيع المبتدئ أن يتابع، والتكرار كفيل بترسيخ المهارة.</p></details>
+    <details><summary>هل يحتاج إلى اتصال بالإنترنت؟</summary><p>يحتاجه مرة واحدة فقط لتنزيل الصورة أو بنائها، ثم يعمل كل شيء بعد ذلك دون إنترنت، حتى خادم الأسماء الخاص بالمختبر.</p></details>
+    <details><summary>هل يصلح لتدريس صف أو تنظيم ورشة؟</summary><p>نعم، فهو مفتوح المصدر برخصة MIT وبلغتين، ويكفي كل متعلّم أن يشغّل نسخته الخاصة، فتقدّم كل واحد وأعلامه مستقلّة عن غيره، ويسير كلٌّ بالإيقاع الذي يناسبه.</p></details>
+    <details><summary>أين أُبلّغ عن مشكلة أو أقترح درسا جديدا؟</summary><p>افتح مسألة (Issue) في مستودع المشروع على GitHub، ونرحّب بكل مساهمة بدروس أو أهداف جديدة.</p></details>
   </div>
 </div></section>
 
 <section><div class="wrap"><div class="closer">
-  <h2>افتح طرفية وابدأ.</h2>
-  <p class="lead">خمسة عشر درسا وستة أهداف حية وصيدُ ستة أعلام، تنتظرك كلها داخل مختبر واحد.</p>
+  <h2>افتح الطرفية وابدأ الآن.</h2>
+  <p class="lead">خمسة عشر درسا، وست خدمات للتدريب، وستة أعلام تبحث عنها، كلها بانتظارك في مختبر واحد.</p>
   <div class="cta" style="justify-content:center">
     <a class="btn btn-primary" href="#start-ar">ابدأ الآن</a>
     <a class="btn btn-ghost" href="https://github.com/SiteQ8/Shabakah">ضع نجمة على GitHub</a>
@@ -688,7 +688,7 @@ ssh -p 2222 learner@localhost</pre>
 </div></div></section>
 
 <footer><div class="wrap"><div class="foot">
-  <span class="made">بناه علي العنزي، ومفتوح المصدر برخصة MIT.</span>
+  <span class="made">من تطوير علي العنزي، ومفتوح المصدر برخصة MIT.</span>
   <span><a href="https://github.com/SiteQ8/Shabakah">github.com/SiteQ8/Shabakah</a></span>
 </div></div></footer>
 
@@ -744,12 +744,12 @@ ssh -p 2222 learner@localhost</pre>
         achievements:"Badges unlock as you clear lessons and capture flags.",
         targets:"See at a glance which practice targets are up.",
         cheat:"A cheat sheet of the exact commands, one keypress away."},
-    ar:{menu:"يرحّب بك المرشد حين تدخل عبر SSH ويتذكّر تقدمك.",
-        lesson:"يعرض كل درس الهدف والمادة وتحديا يُتحقق منه.",
-        ctf:"تتابع لوحة التقاط الأعلام ما وجدته من أعلام ونتيجتك.",
-        achievements:"تُفتح لك الشارات كلما أتممت دروسا والتقطت أعلاما.",
-        targets:"اعرف بلمحة أي أهداف تدريب تعمل.",
-        cheat:"ورقة بالأوامر الدقيقة على بعد ضغطة واحدة."}
+    ar:{menu:"يستقبلك المرشد فور دخولك ويتذكّر أين وصلت.",
+        lesson:"يعرض كل درس هدفه ومادته وتمرينا يُصحّح لك.",
+        ctf:"تتابع في لوحة الأعلام ما وجدته منها ومجموع نقاطك.",
+        achievements:"تكسب الشارات كلما أتممت دروسا ووجدت أعلاما.",
+        targets:"تعرف بلمحة أي الأهداف تعمل الآن.",
+        cheat:"ورقة بأهم الأوامر على بُعد ضغطة واحدة."}
   };
   function wireGallery(scope, lang){
     var tabs = scope.querySelectorAll('.shot-tabs button');
