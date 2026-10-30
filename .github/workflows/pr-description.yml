@@ -30,11 +30,13 @@ jobs:
           keep = []
           for line in body.splitlines():
               low = line.strip().lower()
-              if re.match(r"^\W*generated (by|with)\b", low):
+              if re.match(r"^[\W_]*generated (by|with)\b", low):
                   continue
               if re.search(r"https?://\S*/code/\S*session", low):
                   continue
               keep.append(line)
+          while keep and keep[-1].strip() in ("", "---"):
+              keep.pop()
           clean = "\n".join(keep).strip() + "\n"
           open("clean.txt", "w", encoding="utf-8").write(clean)
           open("changed.txt", "w").write("yes" if clean.strip() != body.strip() else "no")
