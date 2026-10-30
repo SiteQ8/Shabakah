@@ -1,6 +1,7 @@
 ---
 id: 10
 title: Detection and hardening
+tag: defense
 objective: Tie the lessons together into a defender mindset and a repeatable routine.
 est_min: 10
 challenge_type: static

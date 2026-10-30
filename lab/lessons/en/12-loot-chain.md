@@ -1,6 +1,7 @@
 ---
 id: 12
 title: Chaining findings into access
+tag: chaining
 objective: Follow a trail from one small leak to real access, the way a real assessment runs.
 est_min: 15
 challenge_type: dynamic

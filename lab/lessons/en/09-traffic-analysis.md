@@ -1,6 +1,7 @@
 ---
 id: 09
 title: Traffic analysis and spotting attacks
+tag: detection
 objective: Recognise the shape of common activity, including a scan, in captured traffic.
 est_min: 12
 challenge_type: static

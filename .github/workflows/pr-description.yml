@@ -1,0 +1,47 @@
+name: pull request description
+
+# Keeps pull request descriptions to what the author wrote: drops lines that
+# tools append automatically, such as "Generated with" footers and session links.
+
+on:
+  pull_request:
+    types: [ opened, edited, reopened, synchronize ]
+
+permissions:
+  contents: read
+
+jobs:
+  tidy:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Remove appended lines from the description
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          gh api "repos/$REPO/pulls/$NUMBER" --jq '.body // ""' > body.txt
+          python3 - <<'PY'
+          import re
+          body = open("body.txt", encoding="utf-8").read()
+          keep = []
+          for line in body.splitlines():
+              low = line.strip().lower()
+              if re.match(r"^\W*generated (by|with)\b", low):
+                  continue
+              if re.search(r"https?://\S*/code/\S*session", low):
+                  continue
+              keep.append(line)
+          clean = "\n".join(keep).strip() + "\n"
+          open("clean.txt", "w", encoding="utf-8").write(clean)
+          open("changed.txt", "w").write("yes" if clean.strip() != body.strip() else "no")
+          PY
+          if [ "$(cat changed.txt)" = "yes" ]; then
+            gh api -X PATCH "repos/$REPO/pulls/$NUMBER" -F body=@clean.txt >/dev/null
+            echo "description tidied"
+          else
+            echo "nothing to tidy"
+          fi

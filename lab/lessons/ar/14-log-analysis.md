@@ -3,6 +3,7 @@ id: 14
 title: اعثر على الهجوم في السجلات
 objective: اقرأ سجل مصادقة والتقط محاولة تخمين شاملة ومصدرها.
 est_min: 12
+tag: السجلات
 challenge_type: static
 challenge_answer: (203\.0\.113\.77)
 challenge_match: regex
@@ -16,7 +17,7 @@ challenge_hint: عُدّ أسطر كلمة المرور الفاشلة لكل ع
 
 ## اقرأ السجل
 
-الملف محفوظ في الحاوية.
+الملف محفوظ داخل المختبر نفسه.
 
 ```
 less /opt/shabakah/data/logs/auth.log
