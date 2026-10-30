@@ -32,6 +32,7 @@ if [ ! -f /opt/shabakah/tls/lab.crt ]; then
         -subj "/C=KW/O=Shabakah Lab/OU=flag{shabakah_cert_metadata}/CN=shabakah.lab" \
         -addext "subjectAltName=DNS:shabakah.lab" >/dev/null 2>&1 || true
     chmod 644 /opt/shabakah/tls/lab.crt 2>/dev/null || true
+    chown root:shabakah /opt/shabakah/tls/lab.key 2>/dev/null || true
     chmod 640 /opt/shabakah/tls/lab.key 2>/dev/null || true
 fi
 
@@ -44,8 +45,14 @@ if command -v dnsmasq >/dev/null 2>&1; then
         echo "shabakah: DNS resolver did not start, the DNS lesson may be limited"
 fi
 
-# 6. Practice targets (HTTP, HTTPS, raw TCP banner).
-python3 /opt/shabakah/targets/targets.py >/var/log/shabakah-targets.log 2>&1 &
+# 6. Practice targets, run as the unprivileged service account and bound to
+#    loopback unless SHABAKAH_BIND says otherwise.
+if id shabakah >/dev/null 2>&1 && command -v setpriv >/dev/null 2>&1; then
+    setpriv --reuid=shabakah --regid=shabakah --init-groups \
+        python3 /opt/shabakah/targets/targets.py >/var/log/shabakah-targets.log 2>&1 &
+else
+    python3 /opt/shabakah/targets/targets.py >/var/log/shabakah-targets.log 2>&1 &
+fi
 
 echo "==================================================================="
 echo " Shabakah lab is ready."

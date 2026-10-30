@@ -1,13 +1,14 @@
 # Shabakah - interactive network security lab you SSH into.
 # Author: Ali AlEnezi (SiteQ8)
-FROM debian:bookworm-slim
+# Debian 13 (trixie), pinned by digest; Dependabot proposes digest updates.
+FROM debian:trixie-slim@sha256:f6b08b09a05725f9431502d3b5714f5c4576e82c1a84fa1debe0c24a7e0c3ec4
 
 LABEL org.opencontainers.image.title="Shabakah" \
       org.opencontainers.image.description="Interactive network security lab you SSH into to learn by doing" \
       org.opencontainers.image.authors="Ali AlEnezi (SiteQ8)" \
       org.opencontainers.image.source="https://github.com/SiteQ8/Shabakah" \
       org.opencontainers.image.licenses="MIT" \
-      org.opencontainers.image.version="1.2.1"
+      org.opencontainers.image.version="1.3.0"
 
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8 \
@@ -28,7 +29,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         socat \
         curl \
         wget \
-        dnsutils \
+        bind9-dnsutils \
         dnsmasq \
         whois \
         iproute2 \
@@ -48,9 +49,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         tini \
     && rm -rf /var/lib/apt/lists/*
 
-# Unprivileged learner account.
+# Unprivileged learner account, plus a separate service account that runs the
+# deliberately weak practice services, so they never run as root.
 RUN useradd -m -s /bin/bash learner \
     && adduser learner sudo \
+    && useradd --system --no-create-home --shell /usr/sbin/nologin shabakah \
     && install -d -m 755 /opt/shabakah /etc/shabakah
 
 # Lab content and tooling.
@@ -65,11 +68,17 @@ COPY lab/motd /etc/motd
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 
 RUN chmod +x /usr/local/bin/netsec /usr/local/bin/entrypoint.sh \
-    && chmod 644 /etc/profile.d/shabakah.sh
+    && chmod 644 /etc/profile.d/shabakah.sh \
+    && chown root:shabakah /opt/shabakah/targets/targets.py \
+    && chmod 640 /opt/shabakah/targets/targets.py
 
 ENV SHABAKAH_LESSONS=/opt/shabakah/lessons \
     SHABAKAH_DATA=/opt/shabakah/data
 
-EXPOSE 22 8080 8443 9000 9001 2323 5353
+# Only SSH is exposed. The practice services listen on loopback inside the lab.
+EXPOSE 22
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+    CMD nc -z 127.0.0.1 22 && nc -z 127.0.0.1 8080 && nc -z 127.0.0.1 8443 || exit 1
 
 ENTRYPOINT ["/usr/bin/tini", "--", "/usr/local/bin/entrypoint.sh"]

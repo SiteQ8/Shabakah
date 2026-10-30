@@ -1,6 +1,7 @@
 ---
 id: 13
 title: Read a capture like an investigator
+tag: forensics
 objective: Open a saved packet capture and reconstruct what happened from the packets alone.
 est_min: 15
 challenge_type: static

@@ -7,9 +7,10 @@ model bad habits on purpose: a cleartext credential, a chatty banner, an
 undocumented command, a reused password. These are the findings the lessons
 teach you to spot. They are not bugs, and they only exist inside the container.
 
-Every service binds locally inside the container and nothing reaches the outside
-world. Run Shabakah only on a host you control, and only ever point the tools at
-the lab targets or systems you own.
+The practice services bind to the loopback address inside the lab and run as an
+unprivileged account, and only SSH is exposed, so they cannot be reached from
+outside the lab. Run Shabakah only on a host you control, and only ever point
+the tools at the lab targets or systems you own.
 
 ## Reporting a real issue
 
@@ -29,5 +30,7 @@ warranted, a patched image and a note in the changelog.
 
 - Change the default learner password with `LEARNER_PASSWORD` before using
   Shabakah anywhere shared.
-- Do not expose the container's SSH port to an untrusted network.
+- Do not expose the lab's SSH port to an untrusted network.
+- Never publish the practice service ports. `SHABAKAH_BIND` can widen where they
+  listen for instructors who need it; keep such a lab on an isolated network.
 - Treat the flags and credentials inside as teaching material, not secrets.

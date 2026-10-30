@@ -1,6 +1,7 @@
 ---
 id: 02
 title: Reading the wire with tcpdump
+tag: capture
 objective: Capture live traffic, apply a filter, and read what a request and reply contain.
 est_min: 12
 challenge_type: dynamic

@@ -32,7 +32,7 @@ echo "== lesson parity =="
 EN=$(ls "$ROOT"/lab/lessons/en/*.md | wc -l | tr -d ' ')
 AR=$(ls "$ROOT"/lab/lessons/ar/*.md | wc -l | tr -d ' ')
 [ "$EN" = "$AR" ] || fail "lesson count mismatch en=$EN ar=$AR"
-[ "$EN" -ge 15 ] || fail "expected at least 15 lessons, found $EN"
+[ "$EN" -ge 17 ] || fail "expected at least 17 lessons, found $EN"
 pass "en and ar both have $EN lessons"
 
 echo "== every dynamic check referenced by a lesson exists in the guide =="
@@ -66,7 +66,7 @@ echo "== start targets =="
 python3 "$ROOT/lab/targets/targets.py" >"$WORK/targets.log" 2>&1 &
 TPID=$!
 sleep 2
-grep -q "targets up" "$WORK/targets.log" || fail "targets did not start"
+grep -q "targets up on 127.0.0.1" "$WORK/targets.log" || fail "targets did not start on loopback"
 pass "targets are up"
 
 echo "== live challenge checks =="
@@ -86,7 +86,7 @@ reject() {
 }
 
 check 02 SHBK-7788
-check 03 "8080,8443,9000"
+check 03 "2323,8080,8443,9000"
 check 04 v2
 check 05 "lab-P@ss"
 check 07 shabakah.lab
@@ -98,9 +98,14 @@ check 12 netadmin-console-01
 check 13 10.13.37.66
 check 14 203.0.113.77
 check 15 PermitRootLogin
+check 16 3
+check 17 "Shabakah lab web"
 reject 02 WRONG
 reject 07 example.com
 reject 11 NOPE
+reject 03 "8080,8443,9000"
+reject 16 2
+reject 17 "wrong title"
 
 echo "== sample data files present and readable =="
 [ -s "$ROOT/lab/data/pcaps/incident.pcap" ] && pass "incident.pcap present" || fail "incident.pcap missing"
@@ -136,6 +141,11 @@ if python3 "$ROOT/lab/bin/netsec" submit "flag{not_real}" >/dev/null 2>&1; then
 else
     pass "fake flag rejected"
 fi
+if python3 "$ROOT/lab/bin/netsec" submit recon >/dev/null 2>&1; then
+    fail "a flag id was accepted as a flag"
+else
+    pass "flag ids are not accepted as flags"
+fi
 # after all six, the score line should read 110 of 110
 python3 "$ROOT/lab/bin/netsec" progress | grep -q "110 of 110" && pass "full score reached" || fail "score not 110 of 110"
 
@@ -147,6 +157,24 @@ reachable "flag{shabakah_http_recon_ok}"      "$(curl -s http://127.0.0.1:8080/f
 reachable "flag{shabakah_hidden_in_html}"     "$(curl -s http://127.0.0.1:8080/)"
 reachable "flag{shabakah_forgotten_backup}"   "$(curl -s http://127.0.0.1:8080/backup/config.bak)"
 reachable "flag{shabakah_cert_metadata}"      "$(echo | openssl s_client -connect 127.0.0.1:8443 2>/dev/null | openssl x509 -noout -subject 2>/dev/null)"
+
+echo "== Arabic screens render without errors =="
+python3 "$ROOT/lab/bin/netsec" reset --yes >/dev/null
+python3 "$ROOT/lab/bin/netsec" lang ar >/dev/null
+OUT="$WORK/ar.txt"
+{
+    python3 "$ROOT/lab/bin/netsec" submit "flag{shabakah_http_recon_ok}"
+    for v in lessons targets cheat ctf achievements progress help next; do python3 "$ROOT/lab/bin/netsec" $v; done
+    python3 "$ROOT/lab/bin/netsec" check 03 "8080"
+    printf '9\n' | python3 "$ROOT/lab/bin/netsec"
+} >"$OUT" 2>&1 || true
+grep -q Traceback "$OUT" && { cat "$OUT"; fail "an Arabic screen crashed"; }
+grep -q "أحسنت، كشفت رمزا سريا" "$OUT" && pass "Arabic flag submission works" || fail "Arabic flag submission failed"
+for leak in "Welcome back" " pts" "Next up" "not found yet" "the door you came" "Scan every TCP port" "<your answer>"; do
+    grep -qF "$leak" "$OUT" && fail "English leaked into the Arabic guide: $leak"
+done
+pass "no English interface text in the Arabic guide"
+python3 "$ROOT/lab/bin/netsec" lang en >/dev/null
 
 echo
 echo "ALL SMOKE TESTS PASSED"

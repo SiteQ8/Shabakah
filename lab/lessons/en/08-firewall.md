@@ -1,6 +1,7 @@
 ---
 id: 08
 title: Host firewalling
+tag: firewall
 objective: Read and reason about firewall rules and the default deny idea.
 est_min: 12
 challenge_type: static

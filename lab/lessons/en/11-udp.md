@@ -1,6 +1,7 @@
 ---
 id: 11
 title: UDP services and why they hide
+tag: udp
 objective: Scan and talk to a UDP service, and understand why UDP is easy to miss.
 est_min: 10
 challenge_type: dynamic

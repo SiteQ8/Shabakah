@@ -1,6 +1,7 @@
 ---
 id: 01
 title: The network stack and sockets
+tag: foundations
 objective: See how your host talks to the network and how to read what is listening.
 est_min: 10
 challenge_type: dynamic

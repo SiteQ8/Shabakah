@@ -1,6 +1,7 @@
 ---
 id: 06
 title: DNS reconnaissance
+tag: dns
 objective: Query different record types and understand what DNS reveals.
 est_min: 10
 challenge_type: dynamic

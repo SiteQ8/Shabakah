@@ -3,6 +3,7 @@ id: 12
 title: ربط النتائج للوصول
 objective: اتبع أثرا من تسريب صغير إلى وصول حقيقي كما يجري التقييم الواقعي.
 est_min: 15
+tag: ربط النتائج
 challenge_type: dynamic
 challenge_check: console_hostname
 challenge_prompt: اتبع الأثر إلى وحدة التحكم بالنص الصريح على المنفذ 2323 وسجّل الدخول ونفّذ HOSTNAME، فأي اسم مضيف تعلنه؟
