@@ -1,6 +1,7 @@
 ---
 id: 07
 title: TLS and certificates
+tag: tls
 objective: Inspect a TLS service, read its certificate, and judge its trust.
 est_min: 12
 challenge_type: dynamic

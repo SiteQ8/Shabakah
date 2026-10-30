@@ -1,0 +1,39 @@
+name: release
+
+# Publishes the release named in VERSION, once, after it reaches main.
+# The notes come from .github/release-notes/v<version>.md.
+
+on:
+  push:
+    branches: [ main ]
+    paths: [ VERSION ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Tag and publish the release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          version="$(cat VERSION)"
+          tag="v${version}"
+          notes=".github/release-notes/${tag}.md"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            echo "release $tag already exists, nothing to do"
+            exit 0
+          fi
+          test -s "$notes" || { echo "missing $notes"; exit 1; }
+          gh release create "$tag" --target "$GITHUB_SHA" --title "Shabakah $tag" --notes-file "$notes"

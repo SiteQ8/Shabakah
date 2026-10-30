@@ -3,8 +3,8 @@
 # Author: Ali AlEnezi (SiteQ8)
 #
 # Small, deliberately simple services that give the learner something real to
-# scan, capture, and inspect. Everything binds locally inside the container and
-# nothing here reaches the outside world. Several services model bad habits on
+# scan, capture, and inspect. Everything binds to the loopback address inside
+# the container by default, so nothing here is reachable from outside it. Several services model bad habits on
 # purpose (a cleartext credential, a chatty banner, an undocumented debug
 # command, a reused password) so that the lessons have real findings to uncover
 # and the capture the flag board has something to hunt.
@@ -25,6 +25,10 @@ UDP_PORT = int(os.environ.get("SHABAKAH_UDP_PORT", "9001"))
 CONSOLE_PORT = int(os.environ.get("SHABAKAH_CONSOLE_PORT", "2323"))
 CERT = os.environ.get("SHABAKAH_CERT", "/opt/shabakah/tls/lab.crt")
 KEY = os.environ.get("SHABAKAH_KEY", "/opt/shabakah/tls/lab.key")
+# Loopback only by default. These services are deliberately weak, so they must
+# never be published to a real network; an instructor who knows what they are
+# doing can widen this with SHABAKAH_BIND.
+BIND = os.environ.get("SHABAKAH_BIND", "127.0.0.1")
 
 SERVER_BANNER = "Shabakah-Web/1.0"
 LAB_TOKEN = "SHBK-7788"
@@ -96,13 +100,22 @@ API_STATUS = {"service": "shabakah-web", "version": "1.0", "debug": False,
 class LabHandler(BaseHTTPRequestHandler):
     server_version = SERVER_BANNER
     sys_version = ""
+    # Response headers added on top of the defaults. The HTTPS service sets one
+    # security header here and leaves the other three out, which is what the
+    # security headers lesson asks the learner to notice.
+    extra_headers = ()
+
+    def _common_headers(self):
+        self.send_header("X-Lab-Token", LAB_TOKEN)
+        for name, value in self.extra_headers:
+            self.send_header(name, value)
 
     def _send(self, body, status=200, ctype="text/html; charset=utf-8"):
         data = body.encode("utf-8")
         self.send_response(status)
         self.send_header("Content-Type", ctype)
         self.send_header("Content-Length", str(len(data)))
-        self.send_header("X-Lab-Token", LAB_TOKEN)
+        self._common_headers()
         self.end_headers()
         try:
             self.wfile.write(data)
@@ -145,7 +158,7 @@ class LabHandler(BaseHTTPRequestHandler):
     def do_HEAD(self):
         self.send_response(200)
         self.send_header("Content-Type", "text/html; charset=utf-8")
-        self.send_header("X-Lab-Token", LAB_TOKEN)
+        self._common_headers()
         self.end_headers()
 
     def log_message(self, fmt, *args):
@@ -153,8 +166,12 @@ class LabHandler(BaseHTTPRequestHandler):
         return
 
 
+class TLSLabHandler(LabHandler):
+    extra_headers = (("X-Content-Type-Options", "nosniff"),)
+
+
 def serve_http():
-    httpd = ThreadingHTTPServer(("0.0.0.0", HTTP_PORT), LabHandler)
+    httpd = ThreadingHTTPServer((BIND, HTTP_PORT), LabHandler)
     httpd.serve_forever()
 
 
@@ -162,7 +179,7 @@ def serve_https():
     if not (os.path.exists(CERT) and os.path.exists(KEY)):
         sys.stderr.write("shabakah: TLS cert missing, HTTPS target disabled\n")
         return
-    httpd = ThreadingHTTPServer(("0.0.0.0", HTTPS_PORT), LabHandler)
+    httpd = ThreadingHTTPServer((BIND, HTTPS_PORT), TLSLabHandler)
     ctx = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
     ctx.load_cert_chain(certfile=CERT, keyfile=KEY)
     httpd.socket = ctx.wrap_socket(httpd.socket, server_side=True)
@@ -220,7 +237,7 @@ def _handle_enum_client(conn, addr):
 def serve_enum():
     srv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    srv.bind(("0.0.0.0", ENUM_PORT))
+    srv.bind((BIND, ENUM_PORT))
     srv.listen(16)
     while True:
         try:
@@ -302,7 +319,7 @@ def _handle_console_client(conn, addr):
 def serve_console():
     srv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    srv.bind(("0.0.0.0", CONSOLE_PORT))
+    srv.bind((BIND, CONSOLE_PORT))
     srv.listen(16)
     while True:
         try:
@@ -319,7 +336,7 @@ def serve_console():
 def serve_udp():
     srv = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    srv.bind(("0.0.0.0", UDP_PORT))
+    srv.bind((BIND, UDP_PORT))
     while True:
         try:
             data, addr = srv.recvfrom(512)
@@ -349,8 +366,8 @@ def main():
     for th in threads:
         th.start()
     sys.stdout.write(
-        "shabakah targets up: http :%d, https :%d, enum :%d, console :%d, udp :%d\n"
-        % (HTTP_PORT, HTTPS_PORT, ENUM_PORT, CONSOLE_PORT, UDP_PORT))
+        "shabakah targets up on %s: http :%d, https :%d, enum :%d, console :%d, udp :%d\n"
+        % (BIND, HTTP_PORT, HTTPS_PORT, ENUM_PORT, CONSOLE_PORT, UDP_PORT))
     sys.stdout.flush()
     for th in threads:
         th.join()

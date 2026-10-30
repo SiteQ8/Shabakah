@@ -12,6 +12,9 @@ services:
       LEARNER_PASSWORD: shabakah
       # Optional: paste a public key to enable key based login.
       # SSH_PUBKEY: "ssh-ed25519 AAAA... you@host"
+      # The practice services listen on loopback inside the lab. Only widen
+      # this on an isolated network, never publish their ports.
+      # SHABAKAH_BIND: "127.0.0.1"
     cap_add:
       # NET_RAW is already default (tcpdump, nmap SYN via sudo).
       # NET_ADMIN is needed for the firewall lesson (nftables, iptables).

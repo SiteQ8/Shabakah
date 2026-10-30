@@ -1,6 +1,7 @@
 ---
 id: 05
 title: HTTP recon and cleartext exposure
+tag: web
 objective: Inspect an HTTP service and see why cleartext protocols are dangerous.
 est_min: 10
 challenge_type: dynamic

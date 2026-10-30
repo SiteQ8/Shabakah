@@ -1,6 +1,7 @@
 ---
 id: 03
 title: Port scanning with nmap
+tag: scanning
 objective: Discover which ports are open on a host and reason about scan types.
 est_min: 12
 challenge_type: dynamic
@@ -50,7 +51,7 @@ nmap -sT -p- 127.0.0.1
 Then ask what is actually running on the open ports.
 
 ```
-nmap -sV -p 8080,8443,9000 127.0.0.1
+nmap -sV -p 2323,8080,8443,9000 127.0.0.1
 ```
 
 If you want to feel the difference, compare a SYN scan, which needs sudo.
@@ -61,6 +62,6 @@ sudo nmap -sS -p- 127.0.0.1
 
 ## What you should notice
 
-Ignore port 22 and the DNS resolver for this challenge. List the open ports that
-belong to the practice application services. The version scan in the second
-command names each one.
+Ignore port 22 and the DNS resolver for this challenge. List every open TCP port
+that belongs to the practice application services, the forgotten console
+included. The version scan in the second command names each one.

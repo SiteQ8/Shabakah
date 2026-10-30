@@ -1,6 +1,7 @@
 ---
 id: 04
 title: Service enumeration and banners
+tag: enumeration
 objective: Talk to a service by hand and pull useful detail out of its responses.
 est_min: 10
 challenge_type: dynamic

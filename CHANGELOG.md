@@ -2,6 +2,55 @@
 
 All notable changes to Shabakah are recorded here.
 
+## 1.3.0
+
+Added
+
+- Two new lessons, bringing the total to seventeen: reading security headers
+  (16) and scripted scanning with the Nmap Scripting Engine (17), each with a
+  live check against the practice services.
+- `netsec next` opens the next unfinished lesson, and the welcome line names it.
+- `netsec certificate` prints a completion certificate in English and Arabic
+  once every lesson and flag is done, and saves a copy to the home directory.
+- `netsec reset` clears progress for the next class, with a confirmation step.
+- Real Arabic screenshots for the Arabic side of the website.
+- A social preview card, structured data, a sitemap, robots.txt and a 404 page.
+- An end to end test that starts the built image and solves every lesson and
+  finds every flag over the network with the lab's own tools. CI runs it before
+  publishing anything.
+- Unit tests for the guide's strings in both languages, the Arabic house rules,
+  counted nouns, flags, versions and the website.
+- `tools/build_site.py` renders the curriculum and every count on the website
+  and in the README from the lesson files; CI fails if they drift.
+- `tools/lint_lessons.py` checks that each Arabic lesson keeps the English
+  challenge and commands and follows the Arabic writing rules.
+- Releases now publish themselves from the VERSION file, the image is built for
+  both Intel and ARM machines and tagged with its version, and every published
+  image carries an SBOM and build provenance.
+
+Changed
+
+- Every Arabic lesson was rewritten end to end as natural Arabic.
+- The guide is fully bilingual: target names, check feedback, the welcome line,
+  help, and counts no longer fall back to English in Arabic mode, and Arabic
+  numbers and nouns agree. Answers accept Arabic digits.
+- The capture the flag hunt is called التحديات in Arabic and flags are explained
+  as secret codes, matching the website.
+- The image moved to Debian 13, pinned by digest, with Dependabot watching the
+  base image and the workflow actions, which are now pinned to commit SHAs.
+- The practice services bind to the loopback address and run as an unprivileged
+  account, only SSH is exposed, and a health check reports when the lab is ready.
+- The guide keeps only SHA-256 digests of the flags.
+
+Fixed
+
+- Submitting a flag in Arabic crashed the guide.
+- Lesson 03 rejected a complete scan that included the console on port 2323.
+- The UDP service always showed as down on the targets screen.
+- The website and README listed lesson titles and topics that did not match the
+  lessons the guide serves.
+- A flag id was accepted in place of the flag itself.
+
 ## 1.2.1
 
 Fixed

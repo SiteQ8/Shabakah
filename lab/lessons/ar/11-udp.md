@@ -3,6 +3,7 @@ id: 11
 title: خدمات UDP ولماذا تختبئ
 objective: افحص خدمة UDP وخاطبها وافهم لماذا يسهل تفويتها.
 est_min: 10
+tag: بروتوكول UDP
 challenge_type: dynamic
 challenge_check: udp_banner
 challenge_prompt: أرسل كلمة PING إلى خدمة UDP في المختبر على المنفذ 9001 واقرأ ردها، فأي كلمة واحدة تعود؟

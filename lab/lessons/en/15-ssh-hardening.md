@@ -1,6 +1,7 @@
 ---
 id: 15
 title: Harden the door you came in through
+tag: hardening
 objective: Understand the settings that make an SSH server hard to attack, and see them in place.
 est_min: 12
 challenge_type: static

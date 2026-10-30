@@ -1,11 +1,11 @@
 
   SHABAKAH  |  شبكة
   Interactive network security lab. Learn by doing.
-  مختبر تفاعلي لأمن الشبكات. تعلم بالممارسة.
+  مختبر تفاعلي لأمن الشبكات تتعلّم فيه بالتجربة.
 
   The guide opens automatically. Type  netsec  to reopen it.
-  يفتح المرشد تلقائيا. اكتب  netsec  لإعادة فتحه.
+  يفتح المرشد تلقائيا، واكتب  netsec  لتعيد فتحه.
 
   Only scan the local lab targets. Nothing here reaches the outside world.
-  افحص أهداف المختبر المحلية فقط فلا شيء هنا يصل إلى الخارج.
+  لا تفحص إلا أهداف المختبر، فلا شيء هنا يخرج إلى شبكتك.
 

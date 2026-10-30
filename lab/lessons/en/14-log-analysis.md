@@ -1,6 +1,7 @@
 ---
 id: 14
 title: Find the attack in the logs
+tag: logs
 objective: Read an authentication log and pick out a brute force attempt and its source.
 est_min: 12
 challenge_type: static
