@@ -1,3 +1,5 @@
+<img src="docs/logo.svg" height="56" alt="Shabakah logo, the word شبكة in square Kufic">
+
 # Shabakah (شبكة)
 
 A network security lab you SSH into to learn by doing.
