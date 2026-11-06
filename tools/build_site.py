@@ -108,9 +108,9 @@ def site_rows(lang):
     rows = []
     for m in lessons(lang):
         rows.append(
-            '    <div class="lrow"><span class="lid">%s</span><span class="lt">%s'
+            '    <div class="lrow" id="l%s-%s"><span class="lid">%s</span><span class="lt">%s'
             '<span class="ld">%s</span></span><span class="lmeta">%s</span></div>'
-            % (html.escape(m["id"]), html.escape(m["title"]),
+            % ("-ar" if lang == "ar" else "", html.escape(m["id"]), html.escape(m["id"]), html.escape(m["title"]),
                html.escape(m.get("objective", "")), html.escape(m.get("tag", ""))))
     return "\n" + "\n".join(rows) + "\n    "
 

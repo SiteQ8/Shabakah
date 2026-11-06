@@ -14,53 +14,36 @@ sys.path.insert(0, os.path.join(ROOT, "tools"))
 import build_site  # noqa: E402
 
 CARD = """<!doctype html><html><head><meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300..700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box}
-body{margin:0;width:1200px;height:630px;overflow:hidden;font-family:'IBM Plex Sans Arabic',sans-serif;color:#EAEFF7;
-  background:#0A0E1A;background-image:radial-gradient(900px 520px at 85% -10%,rgba(0,51,160,.55),transparent 62%),
-  radial-gradient(700px 420px at 0% 110%,rgba(0,51,160,.28),transparent 60%)}
-.wrap{position:absolute;inset:0;padding:64px 72px;display:grid;grid-template-columns:1fr 470px;gap:48px;align-items:center}
-.brand{display:flex;align-items:center;gap:16px;font-size:30px;font-weight:700}
-.brand svg{width:54px;height:54px}
-.brand span{color:#9DAEC8;font-weight:600}
-h1{font-size:58px;line-height:1.08;margin:30px 0 14px;letter-spacing:-.01em}
-.ar{font-size:36px;font-weight:700;color:#C9D5EA;margin:0 0 34px;direction:rtl;text-align:left}
-.facts{display:flex;gap:14px}
-.fact{background:#121A2E;border:1px solid #2E3E5C;border-radius:14px;padding:14px 18px;min-width:118px}
-.fact b{display:block;font-size:34px;color:#4F8BFF;line-height:1}
-.fact span{display:block;font-size:15px;color:#9DAEC8;margin-top:6px}
-.term{background:#080C18;border:1px solid #2E3E5C;border-radius:16px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.45);
-  font-family:'IBM Plex Mono',monospace;font-size:15px;line-height:1.6}
-.bar{padding:12px 16px;border-bottom:1px solid #233149;color:#6E8791;font-size:13px}
-.bar i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px;vertical-align:-1px}
-pre{margin:0;padding:16px 18px;color:#D9E6E0;font:inherit;white-space:pre}
-.c{color:#5FD3C6}.g{color:#7ce0b3}.u{color:#f2c14e}.d{opacity:.6}
-.url{position:absolute;left:72px;bottom:40px;font-size:18px;color:#9DAEC8;font-family:'IBM Plex Mono',monospace}
+body{margin:0;width:1200px;height:630px;overflow:hidden;font-family:'Readex Pro',sans-serif;color:#0A1F4D;background:#EEF2F8}
+.wrap{position:absolute;inset:0;padding:60px 72px;display:grid;grid-template-columns:1fr 440px;gap:56px;align-items:center}
+.brand{display:flex;align-items:center;gap:14px;font-size:28px;font-weight:600}
+.brand svg{height:46px;width:auto}
+.brand i{width:1.5px;height:40px;background:#CCD6EA}
+h1{font-size:62px;line-height:1.04;margin:34px 0 14px;letter-spacing:-.03em;font-weight:600}
+.ar{font-size:34px;font-weight:500;color:#34477A;margin:0;direction:rtl;text-align:left}
+.box{background:#fff;border:2px solid #0A1F4D;border-radius:20px;padding:24px}
+.box b{display:block;font-size:20px;font-weight:600;margin-bottom:16px}
+.ports{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.port{display:flex;align-items:center;gap:10px;background:#EEF2F8;border:1px solid #CCD6EA;border-radius:12px;padding:12px 14px;font-family:Menlo,monospace;font-weight:700;font-size:20px}
+.port.on{background:#0033A0;border-color:#0033A0;color:#fff}
+.port i{width:11px;height:11px;border-radius:50%;background:#12B76A}
+.plate{margin-top:18px;display:flex;justify-content:space-between;border-top:1px dashed #CCD6EA;padding-top:16px;font-size:16px;color:#34477A}
+.plate em{font-style:normal;font-weight:600;color:#0033A0;font-size:24px;margin-inline-end:6px}
+.url{position:absolute;left:72px;bottom:44px;font-size:18px;color:#56668F}
 </style></head><body><div class="wrap"><div>
-<div class="brand"><svg viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#121A2E"/><path d="M16 44 L32 20 L48 44 M16 44 L48 44" stroke="#4F8BFF" stroke-width="3" fill="none" stroke-linejoin="round"/><circle cx="16" cy="44" r="5" fill="#F2C14E"/><circle cx="32" cy="20" r="5" fill="#F2C14E"/><circle cx="48" cy="44" r="5" fill="#F2C14E"/></svg>Shabakah <span>شبكة</span></div>
+<div class="brand"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 90"><path fill="#0033A0" d="M10 0h40v10h-40zM100 0h10v10h-10zM40 10h10v10h-10zM0 20h10v10h-10zM20 20h10v10h-10zM40 20h10v10h-10zM90 20h10v10h-10zM110 20h10v10h-10zM40 30h10v10h-10zM0 40h30v10h-30zM40 40h10v10h-10zM60 40h10v10h-10zM80 40h10v10h-10zM100 40h10v10h-10zM120 40h10v10h-10zM0 50h10v10h-10zM20 50h10v10h-10zM40 50h10v10h-10zM60 50h10v10h-10zM80 50h10v10h-10zM100 50h10v10h-10zM120 50h10v10h-10zM0 60h130v10h-130zM60 80h10v10h-10z"/></svg><i></i>Shabakah</div>
 <h1>A network security lab you SSH into.</h1>
 <p class="ar">مختبر لأمن الشبكات في جهازك!</p>
-<div class="facts">
-<div class="fact"><b>LESSONS</b><span>hands on lessons</span></div>
-<div class="fact"><b>TARGETS</b><span>live targets</span></div>
-<div class="fact"><b>FLAGS</b><span>secret flags</span></div>
-<div class="fact"><b>2</b><span>languages</span></div>
+</div>
+<div class="box"><b>Shabakah lab</b>
+<div class="ports"><div class="port on"><i></i>8080</div><div class="port"><i></i>8443</div><div class="port"><i></i>9000</div><div class="port"><i></i>2323</div><div class="port"><i></i>5353</div><div class="port"><i></i>9001</div></div>
+<div class="plate"><span><em>LESSONS</em>lessons</span><span><em>FLAGS</em>flags</span><span><em>POINTS</em>points</span></div>
 </div></div>
-<div class="term"><div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i>learner@shabakah: ~</div>
-<pre><span>$ ssh -p 2222 learner@localhost</span>
-<span class="d">Connecting to shabakah.lab</span> <span class="g">[ok]</span>
-<span class="c">====================================</span>
-<span class="c">  SHABAKAH</span>  <span class="d">|</span>  شبكة
-<span class="c">====================================</span>
-<span class="d">  Welcome back.</span>  <span class="g">5/LESSONS</span> <span class="d">lessons</span>  <span class="u">40/POINTS</span> <span class="d">pts</span>
-
-  MAIN MENU
-  1)  Browse lessons
-  5)  Capture the flag
-  6)  Achievements
-  Choose a number: <span style="background:#5FD3C6">&nbsp;</span></pre></div>
-</div><div class="url">shabakah.3li.info</div></body></html>"""
+<div class="url">shabakah.3li.info</div>
+</body></html>"""
 
 
 def main():
