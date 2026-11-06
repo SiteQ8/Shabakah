@@ -34,7 +34,7 @@ h1{font-size:62px;line-height:1.04;margin:34px 0 14px;letter-spacing:-.03em;font
 .plate em{font-style:normal;font-weight:600;color:#0033A0;font-size:24px;margin-inline-end:6px}
 .url{position:absolute;left:72px;bottom:44px;font-size:18px;color:#56668F}
 </style></head><body><div class="wrap"><div>
-<div class="brand"><svg viewBox="0 0 32 32"><path d="M6 24 16 8 26 24Z" fill="none" stroke="#0033A0" stroke-width="2.2" stroke-linejoin="round"/><circle cx="6" cy="24" r="3.4" fill="#0033A0"/><circle cx="16" cy="8" r="3.4" fill="#0033A0"/><circle cx="26" cy="24" r="3.4" fill="#0033A0"/></svg>Shabakah <span>شبكة</span></div>
+<div class="brand"><svg viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#0033A0"/><path d="M7 8.5h18v12h-4.5V24h-9v-3.5H7z" fill="#fff"/><rect x="10.6" y="10.5" width="2.2" height="5" rx=".6" fill="#0033A0"/><rect x="14.9" y="10.5" width="2.2" height="5" rx=".6" fill="#0033A0"/><rect x="19.2" y="10.5" width="2.2" height="5" rx=".6" fill="#0033A0"/></svg>Shabakah <span>شبكة</span></div>
 <h1>A network security lab you SSH into.</h1>
 <p class="ar">مختبر لأمن الشبكات في جهازك!</p>
 </div>

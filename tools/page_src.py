@@ -377,7 +377,7 @@ def build():
     js = open(os.path.join(ROOT, "tools", "page.js"), encoding="utf-8").read()
     header = '''<header><div class="wrap bar">
   <a class="brand" href="#" aria-label="Shabakah">
-    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 24 16 8 26 24Z"/><circle cx="6" cy="24" r="3.4"/><circle cx="16" cy="8" r="3.4"/><circle cx="26" cy="24" r="3.4"/></svg>
+    <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#0033A0"/><path d="M7 8.5h18v12h-4.5V24h-9v-3.5H7z" fill="#fff"/><rect x="10.6" y="10.5" width="2.2" height="5" rx=".6" fill="#0033A0"/><rect x="14.9" y="10.5" width="2.2" height="5" rx=".6" fill="#0033A0"/><rect x="19.2" y="10.5" width="2.2" height="5" rx=".6" fill="#0033A0"/></svg>
     <b>Shabakah</b><span lang="ar">شبكة</span>
   </a>
   <nav>

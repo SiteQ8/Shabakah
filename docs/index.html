@@ -75,9 +75,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(238,242,248,.88);backdro
 .bar{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
 .brand svg{width:28px;height:28px}
-.brand svg path{fill:none;stroke:var(--blue);stroke-width:2.2;stroke-linejoin:round}
-.brand svg circle{fill:var(--blue)}
-.brand b{font-weight:600;font-size:1.05rem}
+.brand b{font-weight:600;font-size:1.05rem;letter-spacing:-.01em}
 .brand span{color:var(--ink-3)}
 nav{display:flex;align-items:center;gap:22px}
 .navlink{color:var(--ink-2);text-decoration:none;font-size:.95rem}
@@ -286,7 +284,7 @@ footer{padding:36px 0;border-top:1px solid var(--rule)}
 <body>
 <header><div class="wrap bar">
   <a class="brand" href="#" aria-label="Shabakah">
-    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 24 16 8 26 24Z"/><circle cx="6" cy="24" r="3.4"/><circle cx="16" cy="8" r="3.4"/><circle cx="26" cy="24" r="3.4"/></svg>
+    <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#0033A0"/><path d="M7 8.5h18v12h-4.5V24h-9v-3.5H7z" fill="#fff"/><rect x="10.6" y="10.5" width="2.2" height="5" rx=".6" fill="#0033A0"/><rect x="14.9" y="10.5" width="2.2" height="5" rx=".6" fill="#0033A0"/><rect x="19.2" y="10.5" width="2.2" height="5" rx=".6" fill="#0033A0"/></svg>
     <b>Shabakah</b><span lang="ar">شبكة</span>
   </a>
   <nav>
