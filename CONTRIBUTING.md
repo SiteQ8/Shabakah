@@ -14,6 +14,9 @@ services, and translations are all welcome.
   loopback address by default and run as the unprivileged `shabakah` account.
 - `lab/lessons/en/` and `lab/lessons/ar/` hold the lessons as markdown, one file
   per lesson, numbered. Each file starts with a small front matter block.
+- `tools/page_src.py` writes the website from its copy, `tools/page.css` and
+  `tools/page.js`. Edit those, never `docs/index.html` by hand, then run
+  `tools/build_site.py`.
 - `tools/build_site.py` renders the curriculum and every count on the website
   and in the README from the lesson files and the guide.
 - `tools/lint_lessons.py` checks every Arabic lesson against its English twin.

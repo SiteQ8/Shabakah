@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Shabakah (شبكة): a network security lab you SSH into</title>
 <meta name="description" content="Shabakah is an isolated Docker lab you SSH into to learn network security by doing: 17 hands on lessons, 6 live practice services, a 6 flag capture the flag hunt, achievements, and a guide that checks your answers. English and Arabic.">
-<meta name="theme-color" content="#0A0E1A">
+<meta name="theme-color" content="#EEF2F8">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Shabakah (شبكة): a network security lab you SSH into">
 <meta property="og:description" content="17 lessons, 6 live practice services, a capture the flag hunt, and a guide that checks your work. English and Arabic.">
@@ -32,718 +32,530 @@
 "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
 "author":{"@type":"Person","name":"Ali AlEnezi","url":"https://github.com/SiteQ8"}}
 </script>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A0E1A'/%3E%3Cpath d='M16 44 L32 20 L48 44 M16 44 L48 44' stroke='%234F8BFF' stroke-width='3' fill='none' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='44' r='5' fill='%23F2C14E'/%3E%3Ccircle cx='32' cy='20' r='5' fill='%23F2C14E'/%3E%3Ccircle cx='48' cy='44' r='5' fill='%23F2C14E'/%3E%3C/svg%3E">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300..700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0A0E1A; --bg-2:#0E1428; --panel:#121A2E; --panel-2:#182238;
-  --ink:#EAEFF7; --ink-2:#9DAEC8; --ink-3:#8090AC;
-  --rule:#233149; --rule-2:#2E3E5C;
-  --brand:#0033a0; --wire:#4F8BFF; --wire-2:#0033a0; --signal:#F2C14E; --coral:#FF8A6B; --violet:#B79CEB;
-  --term-bg:#080C18; --term-fg:#D9E6E0; --term-dim:#6E8791;
-  --sans:'IBM Plex Sans Arabic',system-ui,'Segoe UI',Roboto,sans-serif;
-  --sans-ar:'IBM Plex Sans Arabic',system-ui,Tahoma,sans-serif;
-  --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
-  --maxw:1180px;
+  --paper:#EEF2F8; --sheet:#FFFFFF; --tint:#E3E9F4;
+  --ink:#0A1F4D; --ink-2:#34477A; --ink-3:#56668F;
+  --blue:#0033A0; --blue-2:#1C4BC2; --blue-soft:#D6E0F5;
+  --wire:#93A7D2; --rule:#CCD6EA;
+  --led:#12B76A; --led-off:#B7C3DD; --amber:#9A5B00;
+  --night:#0A1F4D; --night-ink:#DCE5FA;
+  --ease-out:cubic-bezier(0.23, 1, 0.32, 1);
+  --font:"Readex Pro", system-ui, sans-serif;
+  --mono:ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-:root{--ease-out:cubic-bezier(0.23, 1, 0.32, 1)}
-.js .reveal{opacity:0;transform:translateY(24px);transition:opacity 700ms var(--ease-out),transform 700ms var(--ease-out)}
-.js .reveal.in{opacity:1;transform:none}
-.btn,.copybtn,.shot-tabs button,.lang button{transition:transform 160ms var(--ease-out),background-color 150ms ease,border-color 150ms ease,color 150ms ease}
-.btn:active,.copybtn:active,.shot-tabs button:active,.lang button:active{transform:scale(0.97)}
-.card,.flag,.target,.step{transition:transform 220ms var(--ease-out),border-color 150ms ease}
-.shot-stage img{transition:opacity 200ms ease}
-@media (hover:hover) and (pointer:fine){
-  .card:hover,.flag:hover,.target:hover,.step:hover{transform:translateY(-3px);border-color:var(--rule-2)}
-  .btn-ghost:hover{transform:translateY(-1px)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.6;font-weight:350;-webkit-font-smoothing:antialiased}
+main[lang="ar"]{line-height:1.9}
+a{color:var(--blue)}
+a:hover{color:var(--blue-2)}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
+code,pre{font-family:var(--mono);direction:ltr;unicode-bidi:isolate}
+code{font-size:.88em;background:var(--blue-soft);color:var(--ink);padding:1px 6px;border-radius:5px}
+pre{margin:0;background:var(--night);color:var(--night-ink);padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:.86rem;line-height:1.6;text-align:left}
+h1,h2,h3,h4{margin:0;font-weight:600;color:var(--ink);text-wrap:balance}
+h2{font-size:clamp(1.75rem,1.2rem + 2vw,2.5rem);line-height:1.15;letter-spacing:-.015em}
+main[lang="ar"] h2{letter-spacing:0;line-height:1.4}
+h3{font-size:1.08rem;line-height:1.35}
+p{margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+section{padding:96px 0}
+section.tint{background:var(--tint)}
+.lead{font-size:1.1rem;color:var(--ink-2);max-width:60ch;margin-top:14px}
+.muted{color:var(--ink-3);font-size:.95rem}
+
+/* header */
+header{position:sticky;top:0;z-index:10;background:rgba(238,242,248,.88);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--rule)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.brand svg{width:28px;height:28px}
+.brand svg path{fill:none;stroke:var(--blue);stroke-width:2.2;stroke-linejoin:round}
+.brand svg circle{fill:var(--blue)}
+.brand b{font-weight:600;font-size:1.05rem}
+.brand span{color:var(--ink-3)}
+nav{display:flex;align-items:center;gap:22px}
+.navlink{color:var(--ink-2);text-decoration:none;font-size:.95rem}
+.navlink:hover{color:var(--blue)}
+.lang{display:flex;border:1px solid var(--rule);border-radius:999px;padding:3px;background:var(--sheet)}
+.lang button{font:inherit;font-size:.85rem;border:0;background:none;color:var(--ink-2);padding:4px 12px;border-radius:999px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--blue);color:#fff}
+
+/* buttons */
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 22px;border-radius:10px;font-weight:500;text-decoration:none;transition:transform 160ms var(--ease-out),background-color 150ms ease}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:var(--blue);color:#fff}
+.btn-primary:hover{background:var(--blue-2);color:#fff}
+.btn-quiet{color:var(--blue);border:1px solid var(--wire)}
+.btn-quiet:hover{background:var(--sheet)}
+
+/* hero */
+.hero{padding:72px 0 8px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:56px;align-items:center}
+.hero h1{font-size:clamp(2.4rem,1.4rem + 4vw,4.1rem);line-height:1.04;letter-spacing:-.03em;font-weight:600}
+main[lang="ar"] .hero h1{letter-spacing:0;line-height:1.3}
+.hero .lead{margin-top:22px}
+
+/* the lab map */
+.map{margin:0}
+.map-row{display:grid;grid-template-columns:auto minmax(48px,1fr) minmax(0,3.2fr);align-items:center}
+.node-you{display:grid;justify-items:center;gap:6px;text-align:center}
+.node-you svg{width:56px;height:42px}
+.node-you svg rect,.node-you svg path{fill:var(--sheet);stroke:var(--ink);stroke-width:2}
+.node-you b{font-size:.9rem;font-weight:500}
+.node-you code{font-size:.72rem}
+.wire{position:relative;height:2px;background:var(--wire);margin:0 10px}
+.wire span{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.75rem;color:var(--ink-3)}
+.packet{position:absolute;top:-4px;left:0;width:10px;height:10px;border-radius:50%;background:var(--blue);opacity:0}
+.js .packet{animation:packet 1100ms var(--ease-out) 300ms 2 both}
+@keyframes packet{0%{left:0;opacity:0}15%{opacity:1}85%{opacity:1}100%{left:calc(100% - 10px);opacity:0}}
+.box{background:var(--sheet);border:1.5px solid var(--ink);border-radius:16px;padding:18px}
+.box-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding-bottom:14px}
+.box-head b{font-weight:600}
+.box-head span{font-size:.82rem;color:var(--ink-3)}
+.ports{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;direction:ltr}
+.port{font:inherit;display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:8px;align-items:center;text-align:left;background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:9px 10px;cursor:pointer;color:var(--ink);transition:border-color 150ms ease,background-color 150ms ease,transform 160ms var(--ease-out)}
+.port:active{transform:scale(.97)}
+.port:hover{border-color:var(--wire)}
+.port[aria-selected="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+.port .led{grid-row:1/3;width:9px;height:9px;border-radius:50%;background:var(--led);box-shadow:0 0 0 3px rgba(18,183,106,.18)}
+.js .port .led{animation:led 260ms ease-out both;animation-delay:calc(1500ms + var(--i) * 90ms)}
+@keyframes led{from{background:var(--led-off);box-shadow:none}to{background:var(--led)}}
+.port .pn{font-family:var(--mono);font-weight:600;font-size:.95rem}
+.port .pp{display:none}
+.port .pname{grid-column:2;font-size:.74rem;line-height:1.3;opacity:.85}
+main[lang="ar"] .port .pname{direction:rtl;text-align:left}
+.pdetail{margin-top:16px;padding-top:16px;border-top:1px dashed var(--rule)}
+.js .pdetail[hidden]{display:none}
+.pdetail.swap{animation:swap 220ms var(--ease-out)}
+@keyframes swap{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.pdetail h3{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.pdetail h3 code{font-size:.75rem;font-weight:500}
+.pdetail > p{color:var(--ink-2);font-size:.95rem;margin-top:6px}
+.pmeta{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px}
+.pmeta h4{font-size:.8rem;font-weight:500;color:var(--ink-3);margin-bottom:6px}
+.lchips{display:flex;flex-wrap:wrap;gap:6px;direction:ltr;justify-content:flex-start}
+main[lang="ar"] .lchips{justify-content:flex-end}
+.lchips a{font-family:var(--mono);font-size:.8rem;text-decoration:none;border:1px solid var(--wire);border-radius:6px;padding:1px 7px}
+.lchips a:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+.pmeta ul{list-style:none;margin:0;padding:0;font-size:.9rem}
+.pmeta li{display:flex;justify-content:space-between;gap:10px;padding:2px 0}
+.pmeta li span{color:var(--amber);font-weight:500;white-space:nowrap}
+.map figcaption{font-size:.85rem;color:var(--ink-3);margin-top:12px;text-align:end}
+
+/* spec plate */
+.plate{display:grid;grid-template-columns:repeat(5,1fr);margin-top:56px;border:1.5px solid var(--ink);border-radius:14px;background:var(--sheet);overflow:hidden}
+.plate > div{padding:18px 20px;border-inline-start:1px solid var(--rule)}
+.plate > div:first-child{border-inline-start:0}
+.plate b{display:block;font-size:2rem;line-height:1.1;font-weight:600;color:var(--blue);font-variant-numeric:tabular-nums}
+.plate span{font-size:.9rem;color:var(--ink-2)}
+
+/* steps: a real sequence, joined by one wire */
+.steps{list-style:none;margin:48px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;counter-reset:step;position:relative}
+.steps li{counter-increment:step;position:relative;padding-top:52px}
+.steps li::before{content:counter(step);position:absolute;top:0;inset-inline-start:0;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--sheet);border:1.5px solid var(--blue);color:var(--blue);font-weight:600;z-index:1}
+.steps li::after{content:"";position:absolute;top:18px;inset-inline-start:36px;inset-inline-end:-28px;height:1.5px;background:var(--wire)}
+.steps li:last-child::after{display:none}
+.steps p{color:var(--ink-2);margin:6px 0 14px}
+
+/* screens */
+.shots{margin-top:36px}
+.shot-tabs{display:flex;flex-wrap:wrap;gap:6px}
+.shot-tabs button{font:inherit;font-size:.92rem;border:1px solid var(--wire);background:transparent;color:var(--ink-2);padding:6px 14px;border-radius:999px;cursor:pointer;transition:transform 160ms var(--ease-out),background-color 150ms ease}
+.shot-tabs button:active{transform:scale(.97)}
+.shot-tabs button[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.shot-stage{margin-top:18px;background:var(--night);border-radius:16px;padding:14px;max-height:560px;overflow:auto}
+.shot-stage img{display:block;width:100%;height:auto;border-radius:8px;transition:opacity 200ms ease}
+.shot-cap{margin-top:12px;color:var(--ink-3);font-size:.92rem}
+
+/* split sections */
+.split{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:56px;align-items:start}
+.split-head{position:sticky;top:96px}
+
+/* lessons as a route */
+.lessons{position:relative}
+.lessons::before{content:"";position:absolute;top:18px;bottom:18px;inset-inline-start:17px;width:1.5px;background:var(--wire)}
+.lrow{position:relative;display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:16px;align-items:start;padding:12px 0;scroll-margin-top:90px}
+.lrow .lid{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--sheet);border:1.5px solid var(--blue);color:var(--blue);font-weight:600;font-size:.85rem;font-variant-numeric:tabular-nums;z-index:1}
+.lrow .lt{font-weight:500;line-height:1.4;padding-top:6px}
+.lrow .ld{display:block;font-weight:350;color:var(--ink-2);font-size:.94rem;margin-top:2px}
+.lrow .lmeta{font-size:.8rem;color:var(--ink-3);padding-top:8px;white-space:nowrap}
+.lrow:target .lid{background:var(--blue);color:#fff}
+
+/* scoreboard */
+.board{width:100%;border-collapse:separate;border-spacing:0;background:var(--sheet);border:1.5px solid var(--ink);border-radius:14px;overflow:hidden}
+.board th{white-space:nowrap;font-size:.82rem;font-weight:500;color:var(--ink-3);text-align:start;padding:12px 18px;border-bottom:1px solid var(--rule)}
+.board td{padding:14px 18px;border-bottom:1px solid var(--rule);vertical-align:top}
+.board td b{display:block;font-weight:500}
+.board td span{display:block;color:var(--ink-2);font-size:.9rem;margin-top:2px}
+.board .num{text-align:end;font-weight:600;color:var(--amber);white-space:nowrap;font-variant-numeric:tabular-nums}
+.board th:last-child{text-align:end}
+.board .total td{border-bottom:0;background:var(--blue);color:#fff;font-weight:500}
+.board .total .num{color:#fff}
+
+/* features */
+.feats{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:36px 40px}
+.feats dt{font-weight:600;font-size:1.08rem}
+.feats dd{margin:6px 0 0;color:var(--ink-2)}
+
+/* tools */
+.tools{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px;margin-top:40px}
+.tools h3{margin-bottom:16px}
+.toollist{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;direction:ltr}
+main[lang="ar"] .toollist{justify-content:flex-end}
+.toollist li{font-family:var(--mono);font-size:.86rem;background:var(--sheet);border:1px solid var(--rule);border-radius:8px;padding:5px 11px}
+.cmds{width:100%;border-collapse:collapse}
+.cmds td{padding:9px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+.cmds td:first-child{padding-inline-end:20px;white-space:nowrap}
+.cmds td:last-child{color:var(--ink-2)}
+
+/* start */
+.starts h3{margin:0 0 10px}
+.starts h3 + .copywrap{margin-bottom:28px}
+.copywrap{position:relative}
+.copybtn{position:absolute;top:10px;right:10px;font:inherit;font-size:.8rem;border:1px solid rgba(220,229,250,.35);background:transparent;color:var(--night-ink);border-radius:7px;padding:3px 10px;cursor:pointer;transition:transform 160ms var(--ease-out)}
+.copybtn:active{transform:scale(.97)}
+.copywrap pre{padding-right:76px}
+
+/* faq */
+.faq details{border-bottom:1px solid var(--rule)}
+.faq details:first-child{border-top:1px solid var(--rule)}
+.faq summary{cursor:pointer;list-style:none;padding:18px 0;font-weight:500;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--blue);font-weight:400;font-size:1.3rem;line-height:1;transition:transform 200ms var(--ease-out)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 0 20px;color:var(--ink-2);max-width:62ch}
+
+footer{padding:36px 0;border-top:1px solid var(--rule)}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:.9rem;color:var(--ink-3)}
+
+/* tablet */
+@media (max-width:980px){
+  .hero-grid,.split,.tools{grid-template-columns:minmax(0,1fr);gap:40px}
+  .split-head{position:static}
+  .plate{grid-template-columns:repeat(3,1fr)}
+  .plate > div:nth-child(4){border-inline-start:0}
+  .plate > div:nth-child(n+4){border-top:1px solid var(--rule)}
+}
+/* phone */
+@media (max-width:640px){
+  body{font-size:16px}
+  section{padding:64px 0}
+  .wrap{padding:0 16px}
+  .hero{padding:40px 0 40px}
+  nav .navlink{display:none}
+  .map-row{grid-template-columns:1fr;justify-items:center}
+  .wire{width:2px;height:56px;margin:8px 0}
+  .wire span{bottom:auto;top:50%;left:14px;transform:translateY(-50%)}
+  main[lang="ar"] .wire span{left:auto;right:14px}
+  .js .packet{animation-name:packet-v;left:-4px}
+  @keyframes packet-v{0%{top:0;opacity:0}15%{opacity:1}85%{opacity:1}100%{top:calc(100% - 10px);opacity:0}}
+  .box{width:100%}
+  .ports{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pmeta{grid-template-columns:1fr}
+  .plate{grid-template-columns:repeat(2,1fr)}
+  .plate > div{border-inline-start:0;border-top:1px solid var(--rule)}
+  .plate > div:nth-child(2n){border-inline-start:1px solid var(--rule)}
+  .plate > div:nth-child(-n+2){border-top:0}
+  .plate > div:last-child{grid-column:1/-1}
+  .steps{grid-template-columns:minmax(0,1fr);gap:8px}
+  .steps li{padding-top:0;padding-inline-start:54px;padding-bottom:24px}
+  .steps li::after{top:36px;bottom:0;inset-inline-start:17px;inset-inline-end:auto;width:1.5px;height:auto}
+  .steps li:last-child::after{display:none}
+  .feats{grid-template-columns:1fr;gap:24px}
+  .lrow{grid-template-columns:36px minmax(0,1fr)}
+  .lrow .lmeta{grid-column:2;padding-top:0}
+  .board th:nth-child(2),.board td:nth-child(2){display:none}
+  .board td,.board th{padding:12px 14px}
+  .cmds td:first-child{white-space:normal}
 }
 @media (prefers-reduced-motion:reduce){
-  .js .reveal{transform:none;transition:opacity 300ms ease}
-  .card:hover,.flag:hover,.target:hover,.step:hover,.btn-ghost:hover{transform:none}
+  .js .packet,.js .port .led,.pdetail.swap{animation:none}
+  .packet{opacity:0}
+  *{transition-duration:0ms !important}
 }
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;
-  background-image:radial-gradient(1100px 560px at 80% -10%,rgba(0,51,160,.30),transparent 60%),radial-gradient(820px 480px at 6% 2%,rgba(242,193,78,.05),transparent 55%);background-attachment:fixed}
-main[lang="ar"]{font-family:var(--sans-ar);line-height:2;letter-spacing:0}
-main[lang="ar"] h1,main[lang="ar"] h2,main[lang="ar"] h3{letter-spacing:0;line-height:1.35;font-weight:700}
-main[lang="ar"] h1{font-weight:800}
-main[lang="ar"] .eyebrow{letter-spacing:0;font-weight:600}
-main[lang="ar"] .lead{line-height:2.05}
-main[lang="ar"] .fact span,main[lang="ar"] .lrow .lt,main[lang="ar"] .card h3,main[lang="ar"] .flag h3,main[lang="ar"] .target h3{letter-spacing:0}
-a{color:var(--wire);text-underline-offset:3px;text-decoration:none}
-a:hover{color:var(--ink)}
-:focus-visible{outline:3px solid var(--signal);outline-offset:3px;border-radius:4px}
-code,pre,kbd{font-family:var(--mono);direction:ltr;unicode-bidi:isolate}
-code{font-size:.9em;background:var(--panel);padding:.12em .42em;border-radius:5px;border:1px solid var(--rule)}
-pre code{background:none;border:0;padding:0;font-size:1em}
-img{max-width:100%;display:block}
-.wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(18px,4vw,40px)}
-.eyebrow{color:var(--wire);font-size:.9rem;font-weight:600;margin:0 0 .5em}
-section{padding:clamp(52px,8vw,96px) 0}
-h1,h2,h3{letter-spacing:-.015em;line-height:1.1}
-h2{font-size:clamp(1.7rem,3.6vw,2.5rem);margin:0 0 .3em}
-.lead{color:var(--ink-2);font-size:clamp(1.02rem,1.5vw,1.16rem);max-width:65ch}
-main[lang="ar"] .lead{max-width:60ch}
-
-header{position:sticky;top:0;z-index:50;background:rgba(11,20,27,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule)}
-.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:12px 0}
-.brand{display:flex;align-items:center;gap:11px;color:var(--ink)}
-.brand svg{width:30px;height:30px;flex:none}
-.brand b{font-weight:700;font-size:1.16rem;letter-spacing:-.01em}
-.brand span{font-family:var(--sans-ar);color:var(--ink-2);font-size:1.1rem}
-nav{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-nav a.navlink{color:var(--ink-2);font-size:.95rem}
-nav a.navlink:hover{color:var(--ink)}
-.ghlink{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--rule-2);border-radius:8px;padding:7px 12px;color:var(--ink);font-size:.9rem}
-.ghlink:hover{border-color:var(--wire)}
-.ghlink svg{width:17px;height:17px;fill:currentColor}
-.lang{display:inline-flex;border:1px solid var(--rule-2);border-radius:999px;padding:3px;background:var(--panel)}
-.lang button{appearance:none;border:0;background:transparent;color:var(--ink-2);font:inherit;font-size:.88rem;padding:5px 13px;border-radius:999px;cursor:pointer}
-.lang button[aria-pressed="true"]{background:var(--brand);color:#fff;font-weight:600}
-
-.hero{padding-top:clamp(40px,6vw,72px)}
-.hero-grid{display:grid;grid-template-columns:1.04fr 1.15fr;gap:clamp(28px,4vw,56px);align-items:center}
-.hero-grid>*{min-width:0}
-h1{font-size:clamp(2.1rem,5.2vw,3.5rem);font-weight:700;margin:.1em 0 .35em}
-.hero p.lead{font-size:clamp(1.05rem,1.7vw,1.28rem)}
-.cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
-.btn{display:inline-flex;align-items:center;gap:9px;border-radius:10px;padding:13px 20px;font-weight:600;font-size:1rem;cursor:pointer;border:1px solid transparent}
-.btn-primary{background:var(--brand);color:#fff;box-shadow:0 10px 26px rgba(0,51,160,.38)}
-.btn-primary:hover{background:#0a44c8;color:#fff}
-.btn-ghost{background:transparent;border-color:var(--rule-2);color:var(--ink)}
-.btn-ghost:hover{border-color:var(--wire)}
-.btn svg{width:18px;height:18px}
-.facts{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
-.fact{background:var(--panel);border:1px solid var(--rule);border-radius:13px;padding:14px 18px;min-width:88px}
-.fact b{display:block;font-size:1.6rem;font-weight:700;color:var(--wire);line-height:1.05;font-variant-numeric:tabular-nums}
-.fact span{display:block;margin-top:5px;color:var(--ink-2);font-size:.82rem}
-
-.term{background:var(--term-bg);border:1px solid var(--rule-2);border-radius:14px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.45);font-family:var(--mono);animation:termglow 4.5s ease-in-out infinite}
-.term .tbar{display:flex;align-items:center;gap:8px;padding:11px 14px;background:rgba(255,255,255,.03);border-bottom:1px solid var(--rule)}
-.term .dots{display:flex;gap:6px}
-.term .dots i{width:11px;height:11px;border-radius:50%;display:block}
-.d1{background:#ff5f57}.d2{background:#febc2e}.d3{background:#28c840}
-.term .ttl{color:#8090AC;font-size:.8125rem;margin-inline-start:6px}
-.term .body{padding:16px 18px;font-size:.82rem;line-height:1.6;color:var(--term-fg);white-space:pre-wrap;min-height:340px;direction:ltr;text-align:left}
-.term .body .p{color:#5FD3C6}.term .body .u{color:var(--signal)}.term .body .g{color:#7ce0b3}.term .body .d{color:var(--term-dim)}.term .body .c{color:#5FD3C6}
-.cursor{display:inline-block;width:9px;height:1.05em;background:#5FD3C6;vertical-align:-2px;animation:blink 1.1s steps(1) infinite}
-@keyframes blink{50%{opacity:0}}
-@keyframes termglow{0%,100%{box-shadow:0 30px 60px rgba(0,0,0,.45)}50%{box-shadow:0 30px 60px rgba(0,0,0,.45),0 0 34px rgba(79,139,255,.20)}}
-.replay{margin-inline-start:auto;background:transparent;border:0;color:var(--term-dim);cursor:pointer;padding:3px;display:inline-flex;border-radius:6px;transition:color .15s,background .15s}
-.replay:hover{color:#4F8BFF;background:rgba(79,139,255,.12)}
-.replay svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2}
-@media (prefers-reduced-motion:reduce){.cursor{animation:none}.term{animation:none}}
-
-.band{background:var(--bg-2);border-block:1px solid var(--rule)}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:34px}
-.steps>*{min-width:0}
-.step{background:var(--panel);border:1px solid var(--rule);border-radius:14px;padding:24px}
-.step .n{font-family:var(--mono);color:var(--signal);font-size:.9rem;font-weight:600}
-.step h3{font-size:1.16rem;margin:.5em 0 .35em}
-.step p{color:var(--ink-2);font-size:.98rem;margin:0}
-.step pre{margin:.8em 0 0;background:var(--term-bg);border:1px solid var(--rule);border-radius:9px;padding:11px 13px;font-size:.82rem;overflow:auto;color:var(--term-fg)}
-
-.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:18px;margin-top:36px}
-.bento>*{min-width:0}
-.card{background:var(--panel);border:1px solid var(--rule);border-radius:16px;padding:24px;position:relative;overflow:hidden}
-.card.k-wide{grid-column:span 4}.card.k-nar{grid-column:span 2}.card.k-half{grid-column:span 3}.card.k-third{grid-column:span 2}
-.card .ic{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;margin-bottom:14px;border:1px solid var(--rule-2)}
-.card .ic svg{width:20px;height:20px;stroke:var(--wire);fill:none;stroke-width:1.8}
-.card h3{font-size:1.14rem;margin:0 0 .4em}
-.card p{color:var(--ink-2);font-size:.96rem;margin:0}
-.card.feature-lead{background:linear-gradient(155deg,#13285e,#0e1628);border-color:var(--rule-2)}
-.card.feature-lead .ic{border-color:var(--wire-2)}
-.tagrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
-.tag{font-family:var(--mono);font-size:.8125rem;color:var(--ink-2);background:var(--bg-2);border:1px solid var(--rule);border-radius:6px;padding:3px 9px}
-
-.shots{margin-top:34px}
-.shot-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.shot-tabs button{appearance:none;font:inherit;font-size:.9rem;cursor:pointer;color:var(--ink-2);background:var(--panel);border:1px solid var(--rule);border-radius:9px;padding:8px 15px}
-.shot-tabs button[aria-selected="true"]{color:#fff;background:var(--brand);border-color:var(--brand);font-weight:600}
-.shot-stage{border:1px solid var(--rule-2);border-radius:14px;overflow:hidden;background:var(--term-bg);box-shadow:0 26px 54px rgba(0,0,0,.4)}
-.shot-stage img{width:100%;height:auto}
-.shot-cap{color:var(--ink-3);font-size:.9rem;margin-top:12px;text-align:center}
-
-.flaglist{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:32px}
-.flaglist>*{min-width:0}
-.flag{display:flex;align-items:flex-start;gap:14px;background:var(--panel);border:1px solid var(--rule);border-radius:13px;padding:18px 20px}
-.flag .pts{font-family:var(--mono);font-weight:600;color:var(--signal);font-size:.95rem;flex:none;min-width:52px}
-.flag h3{font-size:1.05rem;margin:0 0 .25em}
-.flag p{color:var(--ink-2);font-size:.92rem;margin:0}
-.ctf-note{margin-top:26px;background:var(--panel-2);border:1px solid var(--rule-2);border-radius:12px;padding:16px 20px;color:var(--ink-2);font-size:.96rem}
-.ctf-note code{background:var(--term-bg)}
-
-.lessons{margin-top:30px;border:1px solid var(--rule);border-radius:14px;overflow:hidden}
-.lrow{display:grid;grid-template-columns:60px 1fr auto;gap:16px;align-items:center;padding:15px 20px;border-top:1px solid var(--rule)}
-.lrow:first-child{border-top:0}
-.lrow:nth-child(odd){background:var(--panel)}
-.lrow .lid{font-family:var(--mono);color:var(--signal);font-weight:600}
-.lrow .lt{font-weight:600;color:var(--ink)}
-.lrow .ld{color:var(--ink-3);font-size:.9rem;display:block;font-weight:400;margin-top:2px}
-.lrow .lmeta{font-family:var(--mono);font-size:.8125rem;color:var(--ink-3);white-space:nowrap}
-main[lang="ar"] .lrow{grid-template-columns:auto 1fr 60px}
-
-.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px}
-.tgrid>*{min-width:0}
-.target{background:var(--panel);border:1px solid var(--rule);border-radius:13px;padding:20px}
-.target .port{font-family:var(--mono);font-size:.8125rem;color:var(--wire);background:var(--bg-2);border:1px solid var(--rule);border-radius:6px;padding:2px 8px;display:inline-block;margin-bottom:10px}
-.target h3{font-size:1.05rem;margin:0 0 .3em}
-.target p{color:var(--ink-2);font-size:.92rem;margin:0}
-
-.toolwrap{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:30px}
-.toolwrap>*{min-width:0}
-.toolcol{background:var(--panel);border:1px solid var(--rule);border-radius:13px;padding:22px}
-.toolcol h3{margin:0 0 .6em;font-size:1.08rem}
-.chips{display:flex;gap:9px;flex-wrap:wrap}
-.chip{font-family:var(--mono);font-size:.82rem;color:var(--ink);background:var(--bg-2);border:1px solid var(--rule-2);border-radius:7px;padding:5px 10px}
-
-.cmds{margin-top:30px;background:var(--term-bg);border:1px solid var(--rule-2);border-radius:14px;overflow:hidden}
-.cmd{display:grid;grid-template-columns:230px 1fr;gap:16px;padding:13px 20px;border-top:1px solid var(--rule);align-items:baseline}
-.cmd:first-child{border-top:0}
-.cmd code{background:none;border:0;color:var(--wire);font-size:.9rem;padding:0}
-.cmd span{color:var(--ink-2);font-size:.94rem}
-main[lang="ar"] .cmd{grid-template-columns:1fr 230px}
-main[lang="ar"] .cmd span{text-align:right}
-
-.copywrap{position:relative;margin-top:24px}
-.copywrap pre{background:var(--term-bg);border:1px solid var(--rule-2);border-radius:12px;padding:20px 22px;overflow:auto;color:var(--term-fg);font-size:.92rem;line-height:1.7}
-.copybtn{position:absolute;top:12px;inset-inline-end:12px;appearance:none;border:1px solid var(--rule-2);background:var(--panel);color:var(--ink-2);font:inherit;font-size:.82rem;border-radius:8px;padding:6px 12px;cursor:pointer}
-.copybtn:hover{border-color:var(--wire);color:var(--ink)}
-
-.faq{margin-top:28px;display:grid;gap:12px}
-details{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:4px 20px}
-details[open]{border-color:var(--rule-2)}
-summary{cursor:pointer;padding:16px 0;font-weight:600;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
-summary::-webkit-details-marker{display:none}
-summary::after{content:"+";color:var(--wire);font-size:1.3rem;font-weight:600}
-details[open] summary::after{content:"\2212"}
-details p{margin:0 0 18px;color:var(--ink-2)}
-
-.closer{background:linear-gradient(160deg,#12303a,#0d222c);border:1px solid var(--rule-2);border-radius:20px;padding:clamp(30px,5vw,56px);text-align:center;margin:8px 0}
-.closer h2{margin-bottom:.2em}
-.closer .lead{margin:0 auto}
-
-footer{border-top:1px solid var(--rule);padding:40px 0 56px;color:var(--ink-3)}
-.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
-.foot a{color:var(--ink-2)}
-.foot .made{font-size:.9rem}
-
-@media (max-width:900px){
-  .hero-grid{grid-template-columns:1fr}
-  .steps{grid-template-columns:1fr}
-  .bento{grid-template-columns:repeat(2,1fr)}
-  .card.k-wide,.card.k-nar,.card.k-half,.card.k-third{grid-column:span 2}
-  .flaglist,.tgrid,.toolwrap{grid-template-columns:1fr}
-  .cmd{grid-template-columns:1fr}
-  main[lang="ar"] .cmd{grid-template-columns:1fr}
-  .term .body{font-size:.72rem;min-height:0}
-}
-@media (max-width:560px){
-  .bento{grid-template-columns:1fr}
-  .card.k-wide,.card.k-nar,.card.k-half,.card.k-third{grid-column:span 1}
-  .facts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-  .fact{min-width:0}
-  .fact:first-child{grid-column:1 / -1;background:linear-gradient(120deg,#13285e,#0e1628);border-color:var(--rule-2)}
-  .fact:first-child b{font-size:2.2rem}
-  nav .navlink{display:none}
-}
-
 </style>
 <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
-
-<header>
-  <div class="wrap"><div class="bar">
-    <a class="brand" href="#" aria-label="Shabakah home">
-      <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="12" fill="#121A2E"/><path d="M16 44 L32 20 L48 44 M16 44 L48 44" stroke="#4F8BFF" stroke-width="3" fill="none" stroke-linejoin="round"/><circle cx="16" cy="44" r="5" fill="#F2C14E"/><circle cx="32" cy="20" r="5" fill="#F2C14E"/><circle cx="48" cy="44" r="5" fill="#F2C14E"/></svg>
-      <b>Shabakah</b><span>شبكة</span>
-    </a>
-    <nav>
-      <a class="navlink" href="#features" data-nav="features" data-en="Features" data-ar="المزايا">Features</a>
-      <a class="navlink" href="#screens" data-nav="screens" data-en="Screenshots" data-ar="معاينة">Screenshots</a>
-      <a class="navlink" href="#lessons" data-nav="lessons" data-en="Lessons" data-ar="الدروس">Lessons</a>
-      <a class="navlink" href="#ctf" data-nav="ctf" data-en="Flags" data-ar="التحديات">Flags</a>
-      <a class="ghlink" href="https://github.com/SiteQ8/Shabakah"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
-      <div class="lang" role="group" aria-label="Language">
-        <button type="button" data-lang="en" aria-pressed="true">English</button>
-        <button type="button" data-lang="ar" aria-pressed="false">العربية</button>
-      </div>
-    </nav>
-  </div></div>
-</header>
+<header><div class="wrap bar">
+  <a class="brand" href="#" aria-label="Shabakah">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 24 16 8 26 24Z"/><circle cx="6" cy="24" r="3.4"/><circle cx="16" cy="8" r="3.4"/><circle cx="26" cy="24" r="3.4"/></svg>
+    <b>Shabakah</b><span lang="ar">شبكة</span>
+  </a>
+  <nav>
+    <a class="navlink" href="#lessons" data-nav="lessons" data-en="Lessons" data-ar="الدروس">Lessons</a>
+    <a class="navlink" href="#ctf" data-nav="ctf" data-en="Flags" data-ar="التحديات">Flags</a>
+    <a class="navlink" href="#screens" data-nav="screens" data-en="Screens" data-ar="معاينة">Screens</a>
+    <a class="navlink" href="#start" data-nav="start" data-en="Get started" data-ar="ابدأ">Get started</a>
+    <div class="lang" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="ar" aria-pressed="false">عربي</button></div>
+  </nav>
+</div></header>
 
 <main lang="en" dir="ltr">
 
-<!-- HERO -->
-<section class="hero"><div class="wrap"><div class="hero-grid">
-  <div>
-    <p class="eyebrow">Open source network security lab</p>
+<section class="hero"><div class="wrap hero-grid">
+  <div class="hero-copy">
     <h1>A network security lab you SSH into.</h1>
-    <p class="lead">Shabakah is one self contained Docker container. You start it, you SSH in, and a bilingual guide walks you through <!--n:lessons-->17<!--/n--> hands on lessons against real services running beside it. Every challenge is checked live, so you learn by doing, not by reading.</p>
-    <div class="cta">
-      <a class="btn btn-primary" href="#start">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 17l6-6-6-6"/><path d="M12 19h8"/></svg>
-        Get started
-      </a>
-      <a class="btn btn-ghost" href="https://github.com/SiteQ8/Shabakah">View on GitHub</a>
-    </div>
-    <div class="facts">
-      <div class="fact"><b><!--n:lessons-->17<!--/n--></b><span>hands on lessons</span></div>
-      <div class="fact"><b><!--n:targets-->6<!--/n--></b><span>live targets</span></div>
-      <div class="fact"><b><!--n:flags-->6<!--/n--></b><span>flags to capture</span></div>
-      <div class="fact"><b><!--n:points-->110<!--/n--></b><span>points on offer</span></div>
-      <div class="fact"><b>2</b><span>languages</span></div>
+    <p class="lead">Shabakah runs on your own machine as one isolated Docker image. You start it, you SSH in, and a bilingual guide walks you through <!--n:lessons-->17<!--/n--> hands on lessons against real services running inside it. Every challenge is checked live, so you learn by doing, not by reading.</p>
+    <div class="cta"><a class="btn btn-primary" href="#start">Get started</a><a class="btn btn-quiet" href="https://github.com/SiteQ8/Shabakah">Source on GitHub</a></div>
+  </div>
+  <figure class="map" data-map>
+  <div class="map-row">
+    <div class="node-you"><svg viewBox="0 0 48 36" aria-hidden="true"><rect x="7" y="3" width="34" height="23" rx="3"/><path d="M2 31h44"/></svg><b>Your computer</b><code>ssh -p 2222</code></div>
+    <div class="wire" aria-hidden="true"><span>SSH on port 22</span><i class="packet"></i></div>
+    <div class="box">
+      <div class="box-head"><b>Shabakah lab</b><span>with the netsec guide</span></div>
+      <div class="ports" role="tablist" aria-label="Practice services">
+        <button type="button" class="port" role="tab" id="t-8080" aria-controls="p-8080" aria-selected="true" style="--i:0"><i class="led"></i><span class="pn">8080</span><span class="pp">tcp</span><span class="pname">Cleartext web</span></button>
+        <button type="button" class="port" role="tab" id="t-8443" aria-controls="p-8443" aria-selected="false" style="--i:1"><i class="led"></i><span class="pn">8443</span><span class="pp">tcp</span><span class="pname">TLS web</span></button>
+        <button type="button" class="port" role="tab" id="t-9000" aria-controls="p-9000" aria-selected="false" style="--i:2"><i class="led"></i><span class="pn">9000</span><span class="pp">tcp</span><span class="pname">Enumeration service</span></button>
+        <button type="button" class="port" role="tab" id="t-2323" aria-controls="p-2323" aria-selected="false" style="--i:3"><i class="led"></i><span class="pn">2323</span><span class="pp">tcp</span><span class="pname">Cleartext console</span></button>
+        <button type="button" class="port" role="tab" id="t-5353" aria-controls="p-5353" aria-selected="false" style="--i:4"><i class="led"></i><span class="pn">5353</span><span class="pp">udp</span><span class="pname">Lab DNS resolver</span></button>
+        <button type="button" class="port" role="tab" id="t-9001" aria-controls="p-9001" aria-selected="false" style="--i:5"><i class="led"></i><span class="pn">9001</span><span class="pp">udp</span><span class="pname">UDP banner service</span></button>
+      </div>
+      <div class="pdetail" role="tabpanel" id="p-8080" aria-labelledby="t-8080"><h3>Cleartext web <code>tcp 8080</code></h3><p>An HTTP service with a telling banner, hidden paths, and a page it should never expose.</p><div class="pmeta"><div><h4>Lessons that use it</h4><div class="lchips"><a href="#l-02">02</a><a href="#l-03">03</a><a href="#l-04">04</a><a href="#l-05">05</a><a href="#l-12">12</a><a href="#l-16">16</a><a href="#l-17">17</a></div></div><div><h4>Flags hidden here</h4><ul><li>Recon rookie<span>10 pt</span></li><li>Source reader<span>10 pt</span></li><li>Left the door open<span>20 pt</span></li></ul></div></div></div>
+      <div class="pdetail" role="tabpanel" id="p-8443" aria-labelledby="t-8443"><h3>TLS web <code>tcp 8443</code></h3><p>The same service over TLS, with a self signed certificate to inspect and reason about.</p><div class="pmeta"><div><h4>Lessons that use it</h4><div class="lchips"><a href="#l-02">02</a><a href="#l-03">03</a><a href="#l-07">07</a><a href="#l-16">16</a><a href="#l-17">17</a></div></div><div><h4>Flags hidden here</h4><ul><li>Hidden in plain sight<span>20 pt</span></li></ul></div></div></div>
+      <div class="pdetail" role="tabpanel" id="p-9000" aria-labelledby="t-9000"><h3>Enumeration service <code>tcp 9000</code></h3><p>A raw TCP service with a chatty banner and an undocumented command to uncover.</p><div class="pmeta"><div><h4>Lessons that use it</h4><div class="lchips"><a href="#l-03">03</a><a href="#l-04">04</a><a href="#l-09">09</a><a href="#l-17">17</a></div></div><div><h4>Flags hidden here</h4><ul><li>Undocumented<span>20 pt</span></li></ul></div></div></div>
+      <div class="pdetail" role="tabpanel" id="p-2323" aria-labelledby="t-2323"><h3>Cleartext console <code>tcp 2323</code></h3><p>A forgotten admin console that reuses a password, the kind that turns one leak into three.</p><div class="pmeta"><div><h4>Lessons that use it</h4><div class="lchips"><a href="#l-03">03</a><a href="#l-12">12</a><a href="#l-17">17</a></div></div><div><h4>Flags hidden here</h4><ul><li>One leak, three doors<span>30 pt</span></li></ul></div></div></div>
+      <div class="pdetail" role="tabpanel" id="p-5353" aria-labelledby="t-5353"><h3>Lab DNS resolver <code>udp 5353</code></h3><p>An offline resolver for the shabakah.lab zone, with A, MX, and TXT records to query.</p><div class="pmeta"><div><h4>Lessons that use it</h4><div class="lchips"><a href="#l-06">06</a></div></div><div><h4>Flags hidden here</h4><p class="muted">No flag here, but lessons depend on it</p></div></div></div>
+      <div class="pdetail" role="tabpanel" id="p-9001" aria-labelledby="t-9001"><h3>UDP banner service <code>udp 9001</code></h3><p>A UDP service that stays silent until you speak its protocol, which is the point.</p><div class="pmeta"><div><h4>Lessons that use it</h4><div class="lchips"><a href="#l-09">09</a><a href="#l-11">11</a></div></div><div><h4>Flags hidden here</h4><p class="muted">No flag here, but lessons depend on it</p></div></div></div>
     </div>
   </div>
-  <div class="term" data-ui aria-hidden="true">
-    <div class="tbar"><span class="dots"><i class="d1"></i><i class="d2"></i><i class="d3"></i></span><span class="ttl">learner@shabakah: ~</span></div>
-    <div class="body" id="hero-term"></div>
-  </div>
-</div></div></section>
+  <figcaption>Pick a port to see the service behind it, the lessons that use it, and the flag hidden there.</figcaption>
+</figure>
+</div>
+<div class="wrap"><div class="plate"><div><b><!--n:lessons-->17<!--/n--></b><span>hands on lessons</span></div><div><b><!--n:targets-->6<!--/n--></b><span>practice services</span></div><div><b><!--n:flags-->6<!--/n--></b><span>hidden flags</span></div><div><b><!--n:points-->110<!--/n--></b><span>points to win</span></div><div><b>2</b><span>languages</span></div></div></div>
+</section>
 
-<!-- HOW -->
-<section class="band"><div class="wrap">
-  <p class="eyebrow">How it works</p>
+<section id="how"><div class="wrap">
   <h2>Three commands and you are inside.</h2>
-  <p class="lead">No lab to wire up, no cloud to pay for, nothing that reaches the outside world. Everything lives in the container.</p>
-  <div class="steps">
-    <div class="step"><div class="n">01</div><h3>Run the container</h3><p>Pull the image or build it, then bring it up. It runs anywhere Docker runs.</p><pre>docker compose up -d --build</pre></div>
-    <div class="step"><div class="n">02</div><h3>SSH in</h3><p>Log in as the learner. The guide greets you and remembers where you left off.</p><pre>ssh -p 2222 learner@localhost</pre></div>
-    <div class="step"><div class="n">03</div><h3>Learn by doing</h3><p>Read a lesson, run the tools on the live targets, then let the guide check your answer.</p><pre>netsec check 03 8080,8443,9000</pre></div>
-  </div>
+  <p class="lead">No lab to wire up, no cloud to pay for, nothing that reaches the outside world.</p>
+  <ol class="steps"><li><h3>Run the lab</h3><p>Pull the image or build it, then bring it up. It runs anywhere Docker runs.</p><pre>docker compose up -d --build</pre></li><li><h3>SSH in</h3><p>Log in as the learner. The guide greets you and remembers where you left off.</p><pre>ssh -p 2222 learner@localhost</pre></li><li><h3>Learn by doing</h3><p>Read a lesson, run the tools on the live services, then let the guide check your answer.</p><pre>netsec check 03 2323,8080,8443,9000</pre></li></ol>
 </div></section>
 
-<!-- FEATURES -->
-<section id="features"><div class="wrap">
-  <p class="eyebrow">What is inside</p>
-  <h2>More than a set of notes.</h2>
-  <p class="lead">Shabakah is a guide, a set of live targets, and a game, wrapped in one container so nothing gets in your way.</p>
-  <div class="bento">
-    <div class="card k-wide feature-lead">
-      <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v12H4z"/><path d="M8 20h8"/><path d="M7 8l3 2-3 2"/><path d="M12 12h4"/></svg></div>
-      <h3>A guide that checks your work</h3>
-      <p>The netsec program is your instructor in the terminal. It carries every lesson, shows the objective and the challenge, then verifies your answer against the running services in real time. Right answers mark the lesson complete and stick between sessions.</p>
-      <div class="tagrow"><span class="tag">live verification</span><span class="tag">progress saved</span><span class="tag">no internet needed</span></div>
-    </div>
-    <div class="card k-nar">
-      <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 .8-4.5 4.2L18 20l-6-3.4L6 20l1.5-7L3 8.8 9 8z"/></svg></div>
-      <h3>Capture the flag</h3>
-      <p><!--n:flags-->6<!--/n--> flags are hidden across the targets, each reachable with the tools in the box. Hunt them, submit them, watch your score climb to <!--n:points-->110<!--/n-->.</p>
-    </div>
-    <div class="card k-third">
-      <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M8 14l-2 8 6-3 6 3-2-8"/></svg></div>
-      <h3>Achievements</h3>
-      <p>Seven badges unlock as you clear lessons and capture flags, all the way to Shabakah master.</p>
-    </div>
-    <div class="card k-third">
-      <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 12h18"/><path d="M12 3a15 15 0 010 18"/><path d="M12 3a15 15 0 000 18"/></svg></div>
-      <h3>English and Arabic</h3>
-      <p>Every lesson, prompt, and hint is written in both languages. Switch any time and your progress follows.</p>
-    </div>
-    <div class="card k-third">
-      <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 10h16"/><circle cx="7" cy="8" r=".6" fill="currentColor"/></svg></div>
-      <h3>Real tools</h3>
-      <p>nmap, tcpdump, openssl, dig, netcat, hping3 and more are already installed. The same tools you use on the job.</p>
-    </div>
-    <div class="card k-half">
-      <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg></div>
-      <h3>Safe by design</h3>
-      <p>Every service binds inside the container and nothing reaches the outside world. You practise the aggressive tools with no risk to anyone, which is the only honest way to learn them.</p>
-    </div>
-    <div class="card k-half">
-      <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M8 9l3 3-3 3"/><path d="M13 15h3"/></svg></div>
-      <h3>Learn the whole surface</h3>
-      <p>Recon, banner grabbing, HTTP and TLS inspection, service enumeration, DNS, UDP, packet capture, firewalling, and chaining findings into access. A full first pass over network security.</p>
-    </div>
-  </div>
-</div></section>
-
-<!-- SCREENSHOTS -->
-<section class="band" id="screens"><div class="wrap">
-  <p class="eyebrow">A quick look</p>
+<section class="tint" id="screens"><div class="wrap">
   <h2>See the guide before you start.</h2>
   <p class="lead">Real screens from the guide, straight out of the terminal.</p>
   <div class="shots">
-    <div class="shot-tabs" role="tablist">
-      <button role="tab" aria-selected="true" data-shot="menu">The guide</button>
-      <button role="tab" aria-selected="false" data-shot="lesson">A lesson</button>
-      <button role="tab" aria-selected="false" data-shot="ctf">Capture the flag</button>
-      <button role="tab" aria-selected="false" data-shot="achievements">Achievements</button>
-      <button role="tab" aria-selected="false" data-shot="targets">Targets</button>
-      <button role="tab" aria-selected="false" data-shot="cheat">Cheat sheet</button>
-    </div>
-    <div class="shot-stage"><img id="shot-img" src="screenshots/menu.png" alt="The Shabakah guide as seen after logging in"></div>
-    <p class="shot-cap" id="shot-cap">The guide greets you when you SSH in and remembers your progress.</p>
+    <div class="shot-tabs" role="tablist"><button type="button" role="tab" aria-selected="true" data-shot="menu">The guide</button><button type="button" role="tab" aria-selected="false" data-shot="lesson">A lesson</button><button type="button" role="tab" aria-selected="false" data-shot="ctf">Flags</button><button type="button" role="tab" aria-selected="false" data-shot="achievements">Achievements</button><button type="button" role="tab" aria-selected="false" data-shot="targets">Services</button><button type="button" role="tab" aria-selected="false" data-shot="cheat">Cheat sheet</button></div>
+    <div class="shot-stage"><img src="screenshots/menu.png" width="1564" height="1100" alt="The Shabakah guide as seen after logging in"></div>
+    <p class="shot-cap">The guide greets you when you SSH in and remembers your progress.</p>
   </div>
 </div></section>
 
-<!-- CTF -->
-<section id="ctf"><div class="wrap">
-  <p class="eyebrow">Capture the flag</p>
-  <h2><!--n:flags-->6<!--/n--> flags. <!--n:points-->110<!--/n--> points. One container.</h2>
-  <p class="lead">Each flag sits somewhere a careless operator would leave it, and each is reachable with a tool you already have. Find one, then run <code>netsec submit flag{...}</code>.</p>
-  <div class="flaglist">
-    <div class="flag"><span class="pts">10 pt</span><div><h3>Recon rookie</h3><p>The web service has a page it should not. A first curl finds it.</p></div></div>
-    <div class="flag"><span class="pts">10 pt</span><div><h3>Source reader</h3><p>The home page hides a note in its HTML source, not in the text you see.</p></div></div>
-    <div class="flag"><span class="pts">20 pt</span><div><h3>Left the door open</h3><p>robots.txt points at paths that were never meant to be public. One holds a config backup.</p></div></div>
-    <div class="flag"><span class="pts">20 pt</span><div><h3>Undocumented</h3><p>A service answers more commands than it admits to. Enumeration finds the one it hides.</p></div></div>
-    <div class="flag"><span class="pts">30 pt</span><div><h3>One leak, three doors</h3><p>A cleartext console reuses a password you already saw cross the wire. Reuse is the whole lesson.</p></div></div>
-    <div class="flag"><span class="pts">20 pt</span><div><h3>Hidden in plain sight</h3><p>The TLS certificate carries a field it never should. Read the whole subject, not just the common name.</p></div></div>
-    <div class="flag"><span class="pts">110 pt</span><div><h3>Clean board</h3><p>Capture all five and the master badge is yours. Track it any time with <code>netsec ctf</code>.</p></div></div>
+<section id="lessons"><div class="wrap split">
+  <div class="split-head">
+    <h2><!--n:lessons-->17<!--/n--> lessons, each with a live challenge.</h2>
+    <p class="lead">Every lesson ends with something to prove on the running services, checked by the guide. They run in order, from reading packets to hardening the door you came in through.</p>
   </div>
-  <div class="ctf-note">Lesson 12 walks the full chain, from one small leak to real access, so the hunt doubles as a lesson in how a real assessment actually runs.</div>
-</div></section>
-
-<!-- LESSONS -->
-<section class="band" id="lessons"><div class="wrap">
-  <p class="eyebrow">The curriculum</p>
-  <h2><!--n:lessons-->17<!--/n--> lessons, each with a live challenge.</h2>
-  <p class="lead">Every lesson ends with something to prove on the running targets, checked by the guide.</p>
   <div class="lessons"><!--lessons:en-->
-    <div class="lrow"><span class="lid">01</span><span class="lt">The network stack and sockets<span class="ld">See how your host talks to the network and how to read what is listening.</span></span><span class="lmeta">foundations</span></div>
-    <div class="lrow"><span class="lid">02</span><span class="lt">Reading the wire with tcpdump<span class="ld">Capture live traffic, apply a filter, and read what a request and reply contain.</span></span><span class="lmeta">capture</span></div>
-    <div class="lrow"><span class="lid">03</span><span class="lt">Port scanning with nmap<span class="ld">Discover which ports are open on a host and reason about scan types.</span></span><span class="lmeta">scanning</span></div>
-    <div class="lrow"><span class="lid">04</span><span class="lt">Service enumeration and banners<span class="ld">Talk to a service by hand and pull useful detail out of its responses.</span></span><span class="lmeta">enumeration</span></div>
-    <div class="lrow"><span class="lid">05</span><span class="lt">HTTP recon and cleartext exposure<span class="ld">Inspect an HTTP service and see why cleartext protocols are dangerous.</span></span><span class="lmeta">web</span></div>
-    <div class="lrow"><span class="lid">06</span><span class="lt">DNS reconnaissance<span class="ld">Query different record types and understand what DNS reveals.</span></span><span class="lmeta">dns</span></div>
-    <div class="lrow"><span class="lid">07</span><span class="lt">TLS and certificates<span class="ld">Inspect a TLS service, read its certificate, and judge its trust.</span></span><span class="lmeta">tls</span></div>
-    <div class="lrow"><span class="lid">08</span><span class="lt">Host firewalling<span class="ld">Read and reason about firewall rules and the default deny idea.</span></span><span class="lmeta">firewall</span></div>
-    <div class="lrow"><span class="lid">09</span><span class="lt">Traffic analysis and spotting attacks<span class="ld">Recognise the shape of common activity, including a scan, in captured traffic.</span></span><span class="lmeta">detection</span></div>
-    <div class="lrow"><span class="lid">10</span><span class="lt">Detection and hardening<span class="ld">Tie the lessons together into a defender mindset and a repeatable routine.</span></span><span class="lmeta">defense</span></div>
-    <div class="lrow"><span class="lid">11</span><span class="lt">UDP services and why they hide<span class="ld">Scan and talk to a UDP service, and understand why UDP is easy to miss.</span></span><span class="lmeta">udp</span></div>
-    <div class="lrow"><span class="lid">12</span><span class="lt">Chaining findings into access<span class="ld">Follow a trail from one small leak to real access, the way a real assessment runs.</span></span><span class="lmeta">chaining</span></div>
-    <div class="lrow"><span class="lid">13</span><span class="lt">Read a capture like an investigator<span class="ld">Open a saved packet capture and reconstruct what happened from the packets alone.</span></span><span class="lmeta">forensics</span></div>
-    <div class="lrow"><span class="lid">14</span><span class="lt">Find the attack in the logs<span class="ld">Read an authentication log and pick out a brute force attempt and its source.</span></span><span class="lmeta">logs</span></div>
-    <div class="lrow"><span class="lid">15</span><span class="lt">Harden the door you came in through<span class="ld">Understand the settings that make an SSH server hard to attack, and see them in place.</span></span><span class="lmeta">hardening</span></div>
-    <div class="lrow"><span class="lid">16</span><span class="lt">Reading security headers<span class="ld">Read the HTTP response headers that tell a browser how to protect its users, and spot the ones that are missing.</span></span><span class="lmeta">headers</span></div>
-    <div class="lrow"><span class="lid">17</span><span class="lt">Scripted scanning with nmap<span class="ld">Use the Nmap Scripting Engine to pull titles, certificates and banners in one pass, and know which scripts are safe to run.</span></span><span class="lmeta">scripting</span></div>
+    <div class="lrow" id="l-01"><span class="lid">01</span><span class="lt">The network stack and sockets<span class="ld">See how your host talks to the network and how to read what is listening.</span></span><span class="lmeta">foundations</span></div>
+    <div class="lrow" id="l-02"><span class="lid">02</span><span class="lt">Reading the wire with tcpdump<span class="ld">Capture live traffic, apply a filter, and read what a request and reply contain.</span></span><span class="lmeta">capture</span></div>
+    <div class="lrow" id="l-03"><span class="lid">03</span><span class="lt">Port scanning with nmap<span class="ld">Discover which ports are open on a host and reason about scan types.</span></span><span class="lmeta">scanning</span></div>
+    <div class="lrow" id="l-04"><span class="lid">04</span><span class="lt">Service enumeration and banners<span class="ld">Talk to a service by hand and pull useful detail out of its responses.</span></span><span class="lmeta">enumeration</span></div>
+    <div class="lrow" id="l-05"><span class="lid">05</span><span class="lt">HTTP recon and cleartext exposure<span class="ld">Inspect an HTTP service and see why cleartext protocols are dangerous.</span></span><span class="lmeta">web</span></div>
+    <div class="lrow" id="l-06"><span class="lid">06</span><span class="lt">DNS reconnaissance<span class="ld">Query different record types and understand what DNS reveals.</span></span><span class="lmeta">dns</span></div>
+    <div class="lrow" id="l-07"><span class="lid">07</span><span class="lt">TLS and certificates<span class="ld">Inspect a TLS service, read its certificate, and judge its trust.</span></span><span class="lmeta">tls</span></div>
+    <div class="lrow" id="l-08"><span class="lid">08</span><span class="lt">Host firewalling<span class="ld">Read and reason about firewall rules and the default deny idea.</span></span><span class="lmeta">firewall</span></div>
+    <div class="lrow" id="l-09"><span class="lid">09</span><span class="lt">Traffic analysis and spotting attacks<span class="ld">Recognise the shape of common activity, including a scan, in captured traffic.</span></span><span class="lmeta">detection</span></div>
+    <div class="lrow" id="l-10"><span class="lid">10</span><span class="lt">Detection and hardening<span class="ld">Tie the lessons together into a defender mindset and a repeatable routine.</span></span><span class="lmeta">defense</span></div>
+    <div class="lrow" id="l-11"><span class="lid">11</span><span class="lt">UDP services and why they hide<span class="ld">Scan and talk to a UDP service, and understand why UDP is easy to miss.</span></span><span class="lmeta">udp</span></div>
+    <div class="lrow" id="l-12"><span class="lid">12</span><span class="lt">Chaining findings into access<span class="ld">Follow a trail from one small leak to real access, the way a real assessment runs.</span></span><span class="lmeta">chaining</span></div>
+    <div class="lrow" id="l-13"><span class="lid">13</span><span class="lt">Read a capture like an investigator<span class="ld">Open a saved packet capture and reconstruct what happened from the packets alone.</span></span><span class="lmeta">forensics</span></div>
+    <div class="lrow" id="l-14"><span class="lid">14</span><span class="lt">Find the attack in the logs<span class="ld">Read an authentication log and pick out a brute force attempt and its source.</span></span><span class="lmeta">logs</span></div>
+    <div class="lrow" id="l-15"><span class="lid">15</span><span class="lt">Harden the door you came in through<span class="ld">Understand the settings that make an SSH server hard to attack, and see them in place.</span></span><span class="lmeta">hardening</span></div>
+    <div class="lrow" id="l-16"><span class="lid">16</span><span class="lt">Reading security headers<span class="ld">Read the HTTP response headers that tell a browser how to protect its users, and spot the ones that are missing.</span></span><span class="lmeta">headers</span></div>
+    <div class="lrow" id="l-17"><span class="lid">17</span><span class="lt">Scripted scanning with nmap<span class="ld">Use the Nmap Scripting Engine to pull titles, certificates and banners in one pass, and know which scripts are safe to run.</span></span><span class="lmeta">scripting</span></div>
     <!--/lessons-->
   </div>
 </div></section>
 
-<!-- TARGETS -->
-<section id="targets"><div class="wrap">
-  <p class="eyebrow">Practice targets</p>
-  <h2><!--n:targets-->6<!--/n--> live services to work against.</h2>
-  <p class="lead">Real services, running beside the guide, each one there so a lesson has something honest to find.</p>
-  <div class="tgrid">
-    <div class="target"><span class="port">tcp 8080</span><h3>Cleartext web</h3><p>An HTTP service with a telling banner, hidden paths, and a page it should never expose.</p></div>
-    <div class="target"><span class="port">tcp 8443</span><h3>TLS web</h3><p>The same service over TLS with a self signed certificate to inspect and reason about.</p></div>
-    <div class="target"><span class="port">tcp 9000</span><h3>Enumeration service</h3><p>A raw TCP service with a chatty banner and an undocumented command to uncover.</p></div>
-    <div class="target"><span class="port">tcp 2323</span><h3>Cleartext console</h3><p>A forgotten admin console that reuses a password, the kind that turns one leak into three.</p></div>
-    <div class="target"><span class="port">udp 5353</span><h3>Lab DNS resolver</h3><p>An offline resolver for the shabakah.lab zone, with A, MX, and TXT records to query.</p></div>
-    <div class="target"><span class="port">udp 9001</span><h3>UDP banner service</h3><p>A UDP service that stays silent until you speak its protocol, which is the point.</p></div>
+<section class="tint" id="ctf"><div class="wrap split">
+  <div class="split-head">
+    <h2><!--n:flags-->6<!--/n--> flags, <!--n:points-->110<!--/n--> points.</h2>
+    <p class="lead">Each flag sits where a careless operator would leave it, and each is reachable with a tool you already have. Find one, then run <code>netsec submit flag{...}</code>. Lesson 12 walks the whole chain.</p>
   </div>
+  <div><table class="board"><thead><tr><th>Flag</th><th>Where to look</th><th>Points</th></tr></thead><tbody><tr><td><b>Recon rookie</b><span>The web service has a page it should not. A first curl finds it.</span></td><td><code>8080</code></td><td class="num">10</td></tr><tr><td><b>Source reader</b><span>The home page hides a note in its HTML source, not in the text you see.</span></td><td><code>8080</code></td><td class="num">10</td></tr><tr><td><b>Left the door open</b><span>robots.txt points at paths that were never meant to be public. One holds a config backup.</span></td><td><code>8080</code></td><td class="num">20</td></tr><tr><td><b>Undocumented</b><span>A service answers more commands than it admits to. Enumeration finds the one it hides.</span></td><td><code>9000</code></td><td class="num">20</td></tr><tr><td><b>One leak, three doors</b><span>A cleartext console reuses a password you already saw cross the wire.</span></td><td><code>2323</code></td><td class="num">30</td></tr><tr><td><b>Hidden in plain sight</b><span>The TLS certificate carries a field it never should. Read the whole subject.</span></td><td><code>8443</code></td><td class="num">20</td></tr><tr class="total"><td colspan="2">Total, and the master badge with it</td><td class="num"><!--n:points-->110<!--/n--></td></tr></tbody></table></div>
 </div></section>
 
-<!-- TOOLS + COMMANDS -->
-<section class="band" id="tools"><div class="wrap">
-  <p class="eyebrow">The toolbox</p>
+<section id="features"><div class="wrap split">
+  <div class="split-head">
+    <h2>More than a set of notes.</h2>
+    <p class="lead">A guide, live services, and a game, in one image so nothing gets in your way.</p>
+  </div>
+  <dl class="feats"><div><dt>A guide that checks your work</dt><dd>The netsec program is your instructor in the terminal. It shows the objective and the challenge, then verifies your answer against the running services in real time. Right answers stick between sessions.</dd></div><div><dt>Safe by design</dt><dd>Every practice service listens only inside the lab and runs without privileges. You practise the aggressive tools with no risk to anyone, which is the honest way to learn them.</dd></div><div><dt>Real tools</dt><dd>nmap, tcpdump, openssl, dig, netcat, hping3 and more are installed. The same tools you use on the job.</dd></div><div><dt>English and Arabic</dt><dd>Every lesson, prompt, and hint is written in both languages. Switch any time and your progress follows.</dd></div><div><dt>Badges and a certificate</dt><dd>Seven badges unlock as you clear lessons and capture flags, and a certificate prints once you finish everything.</dd></div><div><dt>The whole surface</dt><dd>Packet capture, port scanning, service enumeration, HTTP, TLS, DNS, UDP, log reading and SSH hardening. A full first pass over network security.</dd></div></dl>
+</div></section>
+
+<section class="tint" id="tools"><div class="wrap">
   <h2>The tools are already installed.</h2>
-  <p class="lead">Nothing to apt install mid lesson. The container ships with a working network security kit and the guide to drive it.</p>
-  <div class="toolwrap">
-    <div class="toolcol"><h3>Inside the container</h3><div class="chips"><span class="chip">nmap</span><span class="chip">tcpdump</span><span class="chip">ngrep</span><span class="chip">openssl</span><span class="chip">dig</span><span class="chip">whois</span><span class="chip">netcat</span><span class="chip">socat</span><span class="chip">curl</span><span class="chip">wget</span><span class="chip">hping3</span><span class="chip">nftables</span><span class="chip">iptables</span><span class="chip">mtr</span><span class="chip">traceroute</span></div></div>
-    <div class="toolcol"><h3>Drive it with netsec</h3>
-      <div class="cmds" style="margin-top:4px;border-radius:11px">
-        <div class="cmd"><code>netsec</code><span>open the interactive guide</span></div>
-        <div class="cmd"><code>netsec lesson 05</code><span>read one lesson</span></div>
-        <div class="cmd"><code>netsec check 05 &lt;a&gt;</code><span>check a challenge answer</span></div>
-        <div class="cmd"><code>netsec ctf</code><span>show the capture the flag board</span></div>
-        <div class="cmd"><code>netsec submit flag{...}</code><span>submit a flag you found</span></div>
-        <div class="cmd"><code>netsec achievements</code><span>show your badges</span></div>
-        <div class="cmd"><code>netsec targets</code><span>see which targets are up</span></div>
-        <div class="cmd"><code>netsec lang ar</code><span>switch to Arabic</span></div>
-      </div>
-    </div>
-  </div>
+  <p class="lead">Nothing to install mid lesson. The lab ships with a working network security kit and the guide to drive it.</p>
+  <div class="tools"><div><h3>Inside the lab</h3><ul class="toollist"><li>nmap</li><li>tcpdump</li><li>ngrep</li><li>openssl</li><li>dig</li><li>whois</li><li>netcat</li><li>socat</li><li>curl</li><li>wget</li><li>hping3</li><li>nftables</li><li>iptables</li><li>mtr</li><li>traceroute</li></ul></div><div><h3>Drive it with netsec</h3><table class="cmds"><tr><td><code>netsec</code></td><td>open the interactive guide</td></tr><tr><td><code>netsec next</code></td><td>jump to your next lesson</td></tr><tr><td><code>netsec lesson 05</code></td><td>read one lesson</td></tr><tr><td><code>netsec check 05 &lt;answer&gt;</code></td><td>check a challenge answer</td></tr><tr><td><code>netsec ctf</code></td><td>show the flag board</td></tr><tr><td><code>netsec submit flag{...}</code></td><td>submit a flag you found</td></tr><tr><td><code>netsec targets</code></td><td>see which services are up</td></tr><tr><td><code>netsec cert</code></td><td>print your certificate when you finish</td></tr><tr><td><code>netsec lang ar</code></td><td>switch to Arabic</td></tr></table></div></div>
 </div></section>
 
-<!-- START -->
-<section id="start"><div class="wrap">
-  <p class="eyebrow">Quick start</p>
-  <h2>Up and running in a minute.</h2>
-  <p class="lead">You need Docker. Everything else is in the image.</p>
-  <div class="copywrap">
-    <button class="copybtn" data-copy="qs-en">Copy</button>
-    <pre id="qs-en">git clone https://github.com/SiteQ8/Shabakah.git
+<section id="start"><div class="wrap split">
+  <div class="split-head">
+    <h2>Up and running in a minute.</h2>
+    <p class="lead">You need Docker. Everything else is in the image.</p>
+  </div>
+  <div class="starts">
+    <h3>From source</h3>
+    <div class="copywrap"><button type="button" class="copybtn" data-copy="qs-en">Copy</button><pre id="qs-en">git clone https://github.com/SiteQ8/Shabakah.git
 cd Shabakah
 docker compose up -d --build
-ssh -p 2222 learner@localhost
-# the password is set in docker-compose.yml, default: shabakah</pre>
-  </div>
-  <p class="lead" style="margin-top:20px">Prefer the prebuilt image? Pull it from the GitHub container registry.</p>
-  <div class="copywrap">
-    <button class="copybtn" data-copy="qs-en2">Copy</button>
-    <pre id="qs-en2">docker run -d --name shabakah --cap-add NET_ADMIN -p 2222:22 ghcr.io/siteq8/shabakah:latest
-ssh -p 2222 learner@localhost</pre>
+ssh -p 2222 learner@localhost</pre></div>
+    <h3>Or with the prebuilt image</h3>
+    <div class="copywrap"><button type="button" class="copybtn" data-copy="qs-en2">Copy</button><pre id="qs-en2">docker run -d --name shabakah --cap-add NET_ADMIN -p 2222:22 ghcr.io/siteq8/shabakah:latest
+ssh -p 2222 learner@localhost</pre></div>
+    <p class="muted">The password is set in docker-compose.yml. The default is shabakah.</p>
   </div>
 </div></section>
 
-<!-- FAQ -->
-<section class="band" id="faq"><div class="wrap">
-  <p class="eyebrow">Questions</p>
-  <h2>Good to know.</h2>
-  <div class="faq">
-    <details><summary>Is any of this dangerous to run?</summary><p>No. Every practice service binds inside the container and nothing reaches the outside world. You get to run nmap, tcpdump, and hping3 the aggressive way with no risk to anyone, which is exactly why a contained lab is the right place to learn them.</p></details>
-    <details><summary>Do I need to know the command line already?</summary><p>A little comfort with a terminal helps, but the guide shows you the exact commands for each lesson and the cheat sheet is one keypress away. Beginners can follow along and the challenges teach by repetition.</p></details>
-    <details><summary>Does it need an internet connection?</summary><p>Only to pull or build the image the first time. After that everything runs offline inside the container, including the lab DNS resolver.</p></details>
-    <details><summary>Can I use it to teach a class or run a workshop?</summary><p>Yes. It is MIT licensed, bilingual, and each learner just needs their own container. Progress and flags are per learner, so a room can work through it at its own pace.</p></details>
-    <details><summary>Where do I report a problem or suggest a lesson?</summary><p>Open an issue on the GitHub repository. Contributions of new lessons and targets are welcome.</p></details>
-  </div>
+<section class="tint" id="faq"><div class="wrap split">
+  <div class="split-head"><h2>Good to know.</h2></div>
+  <div class="faq"><details><summary>Is any of this dangerous to run?</summary><p>No. Every practice service listens only inside the lab and nothing reaches the outside world. You get to run nmap, tcpdump, and hping3 the aggressive way with no risk to anyone.</p></details><details><summary>Do I need to know the command line already?</summary><p>A little comfort with a terminal helps, but the guide shows the exact commands for each lesson and the cheat sheet is one keypress away.</p></details><details><summary>Does it need an internet connection?</summary><p>Only to pull or build the image the first time. After that everything runs offline, including the lab DNS resolver.</p></details><details><summary>Can I use it to teach a class or run a workshop?</summary><p>Yes. It is MIT licensed and bilingual, and each learner runs their own copy, so progress and flags stay per learner.</p></details><details><summary>Where do I report a problem or suggest a lesson?</summary><p>Open an issue on the GitHub repository. New lessons and services are welcome.</p></details></div>
 </div></section>
 
-<section><div class="wrap"><div class="closer">
-  <h2>Open a terminal and begin.</h2>
-  <p class="lead"><!--n:lessons-->17<!--/n--> lessons, <!--n:targets-->6<!--/n--> live targets, and a hunt for <!--n:flags-->6<!--/n--> flags are waiting inside one container.</p>
-  <div class="cta" style="justify-content:center">
-    <a class="btn btn-primary" href="#start">Get started</a>
-    <a class="btn btn-ghost" href="https://github.com/SiteQ8/Shabakah">Star it on GitHub</a>
-  </div>
-</div></div></section>
-
-<footer><div class="wrap"><div class="foot">
-  <span class="made">Built by Ali AlEnezi. Open source under the MIT license.</span>
-  <span><a href="https://github.com/SiteQ8/Shabakah">github.com/SiteQ8/Shabakah</a></span>
-</div></div></footer>
-
+<footer><div class="wrap foot">
+  <span>Built by Ali AlEnezi. Open source under the MIT license.</span>
+  <a href="https://github.com/SiteQ8/Shabakah">github.com/SiteQ8/Shabakah</a>
+</div></footer>
 </main>
 
 <main lang="ar" dir="rtl" hidden>
 
-<!-- HERO -->
-<section class="hero"><div class="wrap"><div class="hero-grid">
-  <div>
-    <p class="eyebrow">مشروع مفتوح المصدر لأمن الشبكات</p>
+<section class="hero"><div class="wrap hero-grid">
+  <div class="hero-copy">
     <h1>مختبر لأمن الشبكات في&nbsp;جهازك!</h1>
     <p class="lead">شبكة مختبرٌ متكامل لأمن الشبكات يعمل في بيئة Docker معزولة على جهازك وحده، تشغّله وتدخل إليه عبر SSH فيستقبلك مرشد بالعربية والإنجليزية ويسير بك في <!--ar:lesson_applied:lessons-->17 درسا تطبيقيا<!--/ar--> على خدمات حقيقية تعمل داخله، ويصحّح لك كل تمرين لحظة تنفيذه فتتعلّم بيدك لا بعينك.</p>
-    <div class="cta">
-      <a class="btn btn-primary" href="#start-ar">ابدأ الآن</a>
-      <a class="btn btn-ghost" href="https://github.com/SiteQ8/Shabakah">شاهده على GitHub</a>
-    </div>
-    <div class="facts">
-      <div class="fact"><b><!--n:lessons-->17<!--/n--></b><span><!--arnoun:lesson_applied:lessons-->درسا تطبيقيا<!--/arnoun--></span></div>
-      <div class="fact"><b><!--n:targets-->6<!--/n--></b><span><!--arnoun:target:targets-->أهداف للتدريب<!--/arnoun--></span></div>
-      <div class="fact"><b><!--n:flags-->6<!--/n--></b><span><!--arnoun:code_hidden:flags-->تحديات مخفية<!--/arnoun--></span></div>
-      <div class="fact"><b><!--n:points-->110<!--/n--></b><span><!--arnoun:point:points-->نقاط<!--/arnoun--></span></div>
-      <div class="fact"><b>2</b><span>لغتان</span></div>
+    <div class="cta"><a class="btn btn-primary" href="#start-ar">ابدأ الآن</a><a class="btn btn-quiet" href="https://github.com/SiteQ8/Shabakah">المصدر على GitHub</a></div>
+  </div>
+  <figure class="map" data-map>
+  <div class="map-row">
+    <div class="node-you"><svg viewBox="0 0 48 36" aria-hidden="true"><rect x="7" y="3" width="34" height="23" rx="3"/><path d="M2 31h44"/></svg><b>جهازك</b><code>ssh -p 2222</code></div>
+    <div class="wire" aria-hidden="true"><span>SSH عبر المنفذ 22</span><i class="packet"></i></div>
+    <div class="box">
+      <div class="box-head"><b>مختبر شبكة</b><span>ومعه المرشد netsec</span></div>
+      <div class="ports" role="tablist" aria-label="خدمات التدريب">
+        <button type="button" class="port" role="tab" id="t-ar-8080" aria-controls="p-ar-8080" aria-selected="true" style="--i:0"><i class="led"></i><span class="pn">8080</span><span class="pp">tcp</span><span class="pname">ويب بنص صريح</span></button>
+        <button type="button" class="port" role="tab" id="t-ar-8443" aria-controls="p-ar-8443" aria-selected="false" style="--i:1"><i class="led"></i><span class="pn">8443</span><span class="pp">tcp</span><span class="pname">ويب عبر TLS</span></button>
+        <button type="button" class="port" role="tab" id="t-ar-9000" aria-controls="p-ar-9000" aria-selected="false" style="--i:2"><i class="led"></i><span class="pn">9000</span><span class="pp">tcp</span><span class="pname">خدمة تعداد</span></button>
+        <button type="button" class="port" role="tab" id="t-ar-2323" aria-controls="p-ar-2323" aria-selected="false" style="--i:3"><i class="led"></i><span class="pn">2323</span><span class="pp">tcp</span><span class="pname">وحدة تحكم بنص صريح</span></button>
+        <button type="button" class="port" role="tab" id="t-ar-5353" aria-controls="p-ar-5353" aria-selected="false" style="--i:4"><i class="led"></i><span class="pn">5353</span><span class="pp">udp</span><span class="pname">خادم DNS للمختبر</span></button>
+        <button type="button" class="port" role="tab" id="t-ar-9001" aria-controls="p-ar-9001" aria-selected="false" style="--i:5"><i class="led"></i><span class="pn">9001</span><span class="pp">udp</span><span class="pname">خدمة لافتة UDP</span></button>
+      </div>
+      <div class="pdetail" role="tabpanel" id="p-ar-8080" aria-labelledby="t-ar-8080"><h3>ويب بنص صريح <code>tcp 8080</code></h3><p>خدمة HTTP بلافتة تفضح نفسها، ومسارات مخفية، وصفحة ما كان ينبغي أن تظهر أبدا.</p><div class="pmeta"><div><h4>الدروس التي تستخدمه</h4><div class="lchips"><a href="#l-ar-02">02</a><a href="#l-ar-03">03</a><a href="#l-ar-04">04</a><a href="#l-ar-05">05</a><a href="#l-ar-12">12</a><a href="#l-ar-16">16</a><a href="#l-ar-17">17</a></div></div><div><h4>التحديات المخبأة فيه</h4><ul><li>مستكشف مبتدئ<span>10 نقاط</span></li><li>قارئ المصدر<span>10 نقاط</span></li><li>باب مفتوح<span>20 نقطة</span></li></ul></div></div></div>
+      <div class="pdetail" role="tabpanel" id="p-ar-8443" aria-labelledby="t-ar-8443"><h3>ويب عبر TLS <code>tcp 8443</code></h3><p>الخدمة نفسها لكن عبر TLS، بشهادة موقّعة ذاتيا تفحصها وتحلّل محتواها.</p><div class="pmeta"><div><h4>الدروس التي تستخدمه</h4><div class="lchips"><a href="#l-ar-02">02</a><a href="#l-ar-03">03</a><a href="#l-ar-07">07</a><a href="#l-ar-16">16</a><a href="#l-ar-17">17</a></div></div><div><h4>التحديات المخبأة فيه</h4><ul><li>مخبأ على مرأى<span>20 نقطة</span></li></ul></div></div></div>
+      <div class="pdetail" role="tabpanel" id="p-ar-9000" aria-labelledby="t-ar-9000"><h3>خدمة تعداد <code>tcp 9000</code></h3><p>خدمة TCP بسيطة بلافتة ثرثارة، وفيها أمر غير موثّق عليك أن تكتشفه.</p><div class="pmeta"><div><h4>الدروس التي تستخدمه</h4><div class="lchips"><a href="#l-ar-03">03</a><a href="#l-ar-04">04</a><a href="#l-ar-09">09</a><a href="#l-ar-17">17</a></div></div><div><h4>التحديات المخبأة فيه</h4><ul><li>غير موثّق<span>20 نقطة</span></li></ul></div></div></div>
+      <div class="pdetail" role="tabpanel" id="p-ar-2323" aria-labelledby="t-ar-2323"><h3>وحدة تحكم بنص صريح <code>tcp 2323</code></h3><p>وحدة تحكّم إدارية منسيّة تُعيد استخدام كلمة مرور، من النوع الذي يحوّل تسريبا واحدا إلى ثلاثة أبواب مفتوحة.</p><div class="pmeta"><div><h4>الدروس التي تستخدمه</h4><div class="lchips"><a href="#l-ar-03">03</a><a href="#l-ar-12">12</a><a href="#l-ar-17">17</a></div></div><div><h4>التحديات المخبأة فيه</h4><ul><li>تسريب واحد وثلاثة أبواب<span>30 نقطة</span></li></ul></div></div></div>
+      <div class="pdetail" role="tabpanel" id="p-ar-5353" aria-labelledby="t-ar-5353"><h3>خادم DNS للمختبر <code>udp 5353</code></h3><p>خادم أسماء محلّي لنطاق shabakah.lab، فيه سجلات A وMX وTXT تستعلم عنها.</p><div class="pmeta"><div><h4>الدروس التي تستخدمه</h4><div class="lchips"><a href="#l-ar-06">06</a></div></div><div><h4>التحديات المخبأة فيه</h4><p class="muted">لا تحدي هنا، لكن الدروس تعتمد عليه</p></div></div></div>
+      <div class="pdetail" role="tabpanel" id="p-ar-9001" aria-labelledby="t-ar-9001"><h3>خدمة لافتة UDP <code>udp 9001</code></h3><p>خدمة UDP تلزم الصمت حتى تخاطبها باللغة التي تفهمها، وذلك هو التحدي.</p><div class="pmeta"><div><h4>الدروس التي تستخدمه</h4><div class="lchips"><a href="#l-ar-09">09</a><a href="#l-ar-11">11</a></div></div><div><h4>التحديات المخبأة فيه</h4><p class="muted">لا تحدي هنا، لكن الدروس تعتمد عليه</p></div></div></div>
     </div>
   </div>
-  <div class="term" data-ui aria-hidden="true">
-    <div class="tbar"><span class="dots"><i class="d1"></i><i class="d2"></i><i class="d3"></i></span><span class="ttl">learner@shabakah: ~</span></div>
-    <div class="body" id="hero-term-ar"></div>
-  </div>
-</div></div></section>
+  <figcaption>اختر منفذا لترى الخدمة التي تعمل خلفه، والدروس التي تستخدمه، والتحدي المخبأ فيه.</figcaption>
+</figure>
+</div>
+<div class="wrap"><div class="plate"><div><b><!--n:lessons-->17<!--/n--></b><span><!--arnoun:lesson_applied:lessons-->درسا تطبيقيا<!--/arnoun--></span></div><div><b><!--n:targets-->6<!--/n--></b><span><!--arnoun:service_train:targets-->خدمات للتدريب<!--/arnoun--></span></div><div><b><!--n:flags-->6<!--/n--></b><span><!--arnoun:code_hidden:flags-->تحديات مخفية<!--/arnoun--></span></div><div><b><!--n:points-->110<!--/n--></b><span><!--arnoun:point:points-->نقاط<!--/arnoun--></span></div><div><b>2</b><span>لغتان</span></div></div></div>
+</section>
 
-<!-- HOW -->
-<section class="band"><div class="wrap">
-  <p class="eyebrow">كيف يعمل</p>
+<section id="how-ar"><div class="wrap">
   <h2>ثلاثة أوامر وتدخل المختبر.</h2>
   <p class="lead">لا إعدادات معقّدة ولا خوادم سحابية بمقابل، فكل شيء يعمل داخل بيئة معزولة على جهازك وحده.</p>
-  <div class="steps">
-    <div class="step"><div class="n">01</div><h3>شغّل المختبر</h3><p>نزّل الصورة الجاهزة أو ابنها بنفسك ثم شغّلها، فهي تعمل أينما توفّر Docker.</p><pre>docker compose up -d --build</pre></div>
-    <div class="step"><div class="n">02</div><h3>ادخل عبر SSH</h3><p>ادخل بحساب المتعلّم فيستقبلك المرشد من حيث توقّفت آخر مرة.</p><pre>ssh -p 2222 learner@localhost</pre></div>
-    <div class="step"><div class="n">03</div><h3>تعلّم بالتجربة</h3><p>اقرأ الدرس ثم جرّب الأدوات على أهداف التدريب، ودع المرشد يصحّح إجابتك.</p><pre>netsec check 03 8080,8443,9000</pre></div>
-  </div>
+  <ol class="steps"><li><h3>شغّل المختبر</h3><p>نزّل الصورة الجاهزة أو ابنها بنفسك ثم شغّلها، فهي تعمل أينما توفّر Docker.</p><pre>docker compose up -d --build</pre></li><li><h3>ادخل عبر SSH</h3><p>ادخل بحساب المتعلّم فيستقبلك المرشد من حيث توقّفت آخر مرة.</p><pre>ssh -p 2222 learner@localhost</pre></li><li><h3>تعلّم بالتجربة</h3><p>اقرأ الدرس ثم جرّب الأدوات على خدمات التدريب، ودع المرشد يصحّح إجابتك.</p><pre>netsec check 03 2323,8080,8443,9000</pre></li></ol>
 </div></section>
 
-<!-- FEATURES -->
-<section id="features-ar"><div class="wrap">
-  <p class="eyebrow">ما في الداخل</p>
-  <h2>أكثر من مجرد دروس تقرؤها.</h2>
-  <p class="lead">يجمع المختبر بين مرشد يعلّمك، وأهداف حقيقية تتدرّب عليها، وتحديات تتنافس فيها، كلها في مكان واحد.</p>
-  <div class="bento">
-    <div class="card k-wide feature-lead">
-      <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v12H4z"/><path d="M8 20h8"/><path d="M7 8l3 2-3 2"/><path d="M12 12h4"/></svg></div>
-      <h3>مرشد يصحّح إجابتك</h3>
-      <p>برنامج netsec هو معلّمك داخل الطرفية، يعرض لك هدف كل درس وتمرينه ثم يتأكد من حلّك باختباره مباشرة على الخدمات العاملة، فيُحفظ تقدّمك مع كل إجابة صحيحة ويبقى معك بين الجلسات.</p>
-      <div class="tagrow"><span class="tag">تصحيح فوري</span><span class="tag">تقدّم محفوظ</span><span class="tag">بلا إنترنت</span></div>
-    </div>
-    <div class="card k-nar">
-      <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 .8-4.5 4.2L18 20l-6-3.4L6 20l1.5-7L3 8.8 9 8z"/></svg></div>
-      <h3>تحديات مخفية</h3>
-      <p>خبّأنا في المختبر <!--ar:code:flags-->6 رموز سرية<!--/ar-->، تكشف كل واحد منها بأدواتك ثم تسلّمه لترفع نتيجتك حتى <!--ar:point:points-->110 نقاط<!--/ar-->.</p>
-    </div>
-    <div class="card k-third">
-      <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M8 14l-2 8 6-3 6 3-2-8"/></svg></div>
-      <h3>الإنجازات</h3>
-      <p>سبع شارات تكسبها تباعا مع كل درس تُنهيه وكل رمز تكشفه، وصولا إلى لقب أستاذ شبكة.</p>
-    </div>
-    <div class="card k-third">
-      <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 12h18"/><path d="M12 3a15 15 0 010 18"/><path d="M12 3a15 15 0 000 18"/></svg></div>
-      <h3>عربية وإنجليزية</h3>
-      <p>كل درس وتمرين وتلميح متوفّر بالعربية والإنجليزية، تنتقل بينهما وقتما تشاء دون أن تفقد تقدّمك.</p>
-    </div>
-    <div class="card k-third">
-      <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 10h16"/><circle cx="7" cy="8" r=".6" fill="currentColor"/></svg></div>
-      <h3>أدوات حقيقية</h3>
-      <p>تجد nmap وtcpdump وopenssl وdig وnetcat وhping3 وغيرها جاهزة للعمل، وهي الأدوات ذاتها التي يعتمدها المحترفون في الميدان.</p>
-    </div>
-    <div class="card k-half">
-      <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg></div>
-      <h3>معزول وآمن</h3>
-      <p>كل الخدمات محبوسة داخل البيئة المعزولة ولا شيء يخرج منها إلى شبكتك، فتستخدم الأدوات الهجومية بحرّية ودون أن تؤذي أحدا، وهذه هي الطريقة الصحيحة الوحيدة لإتقانها.</p>
-    </div>
-    <div class="card k-half">
-      <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M8 9l3 3-3 3"/><path d="M13 15h3"/></svg></div>
-      <h3>من الاستطلاع إلى التحصين</h3>
-      <p>تمرّ على الاستطلاع والتقاط اللافتات، وفحص HTTP وTLS، وتعداد الخدمات، وDNS وUDP، والتقاط الحزم، وضبط الجدار الناري، وربط الثغرات للوصول، فتخرج بجولة أولى شاملة في أمن الشبكات.</p>
-    </div>
-  </div>
-</div></section>
-
-<!-- SCREENSHOTS -->
-<section class="band" id="screens-ar"><div class="wrap">
-  <p class="eyebrow">معاينة سريعة</p>
+<section class="tint" id="screens-ar"><div class="wrap">
   <h2>شاهد المرشد قبل أن تبدأ.</h2>
-  <p class="lead">قبل أن تبدأ، شاهد لقطات حقيقية من المرشد كما ستظهر في طرفيتك تماما.</p>
+  <p class="lead">لقطات حقيقية من المرشد كما ستظهر في طرفيتك تماما.</p>
   <div class="shots">
-    <div class="shot-tabs" role="tablist">
-      <button role="tab" aria-selected="true" data-shot="menu">المرشد</button>
-      <button role="tab" aria-selected="false" data-shot="lesson">درس</button>
-      <button role="tab" aria-selected="false" data-shot="ctf">التحديات</button>
-      <button role="tab" aria-selected="false" data-shot="achievements">الإنجازات</button>
-      <button role="tab" aria-selected="false" data-shot="targets">الأهداف</button>
-      <button role="tab" aria-selected="false" data-shot="cheat">الأوامر السريعة</button>
-    </div>
-    <div class="shot-stage"><img id="shot-img-ar" src="screenshots/ar/menu.png" alt="مرشد شبكة كما يظهر بعد تسجيل الدخول"></div>
-    <p class="shot-cap" id="shot-cap-ar">يستقبلك المرشد فور دخولك ويتذكّر أين وصلت.</p>
+    <div class="shot-tabs" role="tablist"><button type="button" role="tab" aria-selected="true" data-shot="menu">المرشد</button><button type="button" role="tab" aria-selected="false" data-shot="lesson">درس</button><button type="button" role="tab" aria-selected="false" data-shot="ctf">التحديات</button><button type="button" role="tab" aria-selected="false" data-shot="achievements">الإنجازات</button><button type="button" role="tab" aria-selected="false" data-shot="targets">الخدمات</button><button type="button" role="tab" aria-selected="false" data-shot="cheat">الأوامر السريعة</button></div>
+    <div class="shot-stage"><img src="screenshots/ar/menu.png" width="1564" height="1100" alt="مرشد شبكة كما يظهر بعد تسجيل الدخول"></div>
+    <p class="shot-cap">يستقبلك المرشد فور دخولك ويتذكّر أين وصلت.</p>
   </div>
 </div></section>
 
-<!-- CTF -->
-<section id="ctf-ar"><div class="wrap">
-  <p class="eyebrow">تحديات المختبر</p>
-  <h2>ابحث عن <!--ar:code:flags-->6 رموز سرية<!--/ar--> واجمع <!--ar:point:points-->110 نقاط<!--/ar-->.</h2>
-  <p class="lead">التقاط الأعلام أسلوب تدريب معروف في الأمن السيبراني، خبّأنا فيه <!--ar:code:flags-->6 رموز سرية<!--/ar--> داخل المختبر، ترك كلَّ واحد منها مشرف مهمل في مكان ما كان ينبغي أن يظهر فيه، فمهمتك أن تكشفه بالأدوات التي بين يديك ثم تسلّمه بالأمر <code>netsec submit flag{...}</code> لتكسب نقاطه.</p>
-  <div class="flaglist">
-    <div class="flag"><span class="pts">10 نقاط</span><div><h3>مستكشف مبتدئ</h3><p>خدمة الويب تُخفي صفحة ما كان ينبغي أن تظهر، يكشفها أول طلب بـ curl.</p></div></div>
-    <div class="flag"><span class="pts">10 نقاط</span><div><h3>قارئ المصدر</h3><p>الصفحة الرئيسة تُخفي ملاحظة في مصدر HTML لا في النص الذي أمامك.</p></div></div>
-    <div class="flag"><span class="pts">20 نقطة</span><div><h3>باب مفتوح</h3><p>يدلّك ملف robots.txt على مسارات ما كان يُفترض أن تُنشر، وفي أحدها نسخة احتياطية من ملف الإعداد.</p></div></div>
-    <div class="flag"><span class="pts">20 نقطة</span><div><h3>غير موثّق</h3><p>إحدى الخدمات تنفّذ أوامر أكثر مما تُعلن عنه، والتعداد الجيّد يكشف الأمر الخفيّ.</p></div></div>
-    <div class="flag"><span class="pts">30 نقطة</span><div><h3>تسريب واحد وثلاثة أبواب</h3><p>وحدة تحكّم تعمل بنص صريح تستخدم كلمة مرور سبق أن رأيتها تمرّ على الشبكة، وإعادة استخدام كلمة المرور هي الدرس كله.</p></div></div>
-    <div class="flag"><span class="pts">20 نقطة</span><div><h3>مخبأ على مرأى</h3><p>شهادة TLS تحمل حقلا زائدا ما كان ينبغي وجوده، فاقرأ حقل الموضوع كاملا لا الاسم الشائع وحده.</p></div></div>
-    <div class="flag"><span class="pts">110 نقطة</span><div><h3>لوحة نظيفة</h3><p>اجمع الرموز الستة كلها لتنال شارة الأستاذ، وتابع تقدّمك في أي وقت بالأمر <code>netsec ctf</code>.</p></div></div>
+<section id="lessons-ar"><div class="wrap split">
+  <div class="split-head">
+    <h2><!--ar:lesson:lessons-->17 درسا<!--/ar-->، ولكل درس تمرين يُختبر مباشرة.</h2>
+    <p class="lead">ينتهي كل درس بتطبيق عملي على خدمات التدريب يتحقق منه المرشد بنفسه، والدروس مرتّبة من التقاط الحزم إلى التحصين.</p>
   </div>
-  <div class="ctf-note">يأخذك الدرس الثاني عشر في هذه السلسلة خطوة بخطوة، من تسريب بسيط إلى اختراق فعلي، فيتحوّل البحث عن الرموز إلى تدريب حقيقي على أسلوب التقييم الأمني.</div>
-</div></section>
-
-<!-- LESSONS -->
-<section class="band" id="lessons-ar"><div class="wrap">
-  <p class="eyebrow">المنهج</p>
-  <h2><!--ar:lesson:lessons-->17 درسا<!--/ar-->، ولكل درس تمرين يُختبر مباشرة.</h2>
-  <p class="lead">ينتهي كل درس بتطبيق عملي على الأهداف يتحقق منه المرشد بنفسه.</p>
   <div class="lessons"><!--lessons:ar-->
-    <div class="lrow"><span class="lid">01</span><span class="lt">طبقات الشبكة والمقابس<span class="ld">تعلّم كيف يتصل جهازك بالشبكة، وكيف تتعرّف على الخدمات التي تستمع على منافذه.</span></span><span class="lmeta">الأساسيات</span></div>
-    <div class="lrow"><span class="lid">02</span><span class="lt">التقاط الحزم وقراءتها باستخدام tcpdump<span class="ld">التقط حركة الشبكة لحظة مرورها، وحدّد بمرشّح ما تريد الاحتفاظ به منها، ثم اقرأ ما يحمله الطلب والاستجابة.</span></span><span class="lmeta">التقاط الحزم</span></div>
-    <div class="lrow"><span class="lid">03</span><span class="lt">مسح المنافذ باستخدام nmap<span class="ld">اكتشف المنافذ المفتوحة على الجهاز، وافهم الفرق بين أنواع المسح ومتى تستخدم كلا منها.</span></span><span class="lmeta">مسح المنافذ</span></div>
-    <div class="lrow"><span class="lid">04</span><span class="lt">تعداد الخدمات وقراءة لافتاتها<span class="ld">تواصل مع الخدمة يدويا، واستخلص من استجاباتها تفاصيل مفيدة.</span></span><span class="lmeta">تعداد الخدمات</span></div>
-    <div class="lrow"><span class="lid">05</span><span class="lt">استطلاع خدمات HTTP ومخاطر النص الصريح<span class="ld">افحص خدمة HTTP، وتبيّن بنفسك خطورة البروتوكولات التي تنقل البيانات بنص صريح.</span></span><span class="lmeta">الويب</span></div>
-    <div class="lrow"><span class="lid">06</span><span class="lt">الاستطلاع عبر نظام أسماء النطاقات<span class="ld">استعلم عن أنواع مختلفة من السجلات، وافهم ما يكشفه نظام أسماء النطاقات من معلومات.</span></span><span class="lmeta">أسماء النطاقات</span></div>
-    <div class="lrow"><span class="lid">07</span><span class="lt">بروتوكول TLS والشهادات الرقمية<span class="ld">افحص خدمة تعمل ببروتوكول TLS واقرأ شهادتها، ثم احكم على مدى جدارتها بالثقة.</span></span><span class="lmeta">الشهادات الرقمية</span></div>
-    <div class="lrow"><span class="lid">08</span><span class="lt">الجدار الناري على مستوى المضيف<span class="ld">اقرأ قواعد الجدار الناري وافهم منطقها، وتعرّف على فكرة المنع الافتراضي.</span></span><span class="lmeta">الجدار الناري</span></div>
-    <div class="lrow"><span class="lid">09</span><span class="lt">تحليل حركة الشبكة ورصد الهجمات<span class="ld">ميّز ملامح النشاط الشائع في حركة الشبكة الملتقطة، ومنها مسح المنافذ.</span></span><span class="lmeta">الكشف</span></div>
-    <div class="lrow"><span class="lid">10</span><span class="lt">الكشف والتحصين<span class="ld">اربط الدروس السابقة بعضها ببعض لتكوّن طريقة تفكير المدافع وخطوات ثابتة تعيدها على أي مضيف.</span></span><span class="lmeta">الدفاع</span></div>
-    <div class="lrow"><span class="lid">11</span><span class="lt">خدمات UDP ولماذا تختبئ<span class="ld">افحص خدمة UDP وخاطبها وافهم لماذا يسهل تفويتها.</span></span><span class="lmeta">بروتوكول UDP</span></div>
-    <div class="lrow"><span class="lid">12</span><span class="lt">ربط النتائج للوصول<span class="ld">اتبع أثرا من تسريب صغير إلى وصول حقيقي كما يجري التقييم الواقعي.</span></span><span class="lmeta">ربط النتائج</span></div>
-    <div class="lrow"><span class="lid">13</span><span class="lt">اقرأ الالتقاط كمحقق<span class="ld">افتح ملف التقاط محفوظا وأعد بناء ما جرى من الحزم وحدها.</span></span><span class="lmeta">التحقيق الجنائي</span></div>
-    <div class="lrow"><span class="lid">14</span><span class="lt">اعثر على الهجوم في السجلات<span class="ld">اقرأ سجل مصادقة والتقط محاولة تخمين شاملة ومصدرها.</span></span><span class="lmeta">السجلات</span></div>
-    <div class="lrow"><span class="lid">15</span><span class="lt">حصّن الباب الذي دخلت منه<span class="ld">افهم الإعدادات التي تجعل خادم SSH صعب المهاجمة وشاهدها مطبقة.</span></span><span class="lmeta">التحصين</span></div>
-    <div class="lrow"><span class="lid">16</span><span class="lt">قراءة ترويسات الأمان<span class="ld">اقرأ ترويسات استجابة HTTP التي تخبر المتصفح كيف يحمي مستخدميه، واكتشف الغائب منها.</span></span><span class="lmeta">ترويسات الأمان</span></div>
-    <div class="lrow"><span class="lid">17</span><span class="lt">الفحص بالبرامج النصية في nmap<span class="ld">استخدم محرّك البرامج النصية في nmap لتستخرج عناوين الصفحات والشهادات ولافتات الخدمات في فحص واحد، واعرف البرامج النصية التي يمكن تشغيلها بأمان.</span></span><span class="lmeta">برامج nmap النصية</span></div>
+    <div class="lrow" id="l-ar-01"><span class="lid">01</span><span class="lt">طبقات الشبكة والمقابس<span class="ld">تعلّم كيف يتصل جهازك بالشبكة، وكيف تتعرّف على الخدمات التي تستمع على منافذه.</span></span><span class="lmeta">الأساسيات</span></div>
+    <div class="lrow" id="l-ar-02"><span class="lid">02</span><span class="lt">التقاط الحزم وقراءتها باستخدام tcpdump<span class="ld">التقط حركة الشبكة لحظة مرورها، وحدّد بمرشّح ما تريد الاحتفاظ به منها، ثم اقرأ ما يحمله الطلب والاستجابة.</span></span><span class="lmeta">التقاط الحزم</span></div>
+    <div class="lrow" id="l-ar-03"><span class="lid">03</span><span class="lt">مسح المنافذ باستخدام nmap<span class="ld">اكتشف المنافذ المفتوحة على الجهاز، وافهم الفرق بين أنواع المسح ومتى تستخدم كلا منها.</span></span><span class="lmeta">مسح المنافذ</span></div>
+    <div class="lrow" id="l-ar-04"><span class="lid">04</span><span class="lt">تعداد الخدمات وقراءة لافتاتها<span class="ld">تواصل مع الخدمة يدويا، واستخلص من استجاباتها تفاصيل مفيدة.</span></span><span class="lmeta">تعداد الخدمات</span></div>
+    <div class="lrow" id="l-ar-05"><span class="lid">05</span><span class="lt">استطلاع خدمات HTTP ومخاطر النص الصريح<span class="ld">افحص خدمة HTTP، وتبيّن بنفسك خطورة البروتوكولات التي تنقل البيانات بنص صريح.</span></span><span class="lmeta">الويب</span></div>
+    <div class="lrow" id="l-ar-06"><span class="lid">06</span><span class="lt">الاستطلاع عبر نظام أسماء النطاقات<span class="ld">استعلم عن أنواع مختلفة من السجلات، وافهم ما يكشفه نظام أسماء النطاقات من معلومات.</span></span><span class="lmeta">أسماء النطاقات</span></div>
+    <div class="lrow" id="l-ar-07"><span class="lid">07</span><span class="lt">بروتوكول TLS والشهادات الرقمية<span class="ld">افحص خدمة تعمل ببروتوكول TLS واقرأ شهادتها، ثم احكم على مدى جدارتها بالثقة.</span></span><span class="lmeta">الشهادات الرقمية</span></div>
+    <div class="lrow" id="l-ar-08"><span class="lid">08</span><span class="lt">الجدار الناري على مستوى المضيف<span class="ld">اقرأ قواعد الجدار الناري وافهم منطقها، وتعرّف على فكرة المنع الافتراضي.</span></span><span class="lmeta">الجدار الناري</span></div>
+    <div class="lrow" id="l-ar-09"><span class="lid">09</span><span class="lt">تحليل حركة الشبكة ورصد الهجمات<span class="ld">ميّز ملامح النشاط الشائع في حركة الشبكة الملتقطة، ومنها مسح المنافذ.</span></span><span class="lmeta">الكشف</span></div>
+    <div class="lrow" id="l-ar-10"><span class="lid">10</span><span class="lt">الكشف والتحصين<span class="ld">اربط الدروس السابقة بعضها ببعض لتكوّن طريقة تفكير المدافع وخطوات ثابتة تعيدها على أي مضيف.</span></span><span class="lmeta">الدفاع</span></div>
+    <div class="lrow" id="l-ar-11"><span class="lid">11</span><span class="lt">خدمات UDP ولماذا تختبئ<span class="ld">افحص خدمة UDP وخاطبها وافهم لماذا يسهل تفويتها.</span></span><span class="lmeta">بروتوكول UDP</span></div>
+    <div class="lrow" id="l-ar-12"><span class="lid">12</span><span class="lt">ربط النتائج للوصول<span class="ld">اتبع أثرا من تسريب صغير إلى وصول حقيقي كما يجري التقييم الواقعي.</span></span><span class="lmeta">ربط النتائج</span></div>
+    <div class="lrow" id="l-ar-13"><span class="lid">13</span><span class="lt">اقرأ الالتقاط كمحقق<span class="ld">افتح ملف التقاط محفوظا وأعد بناء ما جرى من الحزم وحدها.</span></span><span class="lmeta">التحقيق الجنائي</span></div>
+    <div class="lrow" id="l-ar-14"><span class="lid">14</span><span class="lt">اعثر على الهجوم في السجلات<span class="ld">اقرأ سجل مصادقة والتقط محاولة تخمين شاملة ومصدرها.</span></span><span class="lmeta">السجلات</span></div>
+    <div class="lrow" id="l-ar-15"><span class="lid">15</span><span class="lt">حصّن الباب الذي دخلت منه<span class="ld">افهم الإعدادات التي تجعل خادم SSH صعب المهاجمة وشاهدها مطبقة.</span></span><span class="lmeta">التحصين</span></div>
+    <div class="lrow" id="l-ar-16"><span class="lid">16</span><span class="lt">قراءة ترويسات الأمان<span class="ld">اقرأ ترويسات استجابة HTTP التي تخبر المتصفح كيف يحمي مستخدميه، واكتشف الغائب منها.</span></span><span class="lmeta">ترويسات الأمان</span></div>
+    <div class="lrow" id="l-ar-17"><span class="lid">17</span><span class="lt">الفحص بالبرامج النصية في nmap<span class="ld">استخدم محرّك البرامج النصية في nmap لتستخرج عناوين الصفحات والشهادات ولافتات الخدمات في فحص واحد، واعرف البرامج النصية التي يمكن تشغيلها بأمان.</span></span><span class="lmeta">برامج nmap النصية</span></div>
     <!--/lessons-->
   </div>
 </div></section>
 
-<!-- TARGETS -->
-<section id="targets-ar"><div class="wrap">
-  <p class="eyebrow">أهداف التدريب</p>
-  <h2><!--ar:service_real:targets-->6 خدمات حقيقية<!--/ar--> تتدرّب عليها.</h2>
-  <p class="lead">خدمات حقيقية تعمل إلى جانب المرشد، وضعنا كل واحدة منها ليجد فيها الدرس شيئا حقيقيا يكتشفه.</p>
-  <div class="tgrid">
-    <div class="target"><span class="port">tcp 8080</span><h3>ويب بنص صريح</h3><p>خدمة HTTP بلافتة تفضح نفسها، ومسارات مخفية، وصفحة ما كان ينبغي أن تظهر أبدا.</p></div>
-    <div class="target"><span class="port">tcp 8443</span><h3>ويب عبر TLS</h3><p>الخدمة نفسها لكن عبر TLS، بشهادة موقّعة ذاتيا تفحصها وتحلّل محتواها.</p></div>
-    <div class="target"><span class="port">tcp 9000</span><h3>خدمة تعداد</h3><p>خدمة TCP بسيطة بلافتة ثرثارة، وفيها أمر غير موثّق عليك أن تكتشفه.</p></div>
-    <div class="target"><span class="port">tcp 2323</span><h3>وحدة تحكم بنص صريح</h3><p>وحدة تحكّم إدارية منسيّة تُعيد استخدام كلمة مرور، من النوع الذي يحوّل تسريبا واحدا إلى ثلاثة أبواب مفتوحة.</p></div>
-    <div class="target"><span class="port">udp 5353</span><h3>خادم DNS للمختبر</h3><p>خادم أسماء محلّي لنطاق shabakah.lab، فيه سجلات A وMX وTXT تستعلم عنها.</p></div>
-    <div class="target"><span class="port">udp 9001</span><h3>خدمة لافتة UDP</h3><p>خدمة UDP تلزم الصمت حتى تخاطبها باللغة التي تفهمها، وذلك هو التحدي.</p></div>
+<section class="tint" id="ctf-ar"><div class="wrap split">
+  <div class="split-head">
+    <h2>ابحث عن <!--ar:code:flags-->6 رموز سرية<!--/ar--> واجمع <!--ar:point:points-->110 نقاط<!--/ar-->.</h2>
+    <p class="lead">التقاط الأعلام أسلوب تدريب معروف في الأمن السيبراني، خبّأنا فيه رموزا سرية داخل المختبر في أماكن يتركها فيها مشرف مهمل، فتكشف كل رمز بأدواتك ثم تسلّمه بالأمر <code>netsec submit flag{...}</code> لتكسب نقاطه، ويأخذك الدرس الثاني عشر في السلسلة كلها خطوة بخطوة.</p>
   </div>
+  <div><table class="board"><thead><tr><th>التحدي</th><th>أين تبحث</th><th>النقاط</th></tr></thead><tbody><tr><td><b>مستكشف مبتدئ</b><span>خدمة الويب تُخفي صفحة ما كان ينبغي أن تظهر، يكشفها أول طلب بـ curl.</span></td><td><code>8080</code></td><td class="num">10 نقاط</td></tr><tr><td><b>قارئ المصدر</b><span>الصفحة الرئيسة تُخفي ملاحظة في مصدر HTML لا في النص الذي أمامك.</span></td><td><code>8080</code></td><td class="num">10 نقاط</td></tr><tr><td><b>باب مفتوح</b><span>يدلّك ملف robots.txt على مسارات ما كان يُفترض أن تُنشر، وفي أحدها نسخة احتياطية من ملف الإعداد.</span></td><td><code>8080</code></td><td class="num">20 نقطة</td></tr><tr><td><b>غير موثّق</b><span>إحدى الخدمات تنفّذ أوامر أكثر مما تُعلن عنه، والتعداد الجيّد يكشف الأمر الخفيّ.</span></td><td><code>9000</code></td><td class="num">20 نقطة</td></tr><tr><td><b>تسريب واحد وثلاثة أبواب</b><span>وحدة تحكّم بنص صريح تستخدم كلمة مرور سبق أن رأيتها تمرّ على الشبكة.</span></td><td><code>2323</code></td><td class="num">30 نقطة</td></tr><tr><td><b>مخبأ على مرأى</b><span>شهادة TLS تحمل حقلا زائدا ما كان ينبغي وجوده، فاقرأ حقل الموضوع كاملا.</span></td><td><code>8443</code></td><td class="num">20 نقطة</td></tr><tr class="total"><td colspan="2">المجموع، ومعه شارة الأستاذ</td><td class="num"><!--ar:point:points-->110 نقاط<!--/ar--></td></tr></tbody></table></div>
 </div></section>
 
-<!-- TOOLS + COMMANDS -->
-<section class="band" id="tools-ar"><div class="wrap">
-  <p class="eyebrow">صندوق الأدوات</p>
+<section id="features-ar"><div class="wrap split">
+  <div class="split-head">
+    <h2>أكثر من دروس تقرؤها.</h2>
+    <p class="lead">مرشد يعلّمك، وخدمات حقيقية تتدرّب عليها، وتحديات تتنافس فيها، كلها في مكان واحد.</p>
+  </div>
+  <dl class="feats"><div><dt>مرشد يصحّح إجابتك</dt><dd>برنامج netsec هو معلّمك داخل الطرفية، يعرض لك هدف كل درس وتمرينه ثم يتأكد من حلّك باختباره مباشرة على الخدمات العاملة، فيُحفظ تقدّمك مع كل إجابة صحيحة ويبقى معك بين الجلسات.</dd></div><div><dt>معزول وآمن</dt><dd>كل الخدمات محبوسة داخل البيئة المعزولة ولا تستقبل إلا اتصالات من داخلها، فتستخدم الأدوات الهجومية بحرّية دون أن تؤذي أحدا، وهذه هي الطريقة الصحيحة لإتقانها.</dd></div><div><dt>أدوات حقيقية</dt><dd>تجد nmap وtcpdump وopenssl وdig وnetcat وhping3 وغيرها جاهزة للعمل، وهي الأدوات ذاتها التي يعتمدها المحترفون في الميدان.</dd></div><div><dt>عربية وإنجليزية</dt><dd>كل درس وتمرين وتلميح متوفّر باللغتين، تنتقل بينهما وقتما تشاء دون أن تفقد تقدّمك.</dd></div><div><dt>شارات وشهادة</dt><dd>سبع شارات تكسبها تباعا مع كل درس تُنهيه وكل رمز تكشفه، ثم شهادة إتمام تطبعها حين تُنهي الدروس والتحديات كلها.</dd></div><div><dt>من الاستطلاع إلى التحصين</dt><dd>تمرّ على التقاط الحزم وفحص المنافذ وتعداد الخدمات، وHTTP وTLS وDNS وUDP، ثم قراءة السجلات وتحصين SSH، فتخرج بجولة أولى شاملة في أمن الشبكات.</dd></div></dl>
+</div></section>
+
+<section class="tint" id="tools-ar"><div class="wrap">
   <h2>الأدوات جاهزة من البداية.</h2>
-  <p class="lead">لن تحتاج إلى تثبيت أي شيء أثناء الدرس، فالمختبر يأتي بعُدّة أمن شبكات كاملة ومعها المرشد الذي يوجّهك في استخدامها.</p>
-  <div class="toolwrap">
-    <div class="toolcol"><h3>داخل المختبر</h3><div class="chips"><span class="chip">nmap</span><span class="chip">tcpdump</span><span class="chip">ngrep</span><span class="chip">openssl</span><span class="chip">dig</span><span class="chip">whois</span><span class="chip">netcat</span><span class="chip">socat</span><span class="chip">curl</span><span class="chip">wget</span><span class="chip">hping3</span><span class="chip">nftables</span><span class="chip">iptables</span><span class="chip">mtr</span><span class="chip">traceroute</span></div></div>
-    <div class="toolcol"><h3>تحكّم بها عبر netsec</h3>
-      <div class="cmds" style="margin-top:4px;border-radius:11px">
-        <div class="cmd"><code>netsec</code><span>افتح المرشد التفاعلي</span></div>
-        <div class="cmd"><code>netsec lesson 05</code><span>اقرأ درسا محدّدا</span></div>
-        <div class="cmd"><code>netsec check 05 &lt;a&gt;</code><span>تحقّق من حلّ تمرين</span></div>
-        <div class="cmd"><code>netsec ctf</code><span>اعرض لوحة التحديات</span></div>
-        <div class="cmd"><code>netsec submit flag{...}</code><span>سلّم رمزا كشفته</span></div>
-        <div class="cmd"><code>netsec achievements</code><span>اعرض شاراتك</span></div>
-        <div class="cmd"><code>netsec targets</code><span>اعرض حالة الأهداف</span></div>
-        <div class="cmd"><code>netsec lang en</code><span>بدّل إلى الإنجليزية</span></div>
-      </div>
-    </div>
-  </div>
+  <p class="lead">لن تحتاج إلى تثبيت أي شيء أثناء الدرس، فالمختبر يأتي بعُدّة أمن شبكات كاملة ومعها المرشد الذي يوجّهك.</p>
+  <div class="tools"><div><h3>داخل المختبر</h3><ul class="toollist"><li>nmap</li><li>tcpdump</li><li>ngrep</li><li>openssl</li><li>dig</li><li>whois</li><li>netcat</li><li>socat</li><li>curl</li><li>wget</li><li>hping3</li><li>nftables</li><li>iptables</li><li>mtr</li><li>traceroute</li></ul></div><div><h3>تحكّم بها عبر netsec</h3><table class="cmds"><tr><td><code>netsec</code></td><td>افتح المرشد التفاعلي</td></tr><tr><td><code>netsec next</code></td><td>انتقل إلى درسك التالي</td></tr><tr><td><code>netsec lesson 05</code></td><td>اقرأ درسا محدّدا</td></tr><tr><td><code>netsec check 05 &lt;answer&gt;</code></td><td>تحقّق من حلّ تمرين</td></tr><tr><td><code>netsec ctf</code></td><td>اعرض لوحة التحديات</td></tr><tr><td><code>netsec submit flag{...}</code></td><td>سلّم رمزا كشفته</td></tr><tr><td><code>netsec targets</code></td><td>اعرض حالة الخدمات</td></tr><tr><td><code>netsec cert</code></td><td>اطبع شهادتك حين تُنهي</td></tr><tr><td><code>netsec lang en</code></td><td>بدّل إلى الإنجليزية</td></tr></table></div></div>
 </div></section>
 
-<!-- START -->
-<section id="start-ar"><div class="wrap">
-  <p class="eyebrow">بداية سريعة</p>
-  <h2>جاهز في دقيقة.</h2>
-  <p class="lead">كل ما تحتاجه هو Docker، والباقي موجود داخل الصورة.</p>
-  <div class="copywrap">
-    <button class="copybtn" data-copy="qs-ar">نسخ</button>
-    <pre id="qs-ar">git clone https://github.com/SiteQ8/Shabakah.git
+<section id="start-ar"><div class="wrap split">
+  <div class="split-head">
+    <h2>جاهز في دقيقة.</h2>
+    <p class="lead">كل ما تحتاجه هو Docker، والباقي موجود داخل الصورة.</p>
+  </div>
+  <div class="starts">
+    <h3>من المصدر</h3>
+    <div class="copywrap"><button type="button" class="copybtn" data-copy="qs-ar">نسخ</button><pre id="qs-ar">git clone https://github.com/SiteQ8/Shabakah.git
 cd Shabakah
 docker compose up -d --build
-ssh -p 2222 learner@localhost
-# كلمة المرور محدّدة في docker-compose.yml وقيمتها الافتراضية shabakah</pre>
-  </div>
-  <p class="lead" style="margin-top:20px">تفضّل صورة جاهزة؟ نزّلها من سجل الصور على GitHub.</p>
-  <div class="copywrap">
-    <button class="copybtn" data-copy="qs-ar2">نسخ</button>
-    <pre id="qs-ar2">docker run -d --name shabakah --cap-add NET_ADMIN -p 2222:22 ghcr.io/siteq8/shabakah:latest
-ssh -p 2222 learner@localhost</pre>
+ssh -p 2222 learner@localhost</pre></div>
+    <h3>أو بالصورة الجاهزة من سجل GitHub</h3>
+    <div class="copywrap"><button type="button" class="copybtn" data-copy="qs-ar2">نسخ</button><pre id="qs-ar2">docker run -d --name shabakah --cap-add NET_ADMIN -p 2222:22 ghcr.io/siteq8/shabakah:latest
+ssh -p 2222 learner@localhost</pre></div>
+    <p class="muted">كلمة المرور محدّدة في docker-compose.yml، وقيمتها الافتراضية shabakah.</p>
   </div>
 </div></section>
 
-<!-- FAQ -->
-<section class="band" id="faq-ar"><div class="wrap">
-  <p class="eyebrow">أسئلة شائعة</p>
-  <h2>أمور يحسن أن تعرفها.</h2>
-  <div class="faq">
-    <details><summary>هل تشغيله خطر على جهازي؟</summary><p>لا، فكل شيء محبوس داخل البيئة المعزولة ولا شيء يخرج إلى شبكتك، فتشغّل nmap وtcpdump وhping3 بأقوى صورها دون أن تُلحق ضررا بأحد، ولهذا فالمختبر المعزول هو المكان الصحيح لتعلّم هذه الأدوات.</p></details>
-    <details><summary>هل أحتاج إلى خبرة بسطر الأوامر مسبقا؟</summary><p>تكفي معرفة بسيطة بالطرفية، فالمرشد يعرض لك الأوامر الدقيقة في كل درس، وورقة الأوامر السريعة على بُعد ضغطة، حتى يستطيع المبتدئ أن يتابع، والتكرار كفيل بترسيخ المهارة.</p></details>
-    <details><summary>هل يحتاج إلى اتصال بالإنترنت؟</summary><p>يحتاجه مرة واحدة فقط لتنزيل الصورة أو بنائها، ثم يعمل كل شيء بعد ذلك دون إنترنت، حتى خادم الأسماء الخاص بالمختبر.</p></details>
-    <details><summary>هل يصلح لتدريس صف أو تنظيم ورشة؟</summary><p>نعم، فهو مفتوح المصدر برخصة MIT وبلغتين، ويكفي كل متعلّم أن يشغّل نسخته الخاصة، فتقدّم كل واحد ونقاطه مستقلّة عن غيره، ويسير كلٌّ بالإيقاع الذي يناسبه.</p></details>
-    <details><summary>أين أُبلّغ عن مشكلة أو أقترح درسا جديدا؟</summary><p>افتح مسألة (Issue) في مستودع المشروع على GitHub، ونرحّب بكل مساهمة بدروس أو أهداف جديدة.</p></details>
-  </div>
+<section class="tint" id="faq-ar"><div class="wrap split">
+  <div class="split-head"><h2>أسئلة شائعة.</h2></div>
+  <div class="faq"><details><summary>هل تشغيله خطر على جهازي؟</summary><p>لا، فكل شيء محبوس داخل البيئة المعزولة ولا شيء يخرج إلى شبكتك، فتشغّل nmap وtcpdump وhping3 بأقوى صورها دون أن تُلحق ضررا بأحد، ولهذا فالمختبر المعزول هو المكان الصحيح لتعلّم هذه الأدوات.</p></details><details><summary>هل أحتاج إلى خبرة بسطر الأوامر مسبقا؟</summary><p>تكفي معرفة بسيطة بالطرفية، فالمرشد يعرض لك الأوامر الدقيقة في كل درس، وورقة الأوامر السريعة على بُعد ضغطة، والتكرار كفيل بترسيخ المهارة.</p></details><details><summary>هل يحتاج إلى اتصال بالإنترنت؟</summary><p>يحتاجه مرة واحدة فقط لتنزيل الصورة أو بنائها، ثم يعمل كل شيء بعد ذلك دون إنترنت، حتى خادم الأسماء الخاص بالمختبر.</p></details><details><summary>هل يصلح لتدريس صف أو تنظيم ورشة؟</summary><p>نعم، فهو مفتوح المصدر برخصة MIT وبلغتين، ويكفي كل متعلّم أن يشغّل نسخته الخاصة، فتقدّم كل واحد ونقاطه مستقلّة عن غيره.</p></details><details><summary>أين أُبلّغ عن مشكلة أو أقترح درسا جديدا؟</summary><p>افتح مسألة (Issue) في مستودع المشروع على GitHub، ونرحّب بكل مساهمة بدروس أو خدمات جديدة.</p></details></div>
 </div></section>
 
-<section><div class="wrap"><div class="closer">
-  <h2>افتح الطرفية وابدأ الآن.</h2>
-  <p class="lead"><!--ar:lesson:lessons-->17 درسا<!--/ar-->، و<!--ar:service_train:targets-->6 خدمات للتدريب<!--/ar-->، و<!--ar:challenge:flags-->6 تحديات<!--/ar--> تخوضها، كلها بانتظارك في مختبر واحد.</p>
-  <div class="cta" style="justify-content:center">
-    <a class="btn btn-primary" href="#start-ar">ابدأ الآن</a>
-    <a class="btn btn-ghost" href="https://github.com/SiteQ8/Shabakah">ضع نجمة على GitHub</a>
-  </div>
-</div></div></section>
-
-<footer><div class="wrap"><div class="foot">
-  <span class="made">من تطوير علي العنزي، ومفتوح المصدر برخصة MIT.</span>
-  <span><a href="https://github.com/SiteQ8/Shabakah">github.com/SiteQ8/Shabakah</a></span>
-</div></div></footer>
-
+<footer><div class="wrap foot">
+  <span>من تطوير علي العنزي، ومفتوح المصدر برخصة MIT.</span>
+  <a href="https://github.com/SiteQ8/Shabakah">github.com/SiteQ8/Shabakah</a>
+</div></footer>
 </main>
 
 <script>
@@ -755,20 +567,16 @@ ssh -p 2222 learner@localhost</pre>
 
   var mains = {en: document.querySelector('main[lang="en"]'), ar: document.querySelector('main[lang="ar"]')};
   var langBtns = Array.prototype.slice.call(document.querySelectorAll('.lang button'));
-  var navMap = {features:{en:'features',ar:'features-ar'},screens:{en:'screens',ar:'screens-ar'},lessons:{en:'lessons',ar:'lessons-ar'},ctf:{en:'ctf',ar:'ctf-ar'}};
 
   function pickInitial(){
     var u = new URLSearchParams(location.search).get('lang');
     if(u==='ar'||u==='en') return u;
     var s = load('shabakah-lang');
     if(s==='ar'||s==='en') return s;
-    var n = (navigator.language||'').toLowerCase();
-    return n.indexOf('ar')===0 ? 'ar' : 'en';
+    return (navigator.language||'').toLowerCase().indexOf('ar')===0 ? 'ar' : 'en';
   }
 
-  var typed = {en:false, ar:false};
-
-  function setLang(lang, focus){
+  function setLang(lang){
     if(lang!=='ar') lang='en';
     document.documentElement.lang = lang;
     document.documentElement.dir = lang==='ar' ? 'rtl' : 'ltr';
@@ -776,228 +584,88 @@ ssh -p 2222 learner@localhost</pre>
     mains.ar.hidden = lang!=='ar';
     langBtns.forEach(function(b){b.setAttribute('aria-pressed', String(b.getAttribute('data-lang')===lang));});
     document.querySelectorAll('nav a[data-nav]').forEach(function(a){
-      var key=a.getAttribute('data-nav'); if(navMap[key]) a.setAttribute('href','#'+navMap[key][lang]);
-      var label = lang==='ar' ? a.getAttribute('data-ar') : a.getAttribute('data-en');
-      if(label) a.textContent = label;
+      var key = a.getAttribute('data-nav');
+      a.setAttribute('href', '#' + key + (lang==='ar' ? '-ar' : ''));
+      a.textContent = a.getAttribute(lang==='ar' ? 'data-ar' : 'data-en');
     });
     store('shabakah-lang', lang);
-    runTerminal(lang);
-    if(typeof countUp === 'function') countUp(mains[lang]);
   }
+  langBtns.forEach(function(b){ b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang')); }); });
 
-  langBtns.forEach(function(b){
-    b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang'), true); });
+  // The lab map: each port is a tab that shows its service.
+  document.querySelectorAll('[data-map]').forEach(function(map){
+    var tabs = Array.prototype.slice.call(map.querySelectorAll('.port'));
+    var panels = Array.prototype.slice.call(map.querySelectorAll('.pdetail'));
+    function show(tab, focus){
+      tabs.forEach(function(t){
+        var on = t===tab;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+      });
+      panels.forEach(function(p){
+        var on = p.id === tab.getAttribute('aria-controls');
+        p.hidden = !on;
+        if(on && !reduce){ p.classList.remove('swap'); void p.offsetWidth; p.classList.add('swap'); }
+      });
+      if(focus) tab.focus();
+    }
+    tabs.forEach(function(t, i){
+      t.addEventListener('click', function(){ show(t, false); });
+      t.addEventListener('keydown', function(ev){
+        var step = {ArrowRight:1, ArrowDown:1, ArrowLeft:-1, ArrowUp:-1}[ev.key];
+        if(ev.key==='Home') step = -i; else if(ev.key==='End') step = tabs.length-1-i;
+        if(step===undefined) return;
+        ev.preventDefault();
+        show(tabs[(i + step + tabs.length) % tabs.length], true);
+      });
+    });
+    show(tabs[0], false);
   });
 
   // Screenshot gallery
   var CAPS = {
     en:{menu:"The guide greets you when you SSH in and remembers your progress.",
         lesson:"Each lesson shows the objective, the material, and a challenge to check.",
-        ctf:"The capture the flag board tracks the flags you have found and your score.",
+        ctf:"The flag board tracks the flags you have found and your score.",
         achievements:"Badges unlock as you clear lessons and capture flags.",
-        targets:"See at a glance which practice targets are up.",
+        targets:"See at a glance which practice services are up.",
         cheat:"A cheat sheet of the exact commands, one keypress away."},
     ar:{menu:"يستقبلك المرشد فور دخولك ويتذكّر أين وصلت.",
         lesson:"يعرض كل درس هدفه ومادته وتمرينا يُصحّح لك.",
         ctf:"تتابع في لوحة التحديات ما كشفته من رموز ومجموع نقاطك.",
-        achievements:"تكسب الشارات كلما أتممت دروسا ووجدت أعلاما.",
-        targets:"تعرف بلمحة أي الأهداف تعمل الآن.",
+        achievements:"تكسب الشارات كلما أتممت دروسا وكشفت رموزا سرية.",
+        targets:"تعرف بلمحة أي خدمات التدريب تعمل الآن.",
         cheat:"ورقة بأهم الأوامر على بُعد ضغطة واحدة."}
   };
-  function wireGallery(scope, lang){
+  ['en','ar'].forEach(function(lang){
+    var scope = mains[lang];
     var tabs = scope.querySelectorAll('.shot-tabs button');
     var img = scope.querySelector('.shot-stage img');
     var cap = scope.querySelector('.shot-cap');
     tabs.forEach(function(tab){
       tab.addEventListener('click', function(){
         var key = tab.getAttribute('data-shot');
-        tabs.forEach(function(t){t.setAttribute('aria-selected', String(t===tab));});
-        var next = (lang==='ar' ? 'screenshots/ar/' : 'screenshots/')+key+'.png';
+        tabs.forEach(function(t){ t.setAttribute('aria-selected', String(t===tab)); });
         if(!reduce){ img.style.opacity = '0'; img.onload = function(){ img.style.opacity = '1'; }; }
-        img.src = next;
-        if(CAPS[lang] && CAPS[lang][key]) cap.textContent = CAPS[lang][key];
+        img.src = (lang==='ar' ? 'screenshots/ar/' : 'screenshots/') + key + '.png';
+        img.alt = tab.textContent;
+        cap.textContent = CAPS[lang][key];
       });
     });
-  }
-  wireGallery(mains.en,'en'); wireGallery(mains.ar,'ar');
-
-  // Section entrances: heading, text, then each item, staggered, once.
-  var GROUPS = '.steps,.bento,.flaglist,.tgrid,.toolwrap,.faq,.lessons,.facts';
-  function markReveal(section){
-    var parts = [];
-    var wrap = section.querySelector('.wrap') || section;
-    Array.prototype.forEach.call(wrap.querySelectorAll('.eyebrow,h1,h2,.lead,.cta,.hero-grid > .term,.shots,.copywrap,.ctf-note,.closer'), function(el){ parts.push(el); });
-    Array.prototype.forEach.call(wrap.querySelectorAll(GROUPS), function(group){
-      Array.prototype.forEach.call(group.children, function(el){ parts.push(el); });
-    });
-    parts = parts.filter(function(el){
-      var box = el.parentElement && el.parentElement.closest('.closer');
-      return !box;
-    });
-    parts.sort(function(a,b){ return a.compareDocumentPosition(b) & 2 ? 1 : -1; });
-    parts.forEach(function(el, i){
-      el.classList.add('reveal');
-      el.style.transitionDelay = Math.min(i, 10) * 70 + 'ms';
-    });
-    return parts;
-  }
-  var sections = Array.prototype.slice.call(document.querySelectorAll('main section'));
-  if('IntersectionObserver' in window){
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(!entry.isIntersecting) return;
-        (entry.target._parts || []).forEach(function(el){ el.classList.add('in'); });
-        io.unobserve(entry.target);
-      });
-    }, {threshold: 0.12, rootMargin: '0px 0px -8% 0px'});
-    sections.forEach(function(sec){ sec._parts = markReveal(sec); io.observe(sec); });
-  }
-
-  // Hero numbers count up once, from zero to the value already on the page.
-  function countUp(scope){
-    if(reduce || scope._counted) return;
-    scope._counted = true;
-    Array.prototype.forEach.call(scope.querySelectorAll('.fact b'), function(b){
-      var target = parseInt(b.textContent, 10);
-      if(!target) return;
-      var start = null, dur = 900;
-      b.textContent = '0';
-      function step(ts){
-        if(start === null) start = ts;
-        var p = Math.min(1, (ts - start) / dur);
-        var eased = 1 - Math.pow(1 - p, 3);
-        b.textContent = String(Math.round(target * eased));
-        if(p < 1) requestAnimationFrame(step); else b.textContent = String(target);
-      }
-      requestAnimationFrame(step);
-    });
-  }
+  });
 
   // Copy buttons
   document.querySelectorAll('.copybtn').forEach(function(btn){
     btn.addEventListener('click', function(){
       var pre = document.getElementById(btn.getAttribute('data-copy'));
       if(!pre) return;
-      var text = pre.innerText;
-      var done = function(){ var o=btn.textContent; btn.textContent = document.documentElement.lang==='ar'?'تم النسخ':'Copied'; setTimeout(function(){btn.textContent=o;},1400); };
-      if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(done, done); }
-      else { try{var r=document.createRange();r.selectNode(pre);var s=getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('copy');s.removeAllRanges();done();}catch(e){} }
+      var label = btn.textContent;
+      var done = function(){ btn.textContent = document.documentElement.lang==='ar' ? 'نُسخ' : 'Copied'; setTimeout(function(){ btn.textContent = label; }, 1400); };
+      if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(pre.textContent).then(done, done); }
     });
   });
 
-  // Terminal typing animation
-  var SCRIPTS = {
-    en:[
-      {t:"$ ",cls:""},{t:"ssh -p 2222 learner@localhost\n",cls:"typed"},
-      {cls:"spin",text:"Connecting to shabakah.lab ",ms:950},
-      {cls:"spin",text:"Authenticating ",ms:650},
-      {t:"================================================================\n",cls:"c"},
-      {t:"  SHABAKAH ",cls:"p"},{t:"|  ",cls:"d"},{t:"شبكة\n",cls:""},
-      {t:"  Interactive network security lab you learn by doing\n",cls:"d"},
-      {t:"  v1.3.0  |  github.com/SiteQ8/Shabakah\n",cls:"d"},
-      {t:"================================================================\n",cls:"c"},
-      {t:"  Welcome back.  ",cls:"d"},{t:"5/17 ",cls:"g"},{t:"lessons  ",cls:"d"},{t:"40/110 ",cls:"u"},{t:"pts\n\n",cls:"d"},
-      {t:"  MAIN MENU\n",cls:""},
-      {t:"  1) ",cls:""},{t:"Browse lessons\n",cls:""},
-      {t:"  5) ",cls:""},{t:"Capture the flag\n",cls:""},
-      {t:"  6) ",cls:""},{t:"Achievements\n",cls:""},
-      {t:"  Choose a number: ",cls:""}
-    ],
-    ar:[
-      {t:"$ ",cls:""},{t:"ssh -p 2222 learner@localhost\n",cls:"typed"},
-      {cls:"spin",text:"جارٍ الاتصال بـ shabakah.lab ",ms:950},
-      {cls:"spin",text:"جارٍ تسجيل الدخول ",ms:650},
-      {t:"================================================================\n",cls:"c"},
-      {t:"  SHABAKAH ",cls:"p"},{t:"|  ",cls:"d"},{t:"شبكة\n",cls:""},
-      {t:"  مختبر تفاعلي لأمن الشبكات تتعلّم فيه بالتجربة\n",cls:"d"},
-      {t:"  v1.3.0  |  github.com/SiteQ8/Shabakah\n",cls:"d"},
-      {t:"================================================================\n",cls:"c"},
-      {t:"  أهلا بعودتك   الدروس ",cls:"d"},{t:"5/17 ",cls:"g"},{t:"  النقاط ",cls:"d"},{t:"40/110 ",cls:"u"},{t:"\n\n",cls:"d"},
-      {t:"  القائمة الرئيسية\n",cls:""},
-      {t:"  1) ",cls:""},{t:"تصفّح الدروس\n",cls:""},
-      {t:"  5) ",cls:""},{t:"التحديات\n",cls:""},
-      {t:"  6) ",cls:""},{t:"الإنجازات\n",cls:""},
-      {t:"  اختر رقما: ",cls:""}
-    ]
-  };
-  var timers = [];
-  function clearTimers(){ timers.forEach(clearTimeout); timers = []; }
-  function elFor(lang){ return document.getElementById(lang==='ar'?'hero-term-ar':'hero-term'); }
-
-  function renderInstant(lang){
-    var el = elFor(lang); if(!el) return;
-    el.innerHTML='';
-    SCRIPTS[lang].forEach(function(seg){
-      if(seg.cls==='spin'){
-        var l=document.createElement('span'); l.className='d'; l.textContent=seg.text; el.appendChild(l);
-        var ok=document.createElement('span'); ok.className='g'; ok.textContent='[ok]\n'; el.appendChild(ok);
-        return;
-      }
-      var s=document.createElement('span'); if(seg.cls && seg.cls!=='typed') s.className=seg.cls; s.textContent=seg.t; el.appendChild(s);
-    });
-    var cur=document.createElement('span'); cur.className='cursor'; el.appendChild(cur);
-  }
-
-  function runTerminal(lang){
-    var el = elFor(lang); if(!el) return;
-    if(reduce){ if(!typed[lang]){ renderInstant(lang); typed[lang]=true; } return; }
-    if(typed[lang]){ return; }
-    typed[lang]=true;
-    clearTimers();
-    el.innerHTML='';
-    var segs = SCRIPTS[lang], i=0, delay=380;
-    var cur=document.createElement('span'); cur.className='cursor'; el.appendChild(cur);
-    function nextSeg(){
-      if(i>=segs.length){ return; }
-      var seg=segs[i++];
-      if(seg.cls==='spin'){
-        var label=document.createElement('span'); label.className='d'; label.textContent=seg.text; el.insertBefore(label,cur);
-        var sp=document.createElement('span'); sp.className='c'; el.insertBefore(sp,cur);
-        var frames=['|','/','-','\\'], fi=0, start=Date.now();
-        (function doSpin(){
-          sp.textContent=frames[fi++%frames.length];
-          if(Date.now()-start < seg.ms){ timers.push(setTimeout(doSpin,90)); }
-          else { sp.textContent=''; var ok=document.createElement('span'); ok.className='g'; ok.textContent='[ok]\n'; el.insertBefore(ok,cur); timers.push(setTimeout(nextSeg,200)); }
-        })();
-        return;
-      }
-      var span=document.createElement('span');
-      if(seg.cls && seg.cls!=='typed') span.className=seg.cls;
-      el.insertBefore(span, cur);
-      if(seg.cls==='typed'){
-        var j=0;
-        (function typeChar(){
-          span.textContent += seg.t.charAt(j++);
-          if(j<seg.t.length){ timers.push(setTimeout(typeChar, 34)); }
-          else { timers.push(setTimeout(nextSeg, 260)); }
-        })();
-      } else {
-        span.textContent = seg.t;
-        timers.push(setTimeout(nextSeg, 40));
-      }
-    }
-    timers.push(setTimeout(nextSeg, delay));
-  }
-
-  function replay(lang){ clearTimers(); typed[lang]=false; runTerminal(lang); }
-  [['en','hero-term'],['ar','hero-term-ar']].forEach(function(pair){
-    var body=document.getElementById(pair[1]); if(!body) return;
-    var term=body.parentNode; if(!term) return;
-    term.style.cursor='pointer';
-    term.setAttribute('title', pair[0]==='ar'?'انقر للإعادة':'click to replay');
-    term.addEventListener('click', function(){ replay(pair[0]); });
-    var bar=term.querySelector('.tbar');
-    if(bar && !bar.querySelector('.replay')){
-      var btn=document.createElement('button');
-      btn.className='replay'; btn.type='button';
-      btn.setAttribute('aria-label', pair[0]==='ar'?'إعادة التشغيل':'replay');
-      btn.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>';
-      btn.addEventListener('click', function(e){ e.stopPropagation(); replay(pair[0]); });
-      bar.appendChild(btn);
-    }
-  });
-
-  setLang(pickInitial(), false);
+  setLang(pickInitial());
 })();
 </script>
 </body>
