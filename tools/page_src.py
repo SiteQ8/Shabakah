@@ -7,6 +7,10 @@ counts, Arabic number agreement), so run build_site.py after this script.
 import html
 import os
 import re
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import logo  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "docs", "index.html")
@@ -377,8 +381,7 @@ def build():
     js = open(os.path.join(ROOT, "tools", "page.js"), encoding="utf-8").read()
     header = '''<header><div class="wrap bar">
   <a class="brand" href="#" aria-label="Shabakah">
-    <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#0033A0"/><path d="M7 8.5h18v12h-4.5V24h-9v-3.5H7z" fill="#fff"/><rect x="10.6" y="10.5" width="2.2" height="5" rx=".6" fill="#0033A0"/><rect x="14.9" y="10.5" width="2.2" height="5" rx=".6" fill="#0033A0"/><rect x="19.2" y="10.5" width="2.2" height="5" rx=".6" fill="#0033A0"/></svg>
-    <b>Shabakah</b><span lang="ar">شبكة</span>
+    LOGO_WORD<i class="brand-rule"></i><b>Shabakah</b>
   </a>
   <nav>
     <a class="navlink" href="#lessons" data-nav="lessons" data-en="Lessons" data-ar="الدروس">Lessons</a>
@@ -388,6 +391,7 @@ def build():
     <div class="lang" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="ar" aria-pressed="false">عربي</button></div>
   </nav>
 </div></header>'''
+    header = header.replace("LOGO_WORD", logo.svg(logo.WORD, extra=' aria-hidden="true"'))
     page = (head + "<style>\n" + css + "</style>\n<script>document.documentElement.classList.add('js');</script>\n</head>\n<body>\n"
             + header + "\n\n" + main_block("en") + "\n\n" + main_block("ar") + "\n\n<script>\n" + js + "</script>\n</body>\n</html>\n")
     open(OUT, "w", encoding="utf-8").write(page)

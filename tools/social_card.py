@@ -20,8 +20,8 @@ CARD = """<!doctype html><html><head><meta charset="utf-8">
 body{margin:0;width:1200px;height:630px;overflow:hidden;font-family:'Readex Pro',sans-serif;color:#0A1F4D;background:#EEF2F8}
 .wrap{position:absolute;inset:0;padding:60px 72px;display:grid;grid-template-columns:1fr 440px;gap:56px;align-items:center}
 .brand{display:flex;align-items:center;gap:14px;font-size:28px;font-weight:600}
-.brand svg{width:44px;height:44px}
-.brand span{color:#56668F;font-weight:400}
+.brand svg{height:46px;width:auto}
+.brand i{width:1.5px;height:40px;background:#CCD6EA}
 h1{font-size:62px;line-height:1.04;margin:34px 0 14px;letter-spacing:-.03em;font-weight:600}
 .ar{font-size:34px;font-weight:500;color:#34477A;margin:0;direction:rtl;text-align:left}
 .box{background:#fff;border:2px solid #0A1F4D;border-radius:20px;padding:24px}
@@ -34,7 +34,7 @@ h1{font-size:62px;line-height:1.04;margin:34px 0 14px;letter-spacing:-.03em;font
 .plate em{font-style:normal;font-weight:600;color:#0033A0;font-size:24px;margin-inline-end:6px}
 .url{position:absolute;left:72px;bottom:44px;font-size:18px;color:#56668F}
 </style></head><body><div class="wrap"><div>
-<div class="brand"><svg viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#0033A0"/><path d="M7 8.5h18v12h-4.5V24h-9v-3.5H7z" fill="#fff"/><rect x="10.6" y="10.5" width="2.2" height="5" rx=".6" fill="#0033A0"/><rect x="14.9" y="10.5" width="2.2" height="5" rx=".6" fill="#0033A0"/><rect x="19.2" y="10.5" width="2.2" height="5" rx=".6" fill="#0033A0"/></svg>Shabakah <span>شبكة</span></div>
+<div class="brand"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 90"><path fill="#0033A0" d="M10 0h40v10h-40zM100 0h10v10h-10zM40 10h10v10h-10zM0 20h10v10h-10zM20 20h10v10h-10zM40 20h10v10h-10zM90 20h10v10h-10zM110 20h10v10h-10zM40 30h10v10h-10zM0 40h30v10h-30zM40 40h10v10h-10zM60 40h10v10h-10zM80 40h10v10h-10zM100 40h10v10h-10zM120 40h10v10h-10zM0 50h10v10h-10zM20 50h10v10h-10zM40 50h10v10h-10zM60 50h10v10h-10zM80 50h10v10h-10zM100 50h10v10h-10zM120 50h10v10h-10zM0 60h130v10h-130zM60 80h10v10h-10z"/></svg><i></i>Shabakah</div>
 <h1>A network security lab you SSH into.</h1>
 <p class="ar">مختبر لأمن الشبكات في جهازك!</p>
 </div>

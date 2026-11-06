@@ -35,9 +35,9 @@ section.tint{background:var(--tint)}
 header{position:sticky;top:0;z-index:10;background:rgba(238,242,248,.88);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--rule)}
 .bar{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
-.brand svg{width:28px;height:28px}
+.brand svg{height:26px;width:auto;display:block}
+.brand-rule{width:1px;height:24px;background:var(--rule)}
 .brand b{font-weight:600;font-size:1.05rem;letter-spacing:-.01em}
-.brand span{color:var(--ink-3)}
 nav{display:flex;align-items:center;gap:22px}
 .navlink{color:var(--ink-2);text-decoration:none;font-size:.95rem}
 .navlink:hover{color:var(--blue)}

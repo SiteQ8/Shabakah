@@ -1,4 +1,4 @@
-<img src="docs/logo.svg" width="64" height="64" alt="Shabakah logo">
+<img src="docs/logo.svg" height="56" alt="Shabakah logo, the word شبكة in square Kufic">
 
 # Shabakah (شبكة)
 

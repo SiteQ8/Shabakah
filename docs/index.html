@@ -74,9 +74,9 @@ section.tint{background:var(--tint)}
 header{position:sticky;top:0;z-index:10;background:rgba(238,242,248,.88);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--rule)}
 .bar{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
-.brand svg{width:28px;height:28px}
+.brand svg{height:26px;width:auto;display:block}
+.brand-rule{width:1px;height:24px;background:var(--rule)}
 .brand b{font-weight:600;font-size:1.05rem;letter-spacing:-.01em}
-.brand span{color:var(--ink-3)}
 nav{display:flex;align-items:center;gap:22px}
 .navlink{color:var(--ink-2);text-decoration:none;font-size:.95rem}
 .navlink:hover{color:var(--blue)}
@@ -284,8 +284,7 @@ footer{padding:36px 0;border-top:1px solid var(--rule)}
 <body>
 <header><div class="wrap bar">
   <a class="brand" href="#" aria-label="Shabakah">
-    <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#0033A0"/><path d="M7 8.5h18v12h-4.5V24h-9v-3.5H7z" fill="#fff"/><rect x="10.6" y="10.5" width="2.2" height="5" rx=".6" fill="#0033A0"/><rect x="14.9" y="10.5" width="2.2" height="5" rx=".6" fill="#0033A0"/><rect x="19.2" y="10.5" width="2.2" height="5" rx=".6" fill="#0033A0"/></svg>
-    <b>Shabakah</b><span lang="ar">شبكة</span>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 90" aria-hidden="true"><path fill="#0033A0" d="M10 0h40v10h-40zM100 0h10v10h-10zM40 10h10v10h-10zM0 20h10v10h-10zM20 20h10v10h-10zM40 20h10v10h-10zM90 20h10v10h-10zM110 20h10v10h-10zM40 30h10v10h-10zM0 40h30v10h-30zM40 40h10v10h-10zM60 40h10v10h-10zM80 40h10v10h-10zM100 40h10v10h-10zM120 40h10v10h-10zM0 50h10v10h-10zM20 50h10v10h-10zM40 50h10v10h-10zM60 50h10v10h-10zM80 50h10v10h-10zM100 50h10v10h-10zM120 50h10v10h-10zM0 60h130v10h-130zM60 80h10v10h-10z"/></svg><i class="brand-rule"></i><b>Shabakah</b>
   </a>
   <nav>
     <a class="navlink" href="#lessons" data-nav="lessons" data-en="Lessons" data-ar="الدروس">Lessons</a>
