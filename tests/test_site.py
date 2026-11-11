@@ -2,6 +2,7 @@
 Run from the repo root with python3 -m unittest discover -s tests"""
 
 import contextlib
+import hashlib
 import html
 import io
 import os
@@ -64,6 +65,14 @@ class SiteMatchesLab(unittest.TestCase):
                                 "%s/%s.png" % (folder, name))
 
 
+# Names that must never appear on the site, kept as SHA-256 digests so the list is not a place they appear.
+BLOCKED_NAMES = {
+    "6afd038687a96730d65753ed0d292878e819324ab3470585c4558861126be9a5",
+    "c70eca6b0f88f44d81a41311647e50fda1ac454ec04ffd442b0eb4743a993131",
+    "c857d09db23e6822e3600bc06ad8d58f92ed62bc8efd81c753f77048662cb97d",
+}
+
+
 class HouseRules(unittest.TestCase):
     def test_banned_characters_and_words(self):
         for path in (SITE, README):
@@ -72,8 +81,9 @@ class HouseRules(unittest.TestCase):
                 self.assertNotIn(ch, text, "%s has a banned character" % path)
             for word in ("حاوية", "الحاوية", "الخليج الفارسي"):
                 self.assertNotIn(word, text, "%s uses %s" % (path, word))
-            for word in ("claude", "anthropic", "nbk"):
-                self.assertNotRegex(text.lower(), r"\b%s\b" % word, path)
+            words = set(re.findall(r"[a-z0-9]+", text.lower()))
+            blocked = [w for w in words if hashlib.sha256(w.encode()).hexdigest() in BLOCKED_NAMES]
+            self.assertEqual(blocked, [], "%s uses a blocked name" % path)
 
     def test_arabic_site_has_no_mid_sentence_full_stop(self):
         ar = re.search(r'<main lang="ar".*?</main>', read(SITE), re.S).group(0)

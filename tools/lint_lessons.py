@@ -12,6 +12,7 @@
 # With no arguments every lesson under lab/lessons is checked.
 # Exits 1 when anything is wrong.
 
+import hashlib
 import os
 import re
 import sys
@@ -31,7 +32,12 @@ BANNED_CHARS = {
     "→": "arrow", "•": "bullet symbol",
 }
 BANNED_WORDS_AR = ["حاوية", "الحاوية", "حاويات", "حاويته", "الخليج الفارسي"]
-BANNED_WORDS_ANY = ["claude", "anthropic", "nbk"]
+# Names that must never appear in a lesson, kept as SHA-256 digests so the list is not a place they appear.
+BANNED_NAME_DIGESTS = {
+    "6afd038687a96730d65753ed0d292878e819324ab3470585c4558861126be9a5",
+    "c70eca6b0f88f44d81a41311647e50fda1ac454ec04ffd442b0eb4743a993131",
+    "c857d09db23e6822e3600bc06ad8d58f92ed62bc8efd81c753f77048662cb97d",
+}
 
 AR_LETTER = re.compile(r"[؀-ۿ]")
 # A full stop followed by space and more Arabic text inside one paragraph.
@@ -124,9 +130,9 @@ def lint_pair(en_path, ar_path):
             if ch in raw:
                 errors.append("%s: contains a banned %s" % (name, label))
         low = raw.lower()
-        for w in BANNED_WORDS_ANY:
-            if re.search(r"\b%s\b" % w, low):
-                errors.append("%s: contains the banned word '%s'" % (name, w))
+        for w in set(re.findall(r"[a-z0-9]+", low)):
+            if hashlib.sha256(w.encode()).hexdigest() in BANNED_NAME_DIGESTS:
+                errors.append("%s: contains a banned name" % name)
     for w in BANNED_WORDS_AR:
         if w in raw_ar:
             errors.append("%s: contains the banned word '%s'" % (rel, w))
